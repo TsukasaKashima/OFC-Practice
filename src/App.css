@@ -1,38 +1,28 @@
-.App {
+body {
+  background-image: url(OFC_bg.jpg);
+  background-size: cover;
+}
+
+h1 {
+  color: white;
+  font-size: 5vw;
+  margin: 6.5% 0;
+}
+
+.title {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.title button {
+  font-size: 2vw;
+  padding: 1% 2%;
+  font-weight: bold;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+button.start-left {
+  margin-right: 2%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button.start-right {
+  margin-left: 2%;
 }
