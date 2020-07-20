@@ -7,10 +7,11 @@ import {
   DialogContentText,
   DialogActions,
 } from "@material-ui/core";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function Start() {
   const [memberDialog, setMemberDialog] = useState(false);
-
+  const history = useHistory();
   return (
     <React.Fragment>
       <div className="title">
@@ -43,6 +44,7 @@ export default function Start() {
             <Button
               onClick={() => {
                 setMemberDialog(true);
+                history.push("game");
               }}
             >
               2人
@@ -50,6 +52,7 @@ export default function Start() {
             <Button
               onClick={() => {
                 setMemberDialog(true);
+                history.push("game");
               }}
             >
               3人
