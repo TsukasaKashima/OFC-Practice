@@ -92,7 +92,7 @@ button.start-right {
   border: 1px #888888 solid;
 }
 
-.grave-box {
+.mygrave .box {
   width: 36.8%;
   height: 14.2vh;
   display: inline-block;
@@ -133,7 +133,7 @@ button.back-btn {
   margin-bottom: 4%;
 }
 
-.mybox {
+.myboxes .box {
   width: 7vw;
   height: 17.3vh;
   border: solid 1px #888888;
@@ -141,7 +141,7 @@ button.back-btn {
   display: inline-block;
 }
 
-.mybox img {
+.myboxes .box img {
   width: 100%;
 }
 
@@ -155,7 +155,7 @@ button.back-btn {
   padding: 2%;
 }
 
-.black-box {
+.black-boxes .box {
   width: 5vw;
   height: 12.4vh;
   border: solid 1px #414141;
@@ -163,6 +163,6 @@ button.back-btn {
   margin-right: 3%;
 }
 
-.black-box img {
+.black-boxes .box img {
   width: 100%;
 }

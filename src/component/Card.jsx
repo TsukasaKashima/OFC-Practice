@@ -57,24 +57,10 @@ import diamond_12 from "../cards/diamond_3.png";
 import diamond_13 from "../cards/diamond_1.png";
 import joker from "../cards/joker.png";
 
-export default function Card(props) {
-  const cards = [
-    {
-      spade1: {
-        mark: "spade",
-        number: 1,
-        img: spade_1,
-      },
-      spade2: {
-        mark: "spade",
-        number: 2,
-        img: spade_2,
-      },
-    },
-  ];
+export default function Card() {
   return (
     <div className="box">
-      <img mark={props.mark} number={props.number} src={cards.img} alt="card" />
+      <img src={spade_1} alt="card" />
     </div>
   );
 }
