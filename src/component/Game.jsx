@@ -1,8 +1,6 @@
 import React from "react";
 import "../App.css";
-import spade_1 from "../cards/spade_1.png";
-import spade_2 from "../cards/spade_2.png";
-import spade_3 from "../cards/spade_3.png";
+import Card from "./Card";
 import clover_1 from "../cards/clover_1.png";
 import heart_1 from "../cards/heart_1.png";
 import heart_2 from "../cards/heart_2.png";
@@ -12,21 +10,14 @@ import diamond_2 from "../cards/diamond_2.png";
 import diamond_3 from "../cards/diamond_3.png";
 import joker from "../cards/joker.png";
 
-export default function Game() {
+export default function Game(props) {
   return (
     <div>
       <div className="boxes">
         <div className="boxes-1">
           <div className="box-row">
-            <div className="box">
-              <img src={spade_1} alt="spade" />
-            </div>
-            <div className="box">
-              <img src={spade_2} alt="spade" />
-            </div>
-            <div className="box">
-              <img src={spade_3} alt="spade" />
-            </div>
+            <Card />
+            <Card />
             <div className="box"></div>
             <div className="box"></div>
           </div>
