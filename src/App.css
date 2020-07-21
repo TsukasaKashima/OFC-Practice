@@ -9,6 +9,10 @@ h1 {
   margin: 6.5% 0;
 }
 
+img {
+  cursor: pointer;
+}
+
 .title {
   text-align: center;
 }
@@ -25,4 +29,141 @@ button.start-left {
 
 button.start-right {
   margin-left: 2%;
+}
+
+.boxes {
+  width: 100%;
+}
+
+.boxes-1 {
+  padding: 2% 0 2% 8%;
+  width: 40%;
+  display: inline-block;
+}
+
+.boxes-2 {
+  padding: 2% 0;
+  width: 40%;
+  display: inline-block;
+}
+
+.box-row {
+  margin-bottom: 2%;
+}
+
+.box {
+  width: 5vw;
+  height: 13.5vh;
+  border: solid 1px #888888;
+  margin-right: 2%;
+  display: inline-block;
+}
+
+.box img {
+  width: 100%;
+  height: 100%;
+}
+
+.my-area {
+  width: 100%;
+  margin-top: 2%;
+  position: relative;
+}
+
+.btns_grave {
+  position: absolute;
+  width: 15%;
+  display: inline-block;
+  text-align: center;
+  margin: 0 5%;
+  top: 31%;
+}
+
+.btns, .grave {
+  width: 100%;
+}
+
+.btns {
+  position: absolute;
+  top: -60%;
+}
+
+.mygrave {
+  width: 100%;
+  border: 1px #888888 solid;
+}
+
+.mygrave .box {
+  width: 36.8%;
+  height: 14.3vh;
+  display: inline-block;
+  margin: 3%;
+}
+
+.grave-box img {
+  width: 100%;
+}
+
+button.back-btn {
+  position: absolute;
+  width: 12%;
+  padding: 0.7%;
+  top: 94%;
+  left: 6.6%;
+  margin-bottom: 0;
+  font-size: 2vw;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.btns button {
+  width: 80%;
+  padding: 4%;
+  font-size: 2vw;
+  margin-bottom: 12%;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.myboxes {
+  width: 50%;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 4%;
+}
+
+.myboxes .box {
+  width: 7vw;
+  height: 18.5vh;
+  border: solid 1px #888888;
+  margin-right: 2%;
+  display: inline-block;
+}
+
+.myboxes .box img {
+  width: 100%;
+}
+
+.black-boxes {
+  position: absolute;
+  width: 17%;
+  background-color: black;
+  height: 73vh;
+  left: 73%;
+  top: -34%;
+  padding: 2%;
+}
+
+.black-boxes .box {
+  width: 5vw;
+  height: 13vh;
+  border: solid 1px #414141;
+  display: inline-block;
+  margin-right: 3%;
+}
+
+.black-boxes .box img {
+  width: 100%;
 }
