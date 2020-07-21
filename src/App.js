@@ -1,12 +1,17 @@
 import React from "react";
 import "./App.css";
 import Start from "./component/Start";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 function App() {
   return (
-    <div>
-      <Start />
-    </div>
+    <React.Fragment>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={Start} />
+        </Switch>
+      </BrowserRouter>
+    </React.Fragment>
   );
 }
 
