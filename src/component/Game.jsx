@@ -8,6 +8,7 @@ import {
   DialogContentText,
   DialogActions,
 } from "@material-ui/core";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 import spade_1 from "../cards/spade_1.png";
 import spade_2 from "../cards/spade_2.png";
@@ -68,6 +69,8 @@ import joker from "../cards/joker.png";
 
 export default function Game() {
   const [resetDialog, setResetDialog] = useState(false);
+  const history = useHistory();
+
   return (
     <div>
       <div className="boxes">
@@ -216,7 +219,14 @@ export default function Game() {
             <Card />
           </div>
         </div>
-        <Button className="back-btn" variant="contained" color="primary">
+        <Button
+          className="back-btn"
+          variant="contained"
+          color="secondary"
+          onClick={() => {
+            history.push("/");
+          }}
+        >
           BACK
         </Button>
       </div>
