@@ -1,6 +1,14 @@
 import React from "react";
 import "../App.css";
 import Card from "./Card";
+import {
+  Button,
+  Dialog,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+} from "@material-ui/core";
+
 import spade_1 from "../cards/spade_1.png";
 import spade_2 from "../cards/spade_2.png";
 import spade_3 from "../cards/spade_3.png";
@@ -108,8 +116,12 @@ export default function Game() {
       <div className="my-area">
         <div className="btns_grave">
           <div className="btns">
-            <button>SET</button>
-            <button className="reset-btn">RESET</button>
+            <Button variant="contained" color="primary">
+              SET
+            </Button>
+            <Button className="reset-btn" variant="contained" color="primary">
+              RESET
+            </Button>
           </div>
           <div className="grave">
             <div className="mygrave">
@@ -168,7 +180,9 @@ export default function Game() {
             <Card />
           </div>
         </div>
-        <button className="back-btn">BACK</button>
+        <Button className="back-btn" variant="contained" color="primary">
+          BACK
+        </Button>
       </div>
     </div>
   );
