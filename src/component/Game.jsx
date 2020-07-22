@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../App.css";
 import Card from "./Card";
 import {
@@ -67,6 +67,7 @@ import diamond_13 from "../cards/diamond_1.png";
 import joker from "../cards/joker.png";
 
 export default function Game() {
+  const [resetDialog, setResetDialog] = useState(false);
   return (
     <div>
       <div className="boxes">
@@ -119,9 +120,44 @@ export default function Game() {
             <Button variant="contained" color="primary">
               SET
             </Button>
-            <Button className="reset-btn" variant="contained" color="primary">
+            <Button
+              className="reset-btn"
+              variant="contained"
+              color="primary"
+              onClick={() => {
+                setResetDialog(true);
+              }}
+            >
               RESET
             </Button>
+            <Dialog open={resetDialog}>
+              <DialogContent>
+                <DialogContentText>モードを選択してください</DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button
+                  onClick={() => {
+                    setResetDialog(true);
+                  }}
+                >
+                  ランダム
+                </Button>
+                <Button
+                  onClick={() => {
+                    setResetDialog(true);
+                  }}
+                >
+                  自由に選択
+                </Button>
+                <Button
+                  onClick={() => {
+                    setResetDialog(false);
+                  }}
+                >
+                  キャンセル
+                </Button>
+              </DialogActions>
+            </Dialog>
           </div>
           <div className="grave">
             <div className="mygrave">
