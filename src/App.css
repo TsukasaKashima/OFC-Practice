@@ -108,10 +108,10 @@ button.back-btn {
   position: absolute;
   width: 12%;
   padding: 0.7%;
-  top: 94%;
+  top: 90%;
   left: 6.6%;
   margin-bottom: 0;
-  font-size: 2vw;
+  font-size: 1.5vw;
   border-radius: 10px;
   border: none;
   cursor: pointer;
@@ -120,8 +120,8 @@ button.back-btn {
 .btns button {
   width: 80%;
   padding: 4%;
-  font-size: 2vw;
-  margin-bottom: 12%;
+  font-size: 1.7vw;
+  margin-bottom: 6%;
   border-radius: 10px;
   border: none;
   cursor: pointer;
