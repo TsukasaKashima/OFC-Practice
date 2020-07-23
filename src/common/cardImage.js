@@ -44,16 +44,16 @@ import heart_13 from "../cards/heart_13.png";
 import diamond_1 from "../cards/diamond_1.png";
 import diamond_2 from "../cards/diamond_2.png";
 import diamond_3 from "../cards/diamond_3.png";
-import diamond_4 from "../cards/diamond_1.png";
-import diamond_5 from "../cards/diamond_2.png";
-import diamond_6 from "../cards/diamond_3.png";
-import diamond_7 from "../cards/diamond_1.png";
-import diamond_8 from "../cards/diamond_2.png";
-import diamond_9 from "../cards/diamond_3.png";
-import diamond_10 from "../cards/diamond_1.png";
-import diamond_11 from "../cards/diamond_2.png";
-import diamond_12 from "../cards/diamond_3.png";
-import diamond_13 from "../cards/diamond_1.png";
+import diamond_4 from "../cards/diamond_4.png";
+import diamond_5 from "../cards/diamond_5.png";
+import diamond_6 from "../cards/diamond_6.png";
+import diamond_7 from "../cards/diamond_7.png";
+import diamond_8 from "../cards/diamond_8.png";
+import diamond_9 from "../cards/diamond_9.png";
+import diamond_10 from "../cards/diamond_10.png";
+import diamond_11 from "../cards/diamond_11.png";
+import diamond_12 from "../cards/diamond_12.png";
+import diamond_13 from "../cards/diamond_13.png";
 import joker from "../cards/joker.png";
 
 const spadeCards = [
@@ -130,10 +130,15 @@ const cardImage = {
 
 export default cardImage;
 export const getImageFromTypeAndNumber = (type, number) => {
-  if (type == JOKER) {
+  if (type === JOKER) {
     return joker;
+  } else if (type === SPADE) {
+    return spadeCards[number - 1];
+  } else if (type === CLOVER) {
+    return cloverCards[number - 1];
+  } else if (type === HEART) {
+    return heartCards[number - 1];
+  } else if (type === DIAMOND) {
+    return diamondCards[number - 1];
   }
-  console.log(type);
-  console.log(number);
-  //return cardImage[`${type}Cards`][number - 1];
 };
