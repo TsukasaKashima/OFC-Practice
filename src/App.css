@@ -167,3 +167,30 @@ button.back-btn {
 .black-boxes .box img {
   width: 100%;
 }
+
+.select-cards {
+  padding: 2%;
+  text-align: center;
+}
+
+.select-cards .box {
+  margin: 0 1%;
+}
+
+.select-card-joker {
+  text-align: left;
+  margin-left: 2.2%;
+}
+
+.select-boxes {
+  margin: 0 auto;
+  background-color: black;
+  width: 80%;
+  padding: 3% 0;
+}
+
+button.select-btn {
+  font-size: 1.8vw;
+  padding: 0.8% 7%;
+  margin: 0 2%;
+}
