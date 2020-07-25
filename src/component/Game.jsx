@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../App.css";
 import Card from "./Card";
+import { SPADE, CLOVER, DIAMOND, HEART, JOKER } from "../common/constant";
 import {
   Button,
   Dialog,
