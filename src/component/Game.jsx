@@ -9,6 +9,7 @@ import {
   DialogActions,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { SPADE, CLOVER, HEART, DIAMOND, JOKER } from "../common/constant.js";
 
 export default function Game() {
   const [resetDialog, setResetDialog] = useState(false);
@@ -19,28 +20,28 @@ export default function Game() {
       <div className="boxes">
         <div className="boxes-1">
           <div className="box-row">
-            <Card type="spade" number={13} />
-            <Card type="joker" />
+            <Card type={SPADE} number={13} />
+            <Card type={JOKER} />
             <Card />
             <Card />
             <Card />
           </div>
           <div className="box-row">
-            <Card type="clover" number={3} />
+            <Card type={CLOVER} number={3} />
             <Card />
             <Card />
             <Card />
             <Card />
           </div>
           <div className="box-row">
-            <Card type="diamond" number={11} />
+            <Card type={DIAMOND} number={11} />
             <Card />
             <Card />
           </div>
         </div>
         <div className="boxes-2">
           <div className="box-row">
-            <Card type="diamond" number={4} />
+            <Card type={DIAMOND} number={4} />
             <Card />
             <Card />
             <Card />
@@ -48,7 +49,7 @@ export default function Game() {
           </div>
           <div className="box-row">
             <Card />
-            <Card type="heart" number={13} />
+            <Card type={HEART} number={13} />
             <Card />
             <Card />
             <Card />
@@ -91,6 +92,7 @@ export default function Game() {
                 <Button
                   onClick={() => {
                     setResetDialog(true);
+                    history.push("/select");
                   }}
                 >
                   自由に選択
@@ -110,7 +112,7 @@ export default function Game() {
               <Card />
               <Card />
               <Card />
-              <Card type="clover" number={7} />
+              <Card type={CLOVER} number={7} />
             </div>
           </div>
         </div>
@@ -122,8 +124,8 @@ export default function Game() {
           </div>
           <div className="box-row">
             <Card />
-            <Card type="diamond" number={8} />
-            <Card type="clover" number={12} />
+            <Card type={DIAMOND} number={8} />
+            <Card type={CLOVER} number={12} />
             <Card />
             <Card />
           </div>
@@ -139,7 +141,7 @@ export default function Game() {
           <div className="box-row">
             <Card />
             <Card />
-            <Card type="diamond" number={13} />
+            <Card type={DIAMOND} number={13} />
           </div>
           <div className="box-row">
             <Card />
