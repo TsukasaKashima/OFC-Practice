@@ -10,6 +10,7 @@ import {
   DialogActions,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { SPADE, CLOVER, HEART, DIAMOND, JOKER } from "../common/constant.js";
 
 export default function Game() {
   const [resetDialog, setResetDialog] = useState(false);
