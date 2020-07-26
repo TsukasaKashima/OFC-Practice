@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../App.css";
 import Card from "./Card";
 import { SPADE, CLOVER, DIAMOND, HEART, JOKER } from "../common/constant";
+import cardImage from "../common/cardImage";
 import {
   Button,
   Dialog,
@@ -14,7 +15,21 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 export default function Game() {
   const [resetDialog, setResetDialog] = useState(false);
   const history = useHistory();
-
+  const cards = cardImage;
+  //console.log(cards);
+  function shuffleCard() {
+    for (let i = 0; i < 53; i++) {
+      const r = Math.floor(Math.random() * 13 * 4);
+      const w = cards[i];
+      cards[i] = cards[r];
+      cards[r] = w;
+    }
+  }
+  //console.log(shuffleCard);
+  function dispCard() {
+    const my_hand = cards.slice(0, 5);
+    cards.splice(0, 5);
+  }
   return (
     <div>
       <div className="boxes">
