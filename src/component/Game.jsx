@@ -14,22 +14,16 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function Game() {
   const [resetDialog, setResetDialog] = useState(false);
+  const [state, setState] = useState([cardImage]);
   const history = useHistory();
-  const cards = cardImage;
-  //console.log(cards);
-  function shuffleCard() {
-    for (let i = 0; i < 53; i++) {
-      const r = Math.floor(Math.random() * 13 * 4);
-      const w = cards[i];
-      cards[i] = cards[r];
-      cards[r] = w;
-    }
+  function setItem() {
+    let items = Array(...state);
+    console.log(items);
+    let item = items[Math.floor(Math.random() * items.length)];
+    console.log(item);
+    setState(item);
   }
-  //console.log(shuffleCard);
-  function dispCard() {
-    const my_hand = cards.slice(0, 5);
-    cards.splice(0, 5);
-  }
+  console.log(setItem);
   return (
     <div>
       <div className="boxes">
