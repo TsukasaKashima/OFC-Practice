@@ -76,7 +76,7 @@ export default function Game() {
     const deleteDeck = deck.filter((deck) => {
       return deck !== getRandomCard();
     });
-    //NOTE:setDeck(deleteDeck);
+    setDeck(deleteDeck);
   }
   return (
     <div>
