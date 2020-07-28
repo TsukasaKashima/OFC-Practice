@@ -14,16 +14,65 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function Game() {
   const [resetDialog, setResetDialog] = useState(false);
-  const [state, setState] = useState([cardImage]);
+  const [deck, setDeck] = useState([
+    {
+      number: 1,
+      type: SPADE,
+    },
+    {
+      number: 2,
+      type: SPADE,
+    },
+    {
+      number: 3,
+      type: SPADE,
+    },
+    {
+      number: 4,
+      type: SPADE,
+    },
+    {
+      number: 5,
+      type: SPADE,
+    },
+    {
+      number: 6,
+      type: SPADE,
+    },
+    {
+      number: 7,
+      type: SPADE,
+    },
+    {
+      number: 8,
+      type: SPADE,
+    },
+    {
+      number: 9,
+      type: SPADE,
+    },
+    {
+      number: 10,
+      type: SPADE,
+    },
+    {
+      number: 11,
+      type: SPADE,
+    },
+    {
+      number: 12,
+      type: SPADE,
+    },
+    {
+      number: 13,
+      type: SPADE,
+    },
+  ]);
   const history = useHistory();
-  function setItem() {
-    let items = Array(...state);
-    console.log(items);
-    let item = items[Math.floor(Math.random() * items.length)];
-    console.log(item);
-    setState(item);
+  function getRandomCard() {
+    return deck[Math.floor(Math.random() * deck.length)];
   }
-  console.log(setItem);
+  console.log(getRandomCard());
   return (
     <div>
       <div className="boxes">
