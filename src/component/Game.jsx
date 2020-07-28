@@ -72,7 +72,12 @@ export default function Game() {
   function getRandomCard() {
     return deck[Math.floor(Math.random() * deck.length)];
   }
-  console.log(getRandomCard());
+  function deleteFromDeck() {
+    const deleteDeck = deck.filter((deck) => {
+      return deck !== getRandomCard();
+    });
+    //NOTE:setDeck(deleteDeck);
+  }
   return (
     <div>
       <div className="boxes">
