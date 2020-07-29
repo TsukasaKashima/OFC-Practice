@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../App.css";
 import Card from "./Card";
 import { SPADE, CLOVER, DIAMOND, HEART, JOKER } from "../common/constant";
-import cardImage from "../common/cardImage";
 import {
   Button,
   Dialog,
@@ -13,61 +12,19 @@ import {
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function Game() {
+  function createCard() {
+    for (let i = 1; i <= 13; i++) {
+      return (
+        { type: SPADE, number: i },
+        { type: CLOVER, number: i },
+        { type: HEART, number: i },
+        { type: DIAMOND, number: i },
+        { type: JOKER }
+      );
+    }
+  }
   const [resetDialog, setResetDialog] = useState(false);
-  const [deck, setDeck] = useState([
-    {
-      number: 1,
-      type: SPADE,
-    },
-    {
-      number: 2,
-      type: SPADE,
-    },
-    {
-      number: 3,
-      type: SPADE,
-    },
-    {
-      number: 4,
-      type: SPADE,
-    },
-    {
-      number: 5,
-      type: SPADE,
-    },
-    {
-      number: 6,
-      type: SPADE,
-    },
-    {
-      number: 7,
-      type: SPADE,
-    },
-    {
-      number: 8,
-      type: SPADE,
-    },
-    {
-      number: 9,
-      type: SPADE,
-    },
-    {
-      number: 10,
-      type: SPADE,
-    },
-    {
-      number: 11,
-      type: SPADE,
-    },
-    {
-      number: 12,
-      type: SPADE,
-    },
-    {
-      number: 13,
-      type: SPADE,
-    },
-  ]);
+  const [deck, setDeck] = useState([createCard()]);
   const history = useHistory();
   function getRandomCard() {
     return deck[Math.floor(Math.random() * deck.length)];
@@ -78,6 +35,9 @@ export default function Game() {
     });
     setDeck(deleteDeck);
   }
+  useEffect(() => {
+    console.log(deleteFromDeck());
+  }, []);
   return (
     <div>
       <div className="boxes">
