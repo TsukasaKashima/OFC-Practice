@@ -13,16 +13,18 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function Game() {
   function createCard() {
+    const resultArray = [];
     for (let i = 1; i <= 13; i++) {
-      return (
-        { type: SPADE, number: i },
-        { type: CLOVER, number: i },
-        { type: HEART, number: i },
-        { type: DIAMOND, number: i },
-        { type: JOKER }
-      );
+      resultArray.push({ type: SPADE, number: i });
+      resultArray.push({ type: CLOVER, number: i });
+      resultArray.push({ type: HEART, number: i });
+      resultArray.push({ type: DIAMOND, number: i });
     }
+    resultArray.push({ type: JOKER });
+    resultArray.push({ type: JOKER });
+    return resultArray;
   }
+  console.log(createCard());
   const [resetDialog, setResetDialog] = useState(false);
   const [deck, setDeck] = useState([createCard()]);
   const history = useHistory();
