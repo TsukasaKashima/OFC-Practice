@@ -20,11 +20,11 @@ export default function Game() {
       resultArray.push({ type: HEART, number: i });
       resultArray.push({ type: DIAMOND, number: i });
     }
+    //[Todo:createCardはstateを見てjokerをpushするかどうか判断する（Redux化の際にstoreのstateを参照する）]
     resultArray.push({ type: JOKER });
     resultArray.push({ type: JOKER });
     return resultArray;
   }
-  console.log(createCard());
   const [resetDialog, setResetDialog] = useState(false);
   const [deck, setDeck] = useState([createCard()]);
   const history = useHistory();
@@ -32,11 +32,15 @@ export default function Game() {
     return deck[Math.floor(Math.random() * deck.length)];
   }
   function deleteFromDeck() {
-    const deleteDeck = deck.filter((deck) => {
+    return deck.filter((deck) => {
       return deck !== getRandomCard();
     });
-    setDeck(deleteDeck);
   }
+  //[NOTE:この記述により無限ループが発生]→setDeck(deleteFromDeck());
+
+  const card = getRandomCard();
+  deleteFromDeck(card);
+
   useEffect(() => {
     console.log(deleteFromDeck());
   }, []);
