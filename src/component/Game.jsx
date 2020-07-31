@@ -28,8 +28,15 @@ export default function Game() {
   const [resetDialog, setResetDialog] = useState(false);
   const [deck, setDeck] = useState([...createCard()]);
   const history = useHistory();
-  function getRandomCard() {
-    return deck[Math.floor(Math.random() * deck.length)];
+
+  let getCard = getRandomCard(deck, 5);
+  function getRandomCard(deck, count) {
+    let result = [];
+    for (let i = 0; i < count; i++) {
+      let arrayIndex = Math.floor(Math.random() * deck.length);
+      result[i] = deck[arrayIndex];
+    }
+    return result;
   }
   function deleteFromDeck() {
     const deleteDeck = deck.filter((deck) => {
@@ -41,10 +48,9 @@ export default function Game() {
     const card = getRandomCard();
     deleteFromDeck(card);
   }, []);
-  /*[第二引数に]useEffect(() => {
-    const card = getRandomCard();
-    deleteFromDeck(card);
-  }, [deck]);*/
+
+  console.log(getCard);
+
   return (
     <div>
       <div className="boxes">
