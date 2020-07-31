@@ -26,24 +26,25 @@ export default function Game() {
     return resultArray;
   }
   const [resetDialog, setResetDialog] = useState(false);
-  const [deck, setDeck] = useState([createCard()]);
+  const [deck, setDeck] = useState([...createCard()]);
   const history = useHistory();
   function getRandomCard() {
     return deck[Math.floor(Math.random() * deck.length)];
   }
   function deleteFromDeck() {
-    return deck.filter((deck) => {
+    const deleteDeck = deck.filter((deck) => {
       return deck !== getRandomCard();
     });
+    setDeck(deleteDeck);
   }
-  //[NOTE:この記述により無限ループが発生]→setDeck(deleteFromDeck());
-
-  const card = getRandomCard();
-  deleteFromDeck(card);
-
   useEffect(() => {
-    console.log(deleteFromDeck());
+    const card = getRandomCard();
+    deleteFromDeck(card);
   }, []);
+  /*[第二引数に]useEffect(() => {
+    const card = getRandomCard();
+    deleteFromDeck(card);
+  }, [deck]);*/
   return (
     <div>
       <div className="boxes">
