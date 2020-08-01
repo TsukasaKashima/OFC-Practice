@@ -147,8 +147,8 @@ export default function Game() {
           </div>
           <div className="grave">
             <div className="mygrave">
-              <Card />
-              <Card />
+              <Card type={CLOVER} number={10} />
+              <Card type={CLOVER} number={11} />
               <Card />
               <Card type={CLOVER} number={7} />
             </div>

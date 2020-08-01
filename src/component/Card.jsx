@@ -21,10 +21,7 @@ export default function Card(props) {
     >
       <div className="box">
         <DragDropContainer dragData={{ type, number, onDrop }}>
-          <img
-            src={getImageFromTypeAndNumber(props.type, props.number)}
-            alt=""
-          />
+          <img src={getImageFromTypeAndNumber(type, number)} alt="" />
         </DragDropContainer>
       </div>
     </DropTarget>
