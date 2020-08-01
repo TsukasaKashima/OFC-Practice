@@ -47,7 +47,6 @@ export default function Game() {
     const card = getRandomCard();
     deleteFromDeck(card);
   }, []);
-  //[NOTE:コンソール出力が正しくされるかの確認用]console.log(getRandomCard(1));
   return (
     <div>
       <div className="boxes">
@@ -55,9 +54,9 @@ export default function Game() {
           <div className="box-row">
             <Card type={DIAMOND} number={9} />
             <Card type={JOKER} />
-            <Card type={deck.type} number={deck.number} />
-            <Card type={deck.type} number={deck.number} />
-            <Card type={deck.type} number={deck.number} />
+            <Card />
+            <Card />
+            <Card />
           </div>
           <div className="box-row">
             <Card type={CLOVER} number={3} />
