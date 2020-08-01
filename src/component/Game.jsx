@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../App.css";
 import Card from "./Card";
 import { SPADE, CLOVER, DIAMOND, HEART, JOKER } from "../common/constant";
@@ -13,8 +13,46 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { SPADE, CLOVER, HEART, DIAMOND, JOKER } from "../common/constant.js";
 
 export default function Game() {
+  function createCard() {
+    const resultArray = [];
+    for (let i = 1; i <= 13; i++) {
+      resultArray.push({ type: SPADE, number: i });
+      resultArray.push({ type: CLOVER, number: i });
+      resultArray.push({ type: HEART, number: i });
+      resultArray.push({ type: DIAMOND, number: i });
+    }
+    //[Todo:createCardはstateを見てjokerをpushするかどうか判断する（Redux化の際にstoreのstateを参照する）]
+    resultArray.push({ type: JOKER });
+    resultArray.push({ type: JOKER });
+    return resultArray;
+  }
   const [resetDialog, setResetDialog] = useState(false);
+  const [deck, setDeck] = useState([...createCard()]);
   const history = useHistory();
+  const getFiveCard = getRandomCard(5);
+  const getThreeCard = getRandomCard(3);
+
+  function getRandomCard(count) {
+    let result = [];
+    for (let i = 0; i < count; i++) {
+      let arrayIndex = Math.floor(Math.random() * deck.length);
+      result[i] = deck[arrayIndex];
+    }
+    return result;
+  }
+  function deleteFromDeck() {
+    const deleteDeck = deck.filter((deck) => {
+      return deck !== getRandomCard();
+    });
+    setDeck(deleteDeck);
+  }
+  useEffect(() => {
+    const card = getRandomCard();
+    deleteFromDeck(card);
+  }, []);
+
+  console.log(getFiveCard);
+  console.log(getThreeCard);
 
   return (
     <div>
