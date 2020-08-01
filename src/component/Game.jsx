@@ -28,8 +28,6 @@ export default function Game() {
   const [resetDialog, setResetDialog] = useState(false);
   const [deck, setDeck] = useState([...createCard()]);
   const history = useHistory();
-  const getFiveCard = getRandomCard(5);
-  const getThreeCard = getRandomCard(3);
 
   function getRandomCard(count) {
     let result = [];
@@ -49,20 +47,17 @@ export default function Game() {
     const card = getRandomCard();
     deleteFromDeck(card);
   }, []);
-
-  console.log(getFiveCard);
-  console.log(getThreeCard);
-
+  //[NOTE:コンソール出力が正しくされるかの確認用]console.log(getRandomCard(1));
   return (
     <div>
       <div className="boxes">
         <div className="boxes-1">
           <div className="box-row">
-            <Card type={SPADE} number={13} />
+            <Card type={DIAMOND} number={9} />
             <Card type={JOKER} />
-            <Card />
-            <Card />
-            <Card />
+            <Card type={deck.type} number={deck.number} />
+            <Card type={deck.type} number={deck.number} />
+            <Card type={deck.type} number={deck.number} />
           </div>
           <div className="box-row">
             <Card type={CLOVER} number={3} />
@@ -102,7 +97,13 @@ export default function Game() {
       <div className="my-area">
         <div className="btns_grave">
           <div className="btns">
-            <Button variant="contained" color="primary">
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => {
+                setDeck(getRandomCard(1));
+              }}
+            >
               SET
             </Button>
             <Button
