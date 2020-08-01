@@ -28,9 +28,10 @@ export default function Game() {
   const [resetDialog, setResetDialog] = useState(false);
   const [deck, setDeck] = useState([...createCard()]);
   const history = useHistory();
+  const getFiveCard = getRandomCard(5);
+  const getThreeCard = getRandomCard(3);
 
-  let getCard = getRandomCard(deck, 5);
-  function getRandomCard(deck, count) {
+  function getRandomCard(count) {
     let result = [];
     for (let i = 0; i < count; i++) {
       let arrayIndex = Math.floor(Math.random() * deck.length);
@@ -49,7 +50,8 @@ export default function Game() {
     deleteFromDeck(card);
   }, []);
 
-  console.log(getCard);
+  console.log(getFiveCard);
+  console.log(getThreeCard);
 
   return (
     <div>
