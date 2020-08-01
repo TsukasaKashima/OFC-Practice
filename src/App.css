@@ -53,15 +53,15 @@ button.start-right {
 
 .box {
   width: 5vw;
-  height: 13.5vh;
+  height: 7.1vw;
   border: solid 1px #888888;
   margin-right: 2%;
   display: inline-block;
 }
 
 .box img {
-  width: 100%;
-  height: 100%;
+  width: 5vw;
+  position: absolute;
 }
 
 .my-area {
@@ -94,14 +94,10 @@ button.start-right {
 }
 
 .mygrave .box {
-  width: 36.8%;
-  height: 14.3vh;
+  width: 5vw;
   display: inline-block;
   margin: 3%;
-}
-
-.grave-box img {
-  width: 100%;
+  text-align: left;
 }
 
 button.back-btn {
@@ -135,22 +131,21 @@ button.back-btn {
 }
 
 .myboxes .box {
-  width: 7vw;
-  height: 18.5vh;
+  width: 6.6vw;
+  height: 9.4vw;
   border: solid 1px #888888;
   margin-right: 2%;
   display: inline-block;
 }
 
 .myboxes .box img {
-  width: 100%;
+  width: 6.6vw;
 }
 
 .black-boxes {
   position: absolute;
   width: 17%;
   background-color: black;
-  height: 73vh;
   left: 73%;
   top: -34%;
   padding: 2%;
@@ -158,14 +153,14 @@ button.back-btn {
 
 .black-boxes .box {
   width: 5vw;
-  height: 13vh;
+  height: 7.1vw;
   border: solid 1px #414141;
   display: inline-block;
   margin-right: 3%;
 }
 
 .black-boxes .box img {
-  width: 100%;
+  widows: 5vw;
 }
 
 .select-cards {
@@ -175,6 +170,7 @@ button.back-btn {
 
 .select-cards .box {
   margin: 0 1%;
+  text-align: left;
 }
 
 .select-card-joker {
@@ -193,4 +189,24 @@ button.select-btn {
   font-size: 1.8vw;
   padding: 0.8% 7%;
   margin: 0 2%;
+}
+
+.droptarget {
+  height: 100%;
+}
+
+.ddcontainer {
+  height: 100%;
+}
+
+.ddcontainer:active {
+  height: 100%;
+}
+
+.ddcontainersource {
+  height: 100%;
+}
+
+.ddcontainersource:active {
+  height: 100%;
 }

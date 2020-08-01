@@ -8827,6 +8827,12 @@ react-dom@^16.13.1:
     prop-types "^15.6.2"
     scheduler "^0.19.1"
 
+"react-drag-drop-container@https://github.com/peterh32/react-drag-drop-container.git":
+  version "6.1.1"
+  resolved "https://github.com/peterh32/react-drag-drop-container.git#174d5a27eab0e3adddb91e49d6b0e49389c46f42"
+  dependencies:
+    prop-types "^15.6.2"
+
 react-error-overlay@^6.0.7:
   version "6.0.7"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.7.tgz#1dcfb459ab671d53f660a991513cb2f0a0553108"

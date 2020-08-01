@@ -29,8 +29,6 @@ export default function Game() {
   const [resetDialog, setResetDialog] = useState(false);
   const [deck, setDeck] = useState([...createCard()]);
   const history = useHistory();
-  const getFiveCard = getRandomCard(5);
-  const getThreeCard = getRandomCard(3);
 
   function getRandomCard(count) {
     let result = [];
@@ -50,16 +48,12 @@ export default function Game() {
     const card = getRandomCard();
     deleteFromDeck(card);
   }, []);
-
-  console.log(getFiveCard);
-  console.log(getThreeCard);
-
   return (
     <div>
       <div className="boxes">
         <div className="boxes-1">
           <div className="box-row">
-            <Card type={SPADE} number={13} />
+            <Card type={DIAMOND} number={9} />
             <Card type={JOKER} />
             <Card />
             <Card />
@@ -103,7 +97,13 @@ export default function Game() {
       <div className="my-area">
         <div className="btns_grave">
           <div className="btns">
-            <Button variant="contained" color="primary">
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => {
+                setDeck(getRandomCard(1));
+              }}
+            >
               SET
             </Button>
             <Button
@@ -148,8 +148,8 @@ export default function Game() {
           </div>
           <div className="grave">
             <div className="mygrave">
-              <Card />
-              <Card />
+              <Card type={CLOVER} number={10} />
+              <Card type={CLOVER} number={11} />
               <Card />
               <Card type={CLOVER} number={7} />
             </div>
