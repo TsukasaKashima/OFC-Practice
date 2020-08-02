@@ -32,10 +32,18 @@ export default function Game() {
 
   function getRandomCard(count) {
     let result = [];
+    let tmpDeck = deck.concat();
     for (let i = 0; i < count; i++) {
-      let arrayIndex = Math.floor(Math.random() * deck.length);
-      result[i] = deck[arrayIndex];
+      let arrayIndex = Math.floor(Math.random() * tmpDeck.length);
+      result[i] = tmpDeck[arrayIndex];
+      tmpDeck = tmpDeck.filter((deck) => {
+        return !(
+          deck.type === tmpDeck[arrayIndex].type &&
+          deck.number === tmpDeck[arrayIndex].number
+        );
+      });
     }
+    setDeck(tmpDeck);
     return result;
   }
   function deleteFromDeck() {
@@ -48,6 +56,11 @@ export default function Game() {
     const card = getRandomCard();
     deleteFromDeck(card);
   }, []);
+
+  useEffect(() => {
+    console.log(getRandomCard(3));
+  }, []);
+
   return (
     <div>
       <div className="boxes">
