@@ -13,6 +13,7 @@ import {
   DialogActions,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { SPADE, CLOVER, HEART, DIAMOND, JOKER } from "../common/constant.js";
 
 export default function Game() {
   function createCard() {
@@ -118,8 +119,8 @@ export default function Game() {
           </div>
           <div className="grave">
             <div className="mygrave">
-              <Card />
-              <Card />
+              <Card type={CLOVER} number={10} />
+              <Card type={CLOVER} number={11} />
               <Card />
               <Card />
             </div>
