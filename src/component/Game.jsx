@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../App.css";
 import Card from "./Card";
+import SelfField from "./SelfField";
+import OppField1 from "./OppField1";
+import OppField2 from "./OppField2";
 import { SPADE, CLOVER, DIAMOND, HEART, JOKER } from "../common/constant";
 import {
   Button,
@@ -28,6 +31,9 @@ export default function Game() {
   }
   const [resetDialog, setResetDialog] = useState(false);
   const [deck, setDeck] = useState([...createCard()]);
+  const [selfField, setSelfField] = useState([]);
+  const [oppField_1, setOppField_1] = useState([]);
+  const [oppField_2, setOppField_2] = useState([]);
   const history = useHistory();
 
   function getRandomCard(count) {
@@ -46,65 +52,14 @@ export default function Game() {
     setDeck(tmpDeck);
     return result;
   }
-  function deleteFromDeck() {
-    const deleteDeck = deck.filter((deck) => {
-      return deck !== getRandomCard();
-    });
-    setDeck(deleteDeck);
-  }
-  useEffect(() => {
-    const card = getRandomCard();
-    deleteFromDeck(card);
-  }, []);
-
-  useEffect(() => {
-    console.log(getRandomCard(3));
-  }, []);
-
   return (
     <div>
       <div className="boxes">
         <div className="boxes-1">
-          <div className="box-row">
-            <Card type={DIAMOND} number={9} />
-            <Card type={JOKER} />
-            <Card />
-            <Card />
-            <Card />
-          </div>
-          <div className="box-row">
-            <Card type={CLOVER} number={3} />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-          </div>
-          <div className="box-row">
-            <Card type={DIAMOND} number={11} />
-            <Card />
-            <Card />
-          </div>
+          <OppField1 fieldCard={oppField_1}></OppField1>
         </div>
         <div className="boxes-2">
-          <div className="box-row">
-            <Card type={DIAMOND} number={4} />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-          </div>
-          <div className="box-row">
-            <Card />
-            <Card type={HEART} number={13} />
-            <Card />
-            <Card />
-            <Card />
-          </div>
-          <div className="box-row">
-            <Card />
-            <Card />
-            <Card />
-          </div>
+          <OppField2 fieldCard={oppField_2}></OppField2>
         </div>
       </div>
       <div className="my-area">
@@ -114,7 +69,10 @@ export default function Game() {
               variant="contained"
               color="primary"
               onClick={() => {
-                setDeck(getRandomCard(1));
+                const randomCards = getRandomCard(15);
+                setSelfField(randomCards.slice(0, 5));
+                setOppField_1(randomCards.slice(5, 10));
+                setOppField_2(randomCards.slice(10, 15));
               }}
             >
               SET
@@ -164,30 +122,12 @@ export default function Game() {
               <Card type={CLOVER} number={10} />
               <Card type={CLOVER} number={11} />
               <Card />
-              <Card type={CLOVER} number={7} />
+              <Card />
             </div>
           </div>
         </div>
         <div className="myboxes">
-          <div className="box-row">
-            <Card />
-            <Card />
-            <Card />
-          </div>
-          <div className="box-row">
-            <Card />
-            <Card type={DIAMOND} number={8} />
-            <Card type={CLOVER} number={12} />
-            <Card />
-            <Card />
-          </div>
-          <div className="box-row">
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-          </div>
+          <SelfField fieldCard={selfField}></SelfField>
         </div>
         <div className="black-boxes">
           <div className="box-row">
