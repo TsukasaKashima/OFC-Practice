@@ -68,10 +68,10 @@ export default function Game() {
               variant="contained"
               color="primary"
               onClick={() => {
-                const randomCards = getRandomCard(17);
+                const randomCards = getRandomCard(15);
                 setSelfField(randomCards.slice(0, 5));
-                setOppField_1(randomCards.slice(6, 11));
-                setOppField_2(randomCards.slice(12, 17));
+                setOppField_1(randomCards.slice(5, 10));
+                setOppField_2(randomCards.slice(10, 15));
               }}
             >
               SET
