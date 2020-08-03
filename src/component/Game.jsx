@@ -51,6 +51,21 @@ export default function Game() {
     setDeck(tmpDeck);
     return result;
   }
+  function resetRandomCard(count) {
+    let result = [];
+    let returnDeck = deck.concat();
+    for (let i = 0; i < count; i++) {
+      let arrayIndex = Math.floor(Math.random() * returnDeck.length);
+      result[i] = returnDeck[arrayIndex];
+      returnDeck = returnDeck.filter((deck) => {
+        return !(
+          deck.type === returnDeck[arrayIndex].type &&
+          deck.number === returnDeck[arrayIndex].number
+        );
+      });
+    }
+    return result;
+  }
   return (
     <div>
       <div className="boxes">
@@ -93,7 +108,11 @@ export default function Game() {
               <DialogActions>
                 <Button
                   onClick={() => {
-                    setResetDialog(true);
+                    setResetDialog(false);
+                    const resetCards = resetRandomCard(15);
+                    setSelfField(resetCards.slice(0, 5));
+                    setOppField_1(resetCards.slice(5, 10));
+                    setOppField_2(resetCards.slice(10, 15));
                   }}
                 >
                   ランダム
