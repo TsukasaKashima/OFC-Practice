@@ -29,11 +29,19 @@ export default function Game() {
     return resultArray;
   }
   const [resetDialog, setResetDialog] = useState(false);
+
   const [deck, setDeck] = useState(createCard());
   const [preDeck, setPreDeck] = useState(deck);
+
   const [selfField, setSelfField] = useState([]);
+  const [preSelfField, setPreSelfField] = useState(selfField);
+
   const [oppField1, setOppField1] = useState([]);
+  const [preOppField1, setPreOppField1] = useState(oppField1);
+
   const [oppField2, setOppField2] = useState([]);
+  const [preOppField2, setPreOppField2] = useState(oppField2);
+
   const history = useHistory();
 
   function getRandomCard(count) {
@@ -87,6 +95,9 @@ export default function Game() {
               onClick={() => {
                 const randomCards = getRandomCard(15);
                 setPreDeck(deck);
+                setPreSelfField(selfField);
+                setPreOppField1(oppField1);
+                setPreOppField2(oppField2);
                 setSelfField(randomCards.slice(0, 5));
                 setOppField1(randomCards.slice(5, 10));
                 setOppField2(randomCards.slice(10, 15));
@@ -113,10 +124,14 @@ export default function Game() {
                 <Button
                   onClick={() => {
                     setResetDialog(false);
-                    const randomCards = resetRandomCard(15);
-                    setSelfField(randomCards.slice(0, 5));
-                    setOppField1(randomCards.slice(5, 10));
-                    setOppField2(randomCards.slice(10, 15));
+                    setDeck(preDeck);
+                    setSelfField(preSelfField);
+                    setOppField1(preOppField1);
+                    setOppField2(preOppField2);
+                    const resetCards = resetRandomCard(15);
+                    setSelfField(resetCards.slice(0, 5));
+                    setOppField1(resetCards.slice(5, 10));
+                    setOppField2(resetCards.slice(10, 15));
                     console.log(deck);
                   }}
                 >
