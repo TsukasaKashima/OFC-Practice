@@ -30,10 +30,19 @@ export default function Game() {
     return resultArray;
   }
   const [resetDialog, setResetDialog] = useState(false);
-  const [deck, setDeck] = useState([...createCard()]);
+
+  const [deck, setDeck] = useState(createCard());
+  const [preDeck, setPreDeck] = useState(deck);
+
   const [selfField, setSelfField] = useState([]);
-  const [oppField_1, setOppField_1] = useState([]);
-  const [oppField_2, setOppField_2] = useState([]);
+  const [preSelfField, setPreSelfField] = useState(selfField);
+
+  const [oppField1, setOppField1] = useState([]);
+  const [preOppField1, setPreOppField1] = useState(oppField1);
+
+  const [oppField2, setOppField2] = useState([]);
+  const [preOppField2, setPreOppField2] = useState(oppField2);
+
   const history = useHistory();
 
   function getRandomCard(count) {
@@ -52,14 +61,30 @@ export default function Game() {
     setDeck(tmpDeck);
     return result;
   }
+  function resetRandomCard(count) {
+    let result = [];
+    let returnDeck = preDeck.concat();
+    for (let i = 0; i < count; i++) {
+      let arrayIndex = Math.floor(Math.random() * returnDeck.length);
+      result[i] = returnDeck[arrayIndex];
+      returnDeck = returnDeck.filter((preDeck) => {
+        return !(
+          preDeck.type === returnDeck[arrayIndex].type &&
+          preDeck.number === returnDeck[arrayIndex].number
+        );
+      });
+    }
+    setDeck(returnDeck);
+    return result;
+  }
   return (
     <div>
       <div className="boxes">
         <div className="boxes-1">
-          <OppField1 fieldCard={oppField_1}></OppField1>
+          <OppField1 fieldCard={oppField1}></OppField1>
         </div>
         <div className="boxes-2">
-          <OppField2 fieldCard={oppField_2}></OppField2>
+          <OppField2 fieldCard={oppField2}></OppField2>
         </div>
       </div>
       <div className="my-area">
@@ -70,9 +95,14 @@ export default function Game() {
               color="primary"
               onClick={() => {
                 const randomCards = getRandomCard(15);
+                setPreDeck(deck);
+                setPreSelfField(selfField);
+                setPreOppField1(oppField1);
+                setPreOppField2(oppField2);
                 setSelfField(randomCards.slice(0, 5));
-                setOppField_1(randomCards.slice(5, 10));
-                setOppField_2(randomCards.slice(10, 15));
+                setOppField1(randomCards.slice(5, 10));
+                setOppField2(randomCards.slice(10, 15));
+                console.log(deck);
               }}
             >
               SET
@@ -94,7 +124,16 @@ export default function Game() {
               <DialogActions>
                 <Button
                   onClick={() => {
-                    setResetDialog(true);
+                    setResetDialog(false);
+                    setDeck(preDeck);
+                    setSelfField(preSelfField);
+                    setOppField1(preOppField1);
+                    setOppField2(preOppField2);
+                    const resetCards = resetRandomCard(15);
+                    setSelfField(resetCards.slice(0, 5));
+                    setOppField1(resetCards.slice(5, 10));
+                    setOppField2(resetCards.slice(10, 15));
+                    console.log(deck);
                   }}
                 >
                   ランダム
