@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "../App.css";
 import Card from "./Card";
 import SelfField from "./SelfField";
@@ -106,16 +106,10 @@ export default function Game() {
             >
               SET
             </Button>
-            <Button
-              className="reset-btn"
-              variant="contained"
-              color="primary"
-              onClick={() => {
-                setResetDialog(true);
-              }}
-            >
+            <Button className="reset-btn" variant="contained" color="primary">
               RESET
             </Button>
+<<<<<<< HEAD
             <Dialog open={resetDialog}>
               <DialogContent>
                 <DialogContentText>モードを選択してください</DialogContentText>
@@ -154,6 +148,8 @@ export default function Game() {
                 </Button>
               </DialogActions>
             </Dialog>
+=======
+>>>>>>> parent of 1e3b37e... RESETボタンを押したとき、ダイアログが表示されるようにしました
           </div>
           <div className="grave">
             <div className="mygrave">
