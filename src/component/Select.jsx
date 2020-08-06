@@ -3,8 +3,11 @@ import "../App.css";
 import Card from "./Card";
 import { JOKER, SPADE, CLOVER, HEART, DIAMOND } from "../common/constant";
 import { Button } from "@material-ui/core";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function Select() {
+  const history = useHistory();
+
   return (
     <div className="select-cards">
       <div className="box-row">
@@ -18,7 +21,7 @@ export default function Select() {
         <Card type={SPADE} number={8} />
         <Card type={SPADE} number={9} />
         <Card type={SPADE} number={10} />
-        <Card />
+        <Card type={SPADE} number={11} />
         <Card type={SPADE} number={12} />
         <Card type={SPADE} number={13} />
       </div>
@@ -58,7 +61,7 @@ export default function Select() {
         <Card type={DIAMOND} number={3} />
         <Card type={DIAMOND} number={4} />
         <Card type={DIAMOND} number={5} />
-        <Card />
+        <Card type={DIAMOND} number={6} />
         <Card type={DIAMOND} number={7} />
         <Card type={DIAMOND} number={8} />
         <Card type={DIAMOND} number={9} />
@@ -69,13 +72,13 @@ export default function Select() {
       </div>
       <div className="box-row select-card-joker">
         <Card type={JOKER} />
-        <Card />
+        <Card type={JOKER} />
       </div>
       <div className="select-boxes">
         <div className="box-row">
-          <Card type={JOKER} />
-          <Card type={DIAMOND} number={6} />
-          <Card type={SPADE} number={11} />
+          <Card />
+          <Card />
+          <Card />
           <Card />
           <Card />
           <Card />
@@ -91,7 +94,14 @@ export default function Select() {
           <Card />
           <Card />
         </div>
-        <Button className="select-btn" variant="contained" color="primary">
+        <Button
+          className="select-btn"
+          variant="contained"
+          color="primary"
+          onClick={() => {
+            history.push("/game");
+          }}
+        >
           SET
         </Button>
       </div>

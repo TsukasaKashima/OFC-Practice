@@ -77,6 +77,7 @@ export default function Game() {
     setDeck(returnDeck);
     return result;
   }
+  //[NOTE:Redux化の段階でフィールドをリセットする用の関数が必要か確認]function clearField() {}
   return (
     <div>
       <div className="boxes">
@@ -172,7 +173,7 @@ export default function Game() {
           <div className="box-row">
             <Card />
             <Card />
-            <Card type={DIAMOND} number={13} />
+            <Card />
           </div>
           <div className="box-row">
             <Card />
