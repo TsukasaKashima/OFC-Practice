@@ -44,7 +44,6 @@ export default function Game() {
   const [preOppField2, setPreOppField2] = useState(oppField2);
 
   const history = useHistory();
-
   function getRandomCard(count) {
     let result = [];
     let tmpDeck = deck.concat();
@@ -92,6 +91,8 @@ export default function Game() {
         <div className="btns_grave">
           <div className="btns">
             <Button
+              disabled={deck.length <= 11}
+              id="setButton"
               variant="contained"
               color="primary"
               onClick={() => {
@@ -103,7 +104,6 @@ export default function Game() {
                 setSelfField(randomCards.slice(0, 5));
                 setOppField1(randomCards.slice(5, 10));
                 setOppField2(randomCards.slice(10, 15));
-                console.log(deck);
               }}
             >
               SET
@@ -134,7 +134,6 @@ export default function Game() {
                     setSelfField(resetCards.slice(0, 5));
                     setOppField1(resetCards.slice(5, 10));
                     setOppField2(resetCards.slice(10, 15));
-                    console.log(deck);
                   }}
                 >
                   ランダム
