@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../App.css";
 import Card from "./Card";
+import SelfField from "./SelfField";
+import OppField1 from "./OppField1";
+import OppField2 from "./OppField2";
 import { SPADE, CLOVER, DIAMOND, HEART, JOKER } from "../common/constant";
 import {
   Button,
@@ -10,6 +13,7 @@ import {
   DialogActions,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import GraveField from "./GraveField";
 
 export default function Game() {
   function createCard() {
@@ -26,81 +30,87 @@ export default function Game() {
     return resultArray;
   }
   const [resetDialog, setResetDialog] = useState(false);
-  const [deck, setDeck] = useState([...createCard()]);
-  const history = useHistory();
 
+  const [deck, setDeck] = useState(createCard());
+  const [preDeck, setPreDeck] = useState(deck);
+
+  const [field, setField] = useState({
+    self: [],
+    opp1: [],
+    opp2: [],
+    grave: [],
+  });
+
+  const [preField, setPreField] = useState(field);
+
+  const history = useHistory();
   function getRandomCard(count) {
     let result = [];
+    let tmpDeck = deck.concat();
     for (let i = 0; i < count; i++) {
-      let arrayIndex = Math.floor(Math.random() * deck.length);
-      result[i] = deck[arrayIndex];
+      let arrayIndex = Math.floor(Math.random() * tmpDeck.length);
+      result[i] = tmpDeck[arrayIndex];
+      tmpDeck = tmpDeck.filter((deck) => {
+        return !(
+          deck.type === result[i].type && deck.number === result[i].number
+        );
+      });
     }
+    setDeck(tmpDeck);
     return result;
   }
-  function deleteFromDeck() {
-    const deleteDeck = deck.filter((deck) => {
-      return deck !== getRandomCard();
-    });
-    setDeck(deleteDeck);
+  function resetRandomCard(count) {
+    let result = [];
+    let returnDeck = preDeck.concat();
+    for (let i = 0; i < count; i++) {
+      let arrayIndex = Math.floor(Math.random() * returnDeck.length);
+      result[i] = returnDeck[arrayIndex];
+      returnDeck = returnDeck.filter((preDeck) => {
+        return !(
+          preDeck.type === result[i].type && preDeck.number === result[i].number
+        );
+      });
+    }
+    setDeck(returnDeck);
+    return result;
   }
-  useEffect(() => {
-    const card = getRandomCard();
-    deleteFromDeck(card);
-  }, []);
+  //[NOTE:Redux化の段階でフィールドをリセットする用の関数が必要か確認]function clearField() {}
   return (
     <div>
       <div className="boxes">
         <div className="boxes-1">
-          <div className="box-row">
-            <Card type={DIAMOND} number={9} />
-            <Card type={JOKER} />
-            <Card />
-            <Card />
-            <Card />
-          </div>
-          <div className="box-row">
-            <Card type={CLOVER} number={3} />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-          </div>
-          <div className="box-row">
-            <Card type={DIAMOND} number={11} />
-            <Card />
-            <Card />
-          </div>
+          <OppField1
+            fieldKey="opp1"
+            fieldCard={field}
+            fieldSetter={setField}
+          ></OppField1>
         </div>
         <div className="boxes-2">
-          <div className="box-row">
-            <Card type={DIAMOND} number={4} />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-          </div>
-          <div className="box-row">
-            <Card />
-            <Card type={HEART} number={13} />
-            <Card />
-            <Card />
-            <Card />
-          </div>
-          <div className="box-row">
-            <Card />
-            <Card />
-            <Card />
-          </div>
+          <OppField2
+            fieldKey="opp2"
+            fieldCard={field}
+            fieldSetter={setField}
+          ></OppField2>
         </div>
       </div>
       <div className="my-area">
         <div className="btns_grave">
           <div className="btns">
             <Button
+              disabled={deck.length <= 11}
+              id="setButton"
               variant="contained"
               color="primary"
               onClick={() => {
-                setDeck(getRandomCard(1));
+                const randomCards = getRandomCard(15);
+                setPreDeck(deck);
+                setPreField(field);
+                setField({
+                  self: randomCards.slice(0, 5),
+                  opp1: randomCards.slice(5, 10),
+                  opp2: randomCards.slice(10, 15),
+                  grave: field.grave,
+                });
               }}
             >
               SET
@@ -122,7 +132,16 @@ export default function Game() {
               <DialogActions>
                 <Button
                   onClick={() => {
-                    setResetDialog(true);
+                    setResetDialog(false);
+                    setDeck(preDeck);
+                    setField(preField);
+                    const resetCards = resetRandomCard(15);
+                    setField({
+                      self: resetCards.slice(0, 5),
+                      opp1: resetCards.slice(5, 10),
+                      opp2: resetCards.slice(10, 15),
+                      grave: field.grave,
+                    });
                   }}
                 >
                   ランダム
@@ -147,42 +166,29 @@ export default function Game() {
           </div>
           <div className="grave">
             <div className="mygrave">
-              <Card type={CLOVER} number={10} />
-              <Card type={CLOVER} number={11} />
-              <Card />
-              <Card type={CLOVER} number={7} />
+              <GraveField
+                fieldKey="grave"
+                fieldCard={field}
+                fieldSetter={setField}
+              />
             </div>
           </div>
         </div>
         <div className="myboxes">
-          <div className="box-row">
-            <Card />
-            <Card />
-            <Card />
-          </div>
-          <div className="box-row">
-            <Card />
-            <Card type={DIAMOND} number={8} />
-            <Card type={CLOVER} number={12} />
-            <Card />
-            <Card />
-          </div>
-          <div className="box-row">
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-          </div>
+          <SelfField
+            fieldKey="self"
+            fieldCard={field}
+            fieldSetter={setField}
+          ></SelfField>
         </div>
         <div className="black-boxes">
           <div className="box-row">
             <Card />
             <Card />
-            <Card type={DIAMOND} number={13} />
+            <Card />
           </div>
           <div className="box-row">
-            <Card />
+            <Card type={SPADE} number={4} />
             <Card />
             <Card />
           </div>

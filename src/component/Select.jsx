@@ -3,8 +3,10 @@ import "../App.css";
 import Card from "./Card";
 import { JOKER, SPADE, CLOVER, HEART, DIAMOND } from "../common/constant";
 import { Button } from "@material-ui/core";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function Select() {
+  const history = useHistory();
   return (
     <div className="select-cards">
       <div className="box-row">
@@ -91,7 +93,14 @@ export default function Select() {
           <Card />
           <Card />
         </div>
-        <Button className="select-btn" variant="contained" color="primary">
+        <Button
+          className="select-btn"
+          variant="contained"
+          color="primary"
+          onClick={() => {
+            history.push("/game");
+          }}
+        >
           SET
         </Button>
       </div>
