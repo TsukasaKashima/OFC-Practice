@@ -10,10 +10,10 @@ import {
   Dialog,
   DialogContent,
   DialogContentText,
-  DialogActions,
+  DialogActions
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { SPADE, CLOVER, HEART, DIAMOND, JOKER } from "../common/constant.js";
+import GraveField from "./GraveField";
 
 export default function Game() {
   function createCard() {
@@ -34,14 +34,14 @@ export default function Game() {
   const [deck, setDeck] = useState(createCard());
   const [preDeck, setPreDeck] = useState(deck);
 
-  const [selfField, setSelfField] = useState([]);
-  const [preSelfField, setPreSelfField] = useState(selfField);
+  const [field, setField] = useState({
+    self: [],
+    opp1: [],
+    opp2: [],
+    grave: []
+  });
 
-  const [oppField1, setOppField1] = useState([]);
-  const [preOppField1, setPreOppField1] = useState(oppField1);
-
-  const [oppField2, setOppField2] = useState([]);
-  const [preOppField2, setPreOppField2] = useState(oppField2);
+  const [preField, setPreField] = useState(field);
 
   const history = useHistory();
   function getRandomCard(count) {
@@ -50,10 +50,9 @@ export default function Game() {
     for (let i = 0; i < count; i++) {
       let arrayIndex = Math.floor(Math.random() * tmpDeck.length);
       result[i] = tmpDeck[arrayIndex];
-      tmpDeck = tmpDeck.filter((deck) => {
+      tmpDeck = tmpDeck.filter(deck => {
         return !(
-          deck.type === tmpDeck[arrayIndex].type &&
-          deck.number === tmpDeck[arrayIndex].number
+          deck.type === result[i].type && deck.number === result[i].number
         );
       });
     }
@@ -66,10 +65,9 @@ export default function Game() {
     for (let i = 0; i < count; i++) {
       let arrayIndex = Math.floor(Math.random() * returnDeck.length);
       result[i] = returnDeck[arrayIndex];
-      returnDeck = returnDeck.filter((preDeck) => {
+      returnDeck = returnDeck.filter(preDeck => {
         return !(
-          preDeck.type === returnDeck[arrayIndex].type &&
-          preDeck.number === returnDeck[arrayIndex].number
+          preDeck.type === result[i].type && preDeck.number === result[i].number
         );
       });
     }
@@ -81,10 +79,18 @@ export default function Game() {
     <div>
       <div className="boxes">
         <div className="boxes-1">
-          <OppField1 fieldCard={oppField1}></OppField1>
+          <OppField1
+            fieldKey="opp1"
+            fieldCard={field}
+            fieldSetter={setField}
+          ></OppField1>
         </div>
         <div className="boxes-2">
-          <OppField2 fieldCard={oppField2}></OppField2>
+          <OppField2
+            fieldKey="opp2"
+            fieldCard={field}
+            fieldSetter={setField}
+          ></OppField2>
         </div>
       </div>
       <div className="my-area">
@@ -98,12 +104,13 @@ export default function Game() {
               onClick={() => {
                 const randomCards = getRandomCard(15);
                 setPreDeck(deck);
-                setPreSelfField(selfField);
-                setPreOppField1(oppField1);
-                setPreOppField2(oppField2);
-                setSelfField(randomCards.slice(0, 5));
-                setOppField1(randomCards.slice(5, 10));
-                setOppField2(randomCards.slice(10, 15));
+                setPreField(field);
+                setField({
+                  self: randomCards.slice(0, 5),
+                  opp1: randomCards.slice(5, 10),
+                  opp2: randomCards.slice(10, 15),
+                  grave: field.grave
+                });
               }}
             >
               SET
@@ -127,13 +134,14 @@ export default function Game() {
                   onClick={() => {
                     setResetDialog(false);
                     setDeck(preDeck);
-                    setSelfField(preSelfField);
-                    setOppField1(preOppField1);
-                    setOppField2(preOppField2);
+                    setField(preField);
                     const resetCards = resetRandomCard(15);
-                    setSelfField(resetCards.slice(0, 5));
-                    setOppField1(resetCards.slice(5, 10));
-                    setOppField2(resetCards.slice(10, 15));
+                    setField({
+                      self: resetCards.slice(0, 5),
+                      opp1: resetCards.slice(5, 10),
+                      opp2: resetCards.slice(10, 15),
+                      grave: field.grave
+                    });
                   }}
                 >
                   ランダム
@@ -158,15 +166,20 @@ export default function Game() {
           </div>
           <div className="grave">
             <div className="mygrave">
-              <Card type={CLOVER} number={10} />
-              <Card type={CLOVER} number={11} />
-              <Card />
-              <Card />
+              <GraveField
+                fieldKey="grave"
+                fieldCard={field}
+                fieldSetter={setField}
+              />
             </div>
           </div>
         </div>
         <div className="myboxes">
-          <SelfField fieldCard={selfField}></SelfField>
+          <SelfField
+            fieldKey="self"
+            fieldCard={field}
+            fieldSetter={setField}
+          ></SelfField>
         </div>
         <div className="black-boxes">
           <div className="box-row">
