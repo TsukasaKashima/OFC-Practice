@@ -169,8 +169,11 @@ button.back-btn {
 }
 
 .select-cards .box {
-  margin: 0 1%;
   text-align: left;
+}
+
+.select-cards .ddcontainer {
+  margin: 0 1%;
 }
 
 .select-card-joker {

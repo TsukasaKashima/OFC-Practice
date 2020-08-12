@@ -48,7 +48,7 @@ export default function Card(props) {
       }}
       onHit={(e) => {
         e.dragData.onDrop(cardInformation.type, cardInformation.number);
-        const tmpField = Object.assign({}, props.field); //concat的な記述、オブジェクトをコピーするときはObject.assign
+        const tmpField = Object.assign({}, props.field);
         tmpField[props.fieldKey][props.index] = {
           type: e.dragData.type,
           number: e.dragData.number,

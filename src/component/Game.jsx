@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import "../App.css";
-import Card from "./Card";
+import GameCard from "./GameCard";
 import SelfField from "./SelfField";
 import OppField1 from "./OppField1";
 import OppField2 from "./OppField2";
 import { SPADE, CLOVER, DIAMOND, HEART, JOKER } from "../common/constant";
+import GraveField from "./GraveField";
 import {
   Button,
   Dialog,
@@ -13,7 +14,6 @@ import {
   DialogActions,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import GraveField from "./GraveField";
 
 export default function Game() {
   function createCard() {
@@ -183,29 +183,29 @@ export default function Game() {
         </div>
         <div className="black-boxes">
           <div className="box-row">
-            <Card />
-            <Card />
-            <Card />
+            <GameCard />
+            <GameCard />
+            <GameCard />
           </div>
           <div className="box-row">
-            <Card type={SPADE} number={4} />
-            <Card />
-            <Card />
+            <GameCard />
+            <GameCard />
+            <GameCard />
           </div>
           <div className="box-row">
-            <Card />
-            <Card />
-            <Card />
+            <GameCard />
+            <GameCard />
+            <GameCard />
           </div>
           <div className="box-row">
-            <Card />
-            <Card />
-            <Card />
+            <GameCard />
+            <GameCard />
+            <GameCard />
           </div>
           <div className="box-row">
-            <Card />
-            <Card />
-            <Card />
+            <GameCard />
+            <GameCard />
+            <GameCard />
           </div>
         </div>
         <Button
