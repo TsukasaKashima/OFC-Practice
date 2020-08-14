@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import "../App.css";
 import SelectCard from "./SelectCard";
-import SelectCardRaw from "./SelectCardRow";
+import SelectCardRow from "./SelectCardRow";
+import SelectCardRowJoker from "./SelectCardRowJoker";
 import { JOKER, SPADE, CLOVER, HEART, DIAMOND } from "../common/constant";
 import { Button } from "@material-ui/core";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { DropTarget } from "react-drag-drop-container";
 
-export default function Select() {
+export default function Select(props) {
   const history = useHistory();
   function createCard() {
     const resultArray = [];
@@ -26,36 +27,58 @@ export default function Select() {
   const spadeFilter = deck.filter((deck) => {
     return deck.type === SPADE;
   });
+  const cloverFilter = deck.filter((deck) => {
+    return deck.type === CLOVER;
+  });
+  const heartFilter = deck.filter((deck) => {
+    return deck.type === HEART;
+  });
+  const diamondFilter = deck.filter((deck) => {
+    return deck.type === DIAMOND;
+  });
+  const jokerFilter = deck.filter((deck) => {
+    return deck.type === JOKER;
+  });
 
   const [field, setField] = useState({
     SPADE: [...spadeFilter],
-    CLOVER: [],
-    HEART: [],
-    DIAMOND: [],
-    JOKER: [],
+    CLOVER: [...cloverFilter],
+    HEART: [...heartFilter],
+    DIAMOND: [...diamondFilter],
+    JOKER: [...jokerFilter],
   });
-
-  console.log(field.SPADE);
   return (
     <div className="select-cards">
       <div className="box-row">
-        <SelectCardRaw fieldCard={field.SPADE} fieldSetter={setField} />
+        <SelectCardRow fieldCard={field.SPADE} fieldSetter={setField} />
       </div>
       <div className="box-row">
-        <SelectCardRaw fieldCard={field.CLOVER} fieldSetter={setField} />
+        <SelectCardRow fieldCard={field.CLOVER} fieldSetter={setField} />
       </div>
       <div className="box-row">
-        <SelectCardRaw fieldCard={field.HEART} fieldSetter={setField} />
+        <SelectCardRow fieldCard={field.HEART} fieldSetter={setField} />
       </div>
       <div className="box-row">
-        <SelectCardRaw fieldCard={field.DIAMOND} fieldSetter={setField} />
+        <SelectCardRow fieldCard={field.DIAMOND} fieldSetter={setField} />
       </div>
       <div className="box-row select-card-joker">
-        <SelectCard type={JOKER} />
-        <SelectCard type={JOKER} />
+        <SelectCardRowJoker fieldCard={field.JOKER} fieldSetter={setField} />
       </div>
       <div className="select-boxes">
-        <DropTarget>
+        <DropTarget
+          dropData={{
+            type: deck.type,
+            number: deck.number,
+          }}
+          onHit={(e) => {
+            const tmpField = Object.assign({}, props.field);
+            tmpField[props.field][props.index] = {
+              type: e.dragData.type,
+              number: e.dragData.number,
+            };
+            setDeck(tmpField);
+          }}
+        >
           <div className="box-row">
             <SelectCard />
             <SelectCard />
