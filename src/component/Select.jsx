@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import "../App.css";
-import SelectCard from "./SelectCard";
 import SelectCardRow from "./SelectCardRow";
 import SelectCardRowJoker from "./SelectCardRowJoker";
 import { JOKER, SPADE, CLOVER, HEART, DIAMOND } from "../common/constant";
 import { Button } from "@material-ui/core";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { DropTarget } from "react-drag-drop-container";
+import SelectBox from "./SelectBox";
 
 export default function Select() {
   const history = useHistory();
@@ -24,7 +23,6 @@ export default function Select() {
     return resultArray;
   }
   const [deck, setDeck] = useState(createCard());
-  const [box, setBox] = useState([]);
   const spadeFilter = deck.filter((deck) => {
     return deck.type === SPADE;
   });
@@ -47,17 +45,6 @@ export default function Select() {
     DIAMOND: [...diamondFilter],
     JOKER: [...jokerFilter],
   });
-
-  /*[NOTE:要件Dで使うかも]function onDrop(type, number) {
-    callbackUpdatedField.current = (field) => {
-      const tmpField = Object.assign({}, field);
-      tmpField[props.fieldKey][props.index] = {
-        type,
-        number,
-      };
-      props.fieldSetter(tmpField);
-    };
-  }*/
   return (
     <div className="select-cards">
       <div className="box-row">
@@ -84,40 +71,7 @@ export default function Select() {
         />
       </div>
       <div className="select-boxes">
-        <DropTarget
-          dropData={{
-            type: deck.type,
-            number: deck.number,
-          }}
-          onHit={(e) => {
-            const tmpField = Object.assign({}, field);
-            tmpField[e.dragData.key][e.dragData.index] = {
-              type: undefined, //e.dragData.type,
-              number: undefined, //e.dragData.number,
-            };
-            setField(tmpField);
-          }}
-        >
-          <div className="box-row">
-            <SelectCard />
-            <SelectCard />
-            <SelectCard />
-            <SelectCard />
-            <SelectCard />
-            <SelectCard />
-            <SelectCard />
-            <SelectCard />
-          </div>
-          <div className="box-row">
-            <SelectCard />
-            <SelectCard />
-            <SelectCard />
-            <SelectCard />
-            <SelectCard />
-            <SelectCard />
-            <SelectCard />
-          </div>
-        </DropTarget>
+        <SelectBox />
         <Button
           className="select-btn"
           variant="contained"
