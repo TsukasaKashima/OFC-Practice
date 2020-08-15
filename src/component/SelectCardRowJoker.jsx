@@ -1,14 +1,15 @@
 import React from "react";
 import "../App.css";
 import SelectCard from "./SelectCard";
-export default function JokerCard(props) {
+export default function SelectCardRowJoker(props) {
   return (
     <React.Fragment>
       {[0, 1].map((index) => {
         return (
           <SelectCard
+            fieldKey={props.fieldKey}
             index={index}
-            field={props.fieldCard}
+            field={props.field}
             fieldSetter={props.fieldSetter}
           />
         );
