@@ -1,15 +1,15 @@
 import React from "react";
 import "../App.css";
-import GameCard from "./GameCard";
-export default function GraveField(props) {
+import SelectCard from "./SelectCard";
+export default function SelectCardRowJoker(props) {
   return (
     <React.Fragment>
-      {[0, 1, 2, 3].map((index) => {
+      {[0, 1].map((index) => {
         return (
-          <GameCard
-            index={index}
+          <SelectCard
             fieldKey={props.fieldKey}
-            field={props.fieldCard}
+            index={index}
+            field={props.field}
             fieldSetter={props.fieldSetter}
           />
         );

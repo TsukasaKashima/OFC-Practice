@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import "../App.css";
-import Card from "./Card";
+import GameCard from "./GameCard";
 import SelfField from "./SelfField";
 import OppField1 from "./OppField1";
 import OppField2 from "./OppField2";
 import { SPADE, CLOVER, DIAMOND, HEART, JOKER } from "../common/constant";
+import GraveField from "./GraveField";
 import {
   Button,
   Dialog,
   DialogContent,
   DialogContentText,
-  DialogActions
+  DialogActions,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import GraveField from "./GraveField";
 
 export default function Game() {
   function createCard() {
@@ -38,7 +38,7 @@ export default function Game() {
     self: [],
     opp1: [],
     opp2: [],
-    grave: []
+    grave: [],
   });
 
   const [preField, setPreField] = useState(field);
@@ -50,7 +50,7 @@ export default function Game() {
     for (let i = 0; i < count; i++) {
       let arrayIndex = Math.floor(Math.random() * tmpDeck.length);
       result[i] = tmpDeck[arrayIndex];
-      tmpDeck = tmpDeck.filter(deck => {
+      tmpDeck = tmpDeck.filter((deck) => {
         return !(
           deck.type === result[i].type && deck.number === result[i].number
         );
@@ -65,7 +65,7 @@ export default function Game() {
     for (let i = 0; i < count; i++) {
       let arrayIndex = Math.floor(Math.random() * returnDeck.length);
       result[i] = returnDeck[arrayIndex];
-      returnDeck = returnDeck.filter(preDeck => {
+      returnDeck = returnDeck.filter((preDeck) => {
         return !(
           preDeck.type === result[i].type && preDeck.number === result[i].number
         );
@@ -109,7 +109,7 @@ export default function Game() {
                   self: randomCards.slice(0, 5),
                   opp1: randomCards.slice(5, 10),
                   opp2: randomCards.slice(10, 15),
-                  grave: field.grave
+                  grave: field.grave,
                 });
               }}
             >
@@ -140,7 +140,7 @@ export default function Game() {
                       self: resetCards.slice(0, 5),
                       opp1: resetCards.slice(5, 10),
                       opp2: resetCards.slice(10, 15),
-                      grave: field.grave
+                      grave: field.grave,
                     });
                   }}
                 >
@@ -183,29 +183,29 @@ export default function Game() {
         </div>
         <div className="black-boxes">
           <div className="box-row">
-            <Card />
-            <Card />
-            <Card />
+            <GameCard />
+            <GameCard />
+            <GameCard />
           </div>
           <div className="box-row">
-            <Card />
-            <Card />
-            <Card />
+            <GameCard />
+            <GameCard />
+            <GameCard />
           </div>
           <div className="box-row">
-            <Card />
-            <Card />
-            <Card />
+            <GameCard />
+            <GameCard />
+            <GameCard />
           </div>
           <div className="box-row">
-            <Card />
-            <Card />
-            <Card />
+            <GameCard />
+            <GameCard />
+            <GameCard />
           </div>
           <div className="box-row">
-            <Card />
-            <Card />
-            <Card />
+            <GameCard />
+            <GameCard />
+            <GameCard />
           </div>
         </div>
         <Button

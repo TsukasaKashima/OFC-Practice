@@ -7,7 +7,7 @@ export default function Card(props) {
   const callbackUpdatedField = useRef(null);
   const [cardInformation, setCardInformation] = useState({
     type: undefined,
-    number: undefined
+    number: undefined,
   });
 
   // Note: ドロップされた側のCardで呼び出される関数。
@@ -17,11 +17,11 @@ export default function Card(props) {
   //       そこで、callbackUpdatedFieldというrefに退避させ、
   //       useEffectでprops.fieldの内容を監視してcallbackUpdatedFieldを実行させるようにした。
   function onDrop(type, number) {
-    callbackUpdatedField.current = field => {
+    callbackUpdatedField.current = (field) => {
       const tmpField = Object.assign({}, field);
       tmpField[props.fieldKey][props.index] = {
         type,
-        number
+        number,
       };
       props.fieldSetter(tmpField);
     };
@@ -40,19 +40,18 @@ export default function Card(props) {
       callbackUpdatedField.current = null;
     }
   }, [props.field, props.fieldKey, props.index]);
-
   return (
     <DropTarget
       dropData={{
         type: cardInformation.type,
-        number: cardInformation.number
+        number: cardInformation.number,
       }}
-      onHit={e => {
+      onHit={(e) => {
         e.dragData.onDrop(cardInformation.type, cardInformation.number);
         const tmpField = Object.assign({}, props.field);
         tmpField[props.fieldKey][props.index] = {
           type: e.dragData.type,
-          number: e.dragData.number
+          number: e.dragData.number,
         };
         props.fieldSetter(tmpField);
       }}
@@ -62,7 +61,7 @@ export default function Card(props) {
           dragData={{
             type: cardInformation.type,
             number: cardInformation.number,
-            onDrop
+            onDrop,
           }}
         >
           <img

@@ -1,13 +1,13 @@
 import React from "react";
 import "../App.css";
-import Card from "./Card";
+import GameCard from "./GameCard";
 export default function OppField1(props) {
   return (
     <React.Fragment>
       <div className="box-row">
-        {[0, 1, 2, 3, 4].map(index => {
+        {[0, 1, 2, 3, 4].map((index) => {
           return (
-            <Card
+            <GameCard
               index={index}
               fieldKey={props.fieldKey}
               field={props.fieldCard}
@@ -17,9 +17,9 @@ export default function OppField1(props) {
         })}
       </div>
       <div className="box-row">
-        {[5, 6, 7, 8, 9].map(index => {
+        {[5, 6, 7, 8, 9].map((index) => {
           return (
-            <Card
+            <GameCard
               index={index}
               fieldKey={props.fieldKey}
               field={props.fieldCard}
@@ -29,9 +29,9 @@ export default function OppField1(props) {
         })}
       </div>
       <div className="box-row">
-        {[10, 11, 12].map(index => {
+        {[10, 11, 12].map((index) => {
           return (
-            <Card
+            <GameCard
               index={index}
               fieldKey={props.fieldKey}
               field={props.fieldCard}
