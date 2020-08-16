@@ -7,7 +7,7 @@ export default function SelectBoxCard(props) {
     <div className="box">
       <img
         src={
-          props.type && props.number
+          props.type || props.number
             ? getImageFromTypeAndNumber(props.type, props.number)
             : null
         }

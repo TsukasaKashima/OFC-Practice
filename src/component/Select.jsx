@@ -71,7 +71,7 @@ export default function Select() {
         />
       </div>
       <div className="select-boxes">
-        <SelectBox />
+        <SelectBox field={field} setField={setField} />
         <Button
           className="select-btn"
           variant="contained"
