@@ -16,7 +16,11 @@ export default function SelectBox(props) {
           if (box.length < 15) {
             const tmpField = Object.assign({}, props.field);
             const tmpBox = box.concat();
-            tmpBox.push({ number: e.dragData.number, type: e.dragData.type });
+            tmpBox.push({
+              number: e.dragData.number,
+              type: e.dragData.type,
+              index: e.dragData.index,
+            });
             tmpField[e.dragData.key][e.dragData.index] = {
               type: undefined,
               number: undefined,
@@ -33,6 +37,19 @@ export default function SelectBox(props) {
                 <SelectBoxCard
                   type={box[index].type}
                   number={box[index].number}
+                  index={box[index].index}
+                  onClick={(type, number, index) => {
+                    const tmpCard = box.concat();
+                    const tmpField = Object.assign({}, props.field);
+                    tmpField[type][index] = { type: type, number: number };
+                    props.setField(tmpField);
+                    setBox(
+                      tmpCard.filter((card) => {
+                        return !(card.type === type && card.number === number);
+                      })
+                    );
+                    console.log(props.field[type][index]);
+                  }}
                 />
               ); // 表示すべきカードの情報をpropsで渡す
             }
@@ -46,6 +63,9 @@ export default function SelectBox(props) {
                 <SelectBoxCard
                   type={box[index].type}
                   number={box[index].number}
+                  onClick={() => {
+                    setBox([]);
+                  }}
                 />
               ); // 表示すべきカードの情報をpropsで渡す
             }

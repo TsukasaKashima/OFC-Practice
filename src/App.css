@@ -188,6 +188,23 @@ button.back-btn {
   padding: 3% 0;
 }
 
+.select-box-card {
+  position: relative;
+}
+
+.select-box-card button {
+  font-size: 0.4vw;
+  border: none;
+  z-index: 1;
+  padding: 0 5% 0 0;
+  right: 5%;
+  top: 3%;
+  display: block;
+  position: absolute;
+  background-color: #fff;
+  cursor: pointer;
+}
+
 button.select-btn {
   font-size: 1.8vw;
   padding: 0.8% 7%;
