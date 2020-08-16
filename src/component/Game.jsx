@@ -14,7 +14,6 @@ import {
   DialogActions,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { SPADE, CLOVER, HEART, DIAMOND, JOKER } from "../common/constant.js";
 
 export default function Game() {
   function createCard() {
@@ -43,14 +42,6 @@ export default function Game() {
   });
 
   const [preField, setPreField] = useState(field);
-  const [selfField, setSelfField] = useState([]);
-  const [preSelfField, setPreSelfField] = useState(selfField);
-
-  const [oppField1, setOppField1] = useState([]);
-  const [preOppField1, setPreOppField1] = useState(oppField1);
-
-  const [oppField2, setOppField2] = useState([]);
-  const [preOppField2, setPreOppField2] = useState(oppField2);
 
   const history = useHistory();
   function getRandomCard(count) {
