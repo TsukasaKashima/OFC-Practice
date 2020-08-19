@@ -41,16 +41,29 @@ export default function SelectBox(props) {
           }
         }}
       >
-        <div className="box-row">
+        <div className="box-row select-box-row">
           {[0, 1, 2, 3, 4, 5, 6, 7].map((index) => {
             if (box[index]) {
               return (
-                <SelectBoxCard
-                  type={box[index].type}
-                  number={box[index].number}
-                  index={box[index].index}
-                  onClick={onClickDeleteButton}
-                />
+                <React.Fragment>
+                  <button
+                    className="delete-btn"
+                    onClick={() => {
+                      onClickDeleteButton(
+                        box[index].type,
+                        box[index].number,
+                        box[index].index
+                      );
+                    }}
+                  >
+                    <span>×</span>
+                  </button>
+                  <SelectBoxCard
+                    type={box[index].type}
+                    number={box[index].number}
+                    index={box[index].index}
+                  />
+                </React.Fragment>
               );
             }
             return <SelectBoxCard />;
@@ -60,12 +73,25 @@ export default function SelectBox(props) {
           {[8, 9, 10, 11, 12, 13, 14].map((index) => {
             if (box[index]) {
               return (
-                <SelectBoxCard
-                  type={box[index].type}
-                  number={box[index].number}
-                  index={box[index].index}
-                  onClick={onClickDeleteButton}
-                />
+                <React.Fragment>
+                  <button
+                    className="delete-btn"
+                    onClick={() => {
+                      onClickDeleteButton(
+                        box[index].type,
+                        box[index].number,
+                        box[index].index
+                      );
+                    }}
+                  >
+                    <span>×</span>
+                  </button>
+                  <SelectBoxCard
+                    type={box[index].type}
+                    number={box[index].number}
+                    index={box[index].index}
+                  />
+                </React.Fragment>
               );
             }
             return <SelectBoxCard />;
