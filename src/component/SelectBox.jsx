@@ -5,6 +5,17 @@ import { DropTarget } from "react-drag-drop-container";
 
 export default function SelectBox(props) {
   const [box, setBox] = useState([]);
+  function onClickDeleteButton(type, number, index) {
+    const tmpCard = box.concat();
+    const tmpField = Object.assign({}, props.field);
+    tmpField[type][index] = { type: type, number: number };
+    props.setField(tmpField);
+    setBox(
+      tmpCard.filter((card) => {
+        return !(card.type === type && card.number === number);
+      })
+    );
+  }
   return (
     <React.Fragment>
       <DropTarget
@@ -38,20 +49,9 @@ export default function SelectBox(props) {
                   type={box[index].type}
                   number={box[index].number}
                   index={box[index].index}
-                  onClick={(type, number, index) => {
-                    const tmpCard = box.concat();
-                    const tmpField = Object.assign({}, props.field);
-                    tmpField[type][index] = { type: type, number: number };
-                    props.setField(tmpField);
-                    setBox(
-                      tmpCard.filter((card) => {
-                        return !(card.type === type && card.number === number);
-                      })
-                    );
-                    console.log(props.field[type][index]);
-                  }}
+                  onClick={onClickDeleteButton}
                 />
-              ); // 表示すべきカードの情報をpropsで渡す
+              );
             }
             return <SelectBoxCard />;
           })}
@@ -63,11 +63,10 @@ export default function SelectBox(props) {
                 <SelectBoxCard
                   type={box[index].type}
                   number={box[index].number}
-                  onClick={() => {
-                    setBox([]);
-                  }}
+                  index={box[index].index}
+                  onClick={onClickDeleteButton}
                 />
-              ); // 表示すべきカードの情報をpropsで渡す
+              );
             }
             return <SelectBoxCard />;
           })}

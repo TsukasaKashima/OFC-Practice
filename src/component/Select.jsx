@@ -39,34 +39,34 @@ export default function Select() {
     return deck.type === JOKER;
   });
   const [field, setField] = useState({
-    spade: [...spadeFilter],
-    clover: [...cloverFilter],
-    heart: [...heartFilter],
-    diamond: [...diamondFilter],
-    joker: [...jokerFilter],
+    [SPADE]: [...spadeFilter],
+    [CLOVER]: [...cloverFilter],
+    [HEART]: [...heartFilter],
+    [DIAMOND]: [...diamondFilter],
+    [JOKER]: [...jokerFilter],
   });
   return (
     <div className="select-cards">
       <div className="box-row">
-        <SelectCardRow field={field} fieldKey="spade" fieldSetter={setField} />
+        <SelectCardRow field={field} fieldKey={SPADE} fieldSetter={setField} />
       </div>
       <div className="box-row">
-        <SelectCardRow field={field} fieldKey="clover" fieldSetter={setField} />
+        <SelectCardRow field={field} fieldKey={CLOVER} fieldSetter={setField} />
       </div>
       <div className="box-row">
-        <SelectCardRow field={field} fieldKey="heart" fieldSetter={setField} />
+        <SelectCardRow field={field} fieldKey={HEART} fieldSetter={setField} />
       </div>
       <div className="box-row">
         <SelectCardRow
           field={field}
-          fieldKey="diamond"
+          fieldKey={DIAMOND}
           fieldSetter={setField}
         />
       </div>
       <div className="box-row select-card-joker">
         <SelectCardRowJoker
           field={field}
-          fieldKey="joker"
+          fieldKey={JOKER}
           fieldSetter={setField}
         />
       </div>

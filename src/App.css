@@ -203,6 +203,7 @@ button.back-btn {
   position: absolute;
   background-color: #fff;
   cursor: pointer;
+  border-radius: 50%;
 }
 
 button.select-btn {
