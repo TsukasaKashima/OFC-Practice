@@ -186,6 +186,25 @@ button.back-btn {
   background-color: black;
   width: 80%;
   padding: 3% 0;
+  position: relative;
+}
+
+.select-box-row {
+  position: relative;
+}
+
+button.delete-btn {
+  font-size: 1.2vw;
+  border: none;
+  z-index: 1;
+  display: inline-block;
+  background-color: white;
+  cursor: pointer;
+  color: black;
+  padding: 0 0.5%;
+  position: absolute;
+  margin: 0.2% 0 0 4.4%;
+  border-radius: 50%;
 }
 
 button.select-btn {

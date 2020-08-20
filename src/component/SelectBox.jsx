@@ -5,6 +5,17 @@ import { DropTarget } from "react-drag-drop-container";
 
 export default function SelectBox(props) {
   const [box, setBox] = useState([]);
+  function onClickDeleteButton(type, number, index) {
+    const tmpCard = box.concat();
+    const tmpField = Object.assign({}, props.field);
+    tmpField[type][index] = { type: type, number: number };
+    props.setField(tmpField);
+    setBox(
+      tmpCard.filter((card) => {
+        return !(card.type === type && card.number === number);
+      })
+    );
+  }
   return (
     <React.Fragment>
       <DropTarget
@@ -16,7 +27,11 @@ export default function SelectBox(props) {
           if (box.length < 15) {
             const tmpField = Object.assign({}, props.field);
             const tmpBox = box.concat();
-            tmpBox.push({ number: e.dragData.number, type: e.dragData.type });
+            tmpBox.push({
+              number: e.dragData.number,
+              type: e.dragData.type,
+              index: e.dragData.index,
+            });
             tmpField[e.dragData.key][e.dragData.index] = {
               type: undefined,
               number: undefined,
@@ -26,15 +41,30 @@ export default function SelectBox(props) {
           }
         }}
       >
-        <div className="box-row">
+        <div className="box-row select-box-row">
           {[0, 1, 2, 3, 4, 5, 6, 7].map((index) => {
             if (box[index]) {
               return (
-                <SelectBoxCard
-                  type={box[index].type}
-                  number={box[index].number}
-                />
-              ); // 表示すべきカードの情報をpropsで渡す
+                <React.Fragment>
+                  <button
+                    className="delete-btn"
+                    onClick={() => {
+                      onClickDeleteButton(
+                        box[index].type,
+                        box[index].number,
+                        box[index].index
+                      );
+                    }}
+                  >
+                    <span>×</span>
+                  </button>
+                  <SelectBoxCard
+                    type={box[index].type}
+                    number={box[index].number}
+                    index={box[index].index}
+                  />
+                </React.Fragment>
+              );
             }
             return <SelectBoxCard />;
           })}
@@ -43,11 +73,26 @@ export default function SelectBox(props) {
           {[8, 9, 10, 11, 12, 13, 14].map((index) => {
             if (box[index]) {
               return (
-                <SelectBoxCard
-                  type={box[index].type}
-                  number={box[index].number}
-                />
-              ); // 表示すべきカードの情報をpropsで渡す
+                <React.Fragment>
+                  <button
+                    className="delete-btn"
+                    onClick={() => {
+                      onClickDeleteButton(
+                        box[index].type,
+                        box[index].number,
+                        box[index].index
+                      );
+                    }}
+                  >
+                    <span>×</span>
+                  </button>
+                  <SelectBoxCard
+                    type={box[index].type}
+                    number={box[index].number}
+                    index={box[index].index}
+                  />
+                </React.Fragment>
+              );
             }
             return <SelectBoxCard />;
           })}
