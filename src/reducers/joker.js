@@ -1,5 +1,4 @@
-import { SELECT_JOKER } from "../actions";
-import { NON_JOKER } from "../actions";
+import { SELECT_JOKER, NON_JOKER } from "../action/index.js";
 
 const jokers = (state = [], action) => {
   switch (action.type) {

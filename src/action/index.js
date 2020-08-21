@@ -1,15 +1,7 @@
-export const SELECT_MEMBER = "SELECT_MEMBER";
 export const ONE_OPP = "ONE_OPP";
 export const TWO_OPP = "TWO_OPP";
 export const SELECT_JOKER = "SELECT_JOKER";
 export const NON_JOKER = "NON_JOKER";
-
-export const selectMember = (member) => {
-  return {
-    type: SELECT_MEMBER,
-    countMember: member,
-  };
-};
 
 export const oneOpp = (member) => {
   return {
@@ -35,6 +27,6 @@ export const selectJoker = (joker) => {
 export const nonJoker = (joker) => {
   return {
     type: NON_JOKER,
-    countJoker: !joker,
+    countJoker: joker,
   };
 };
