@@ -1,20 +1,15 @@
-import { ONE_OPP, TWO_OPP } from "../action/index.js";
-import OppField1 from "../container/OppField1.jsx";
+import { ONE_OPP } from "../action/index.js";
 
 const members = (state = Number, action) => {
   switch (action.type) {
     case ONE_OPP:
       state = 1;
-      return (member) => {
-        return member.count !== OppField1;
-      };
-    case TWO_OPP:
-      state = 2;
-      return [
+      /*return [
         {
           Member: action.countMember,
         },
-      ];
+      ];*/
+      break;
     default:
       return state;
   }

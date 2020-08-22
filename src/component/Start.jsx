@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "../App.css";
-import { connect } from "react-redux";
 import {
   Button,
   Dialog,
@@ -9,19 +8,21 @@ import {
   DialogActions,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { oneOpp, twoOpp, selectJoker, nonJoker } from "../action";
+import OppField1 from "./Game";
+import OppField2 from "./Game";
 
-const Start = (props) => {
+export default function Start() {
   const [jokerDialog, setJokerDialog] = useState(false);
   const [nonJokerDialog, setNonJokerDialog] = useState(false);
   const history = useHistory();
+  const [oppField, setOppField] = useState([<OppField1 />, <OppField2 />]);
 
-  function selectOneOpp(member) {
-    props.oneOpp(member);
-  }
-
-  function selectTwoOpp(member) {
-    props.twoOpp(member);
+  function removeArea() {
+    const getField = oppField.splice(1);
+    setOppField(getField);
+    /*return oppField.filter(() => {
+      return oppField !== oppField[1];
+    })*/
   }
 
   return (
@@ -58,7 +59,7 @@ const Start = (props) => {
               onClick={() => {
                 setJokerDialog(true);
                 history.push("game");
-                selectOneOpp();
+                removeArea();
               }}
             >
               2人
@@ -67,7 +68,6 @@ const Start = (props) => {
               onClick={() => {
                 setJokerDialog(true);
                 history.push("game");
-                selectTwoOpp();
               }}
             >
               3人
@@ -91,7 +91,7 @@ const Start = (props) => {
               onClick={() => {
                 setNonJokerDialog(true);
                 history.push("game");
-                selectOneOpp();
+                //selectOneOpp();
               }}
             >
               2人
@@ -100,7 +100,6 @@ const Start = (props) => {
               onClick={() => {
                 setNonJokerDialog(true);
                 history.push("game");
-                selectTwoOpp();
               }}
             >
               3人
@@ -117,17 +116,4 @@ const Start = (props) => {
       </div>
     </React.Fragment>
   );
-};
-
-const mapStateToProps = ({ members, jokers }) => {
-  return { members: members, jokers: jokers };
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  oneOpp: (member) => dispatch(oneOpp(member)),
-  twoOpp: (member) => dispatch(twoOpp(member)),
-  selectJoker: (joker) => dispatch(selectJoker(joker)),
-  nonJoker: (joker) => dispatch(nonJoker(joker)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Start);
+}

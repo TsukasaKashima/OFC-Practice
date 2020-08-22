@@ -1,8 +1,8 @@
 import React from "react";
 import "./App.css";
-import Start from "./container/Start";
-import Game from "./container/Game";
-import Select from "./container/Select";
+import Start from "./component/Start";
+import Game from "./component/Game";
+import Select from "./component/Select";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import { createStore } from "redux";

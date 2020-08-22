@@ -14,8 +14,9 @@ import {
   DialogActions,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+//import Start from "./Start";
 
-export default function Game() {
+export default function Game(props) {
   function createCard() {
     const resultArray = [];
     for (let i = 1; i <= 13; i++) {
@@ -40,10 +41,11 @@ export default function Game() {
     opp2: [],
     grave: [],
   });
-
   const [preField, setPreField] = useState(field);
 
+  const [oppField, setOppField] = useState([<OppField1 />, <OppField2 />]);
   const history = useHistory();
+
   function getRandomCard(count) {
     let result = [];
     let tmpDeck = deck.concat();
@@ -74,9 +76,27 @@ export default function Game() {
     setDeck(returnDeck);
     return result;
   }
-  //[NOTE:Redux化の段階でフィールドをリセットする用の関数が必要か確認]function clearField() {}
+
+  function removeArea() {
+    const getField = oppField.splice(1);
+    setOppField(getField);
+    /*return oppField.filter(() => {
+      return oppField !== oppField[1];
+    })*/
+  }
+  console.log(oppField);
+
   return (
     <div>
+      <Button
+        variant="contained"
+        color="secondary"
+        onClick={() => {
+          removeArea();
+        }}
+      >
+        消す
+      </Button>
       <div className="boxes">
         <div className="boxes-1">
           <OppField1

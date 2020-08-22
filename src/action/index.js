@@ -10,13 +10,6 @@ export const oneOpp = (member) => {
   };
 };
 
-export const twoOpp = (member) => {
-  return {
-    type: TWO_OPP,
-    countMember: member,
-  };
-};
-
 export const selectJoker = (joker) => {
   return {
     type: SELECT_JOKER,
