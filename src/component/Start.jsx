@@ -9,9 +9,11 @@ import {
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
-export default function Start() {
-  const [memberDialog, setMemberDialog] = useState(false);
+export default function Start(props) {
+  const [jokerDialog, setJokerDialog] = useState(false);
+  const [nonJokerDialog, setNonJokerDialog] = useState(false);
   const history = useHistory();
+
   return (
     <React.Fragment>
       <div className="title">
@@ -21,7 +23,8 @@ export default function Start() {
           variant="contained"
           color="primary"
           onClick={() => {
-            setMemberDialog(true);
+            props.setExistJoker(true);
+            setJokerDialog(true);
           }}
         >
           54枚
@@ -31,35 +34,72 @@ export default function Start() {
           variant="contained"
           color="primary"
           onClick={() => {
-            setMemberDialog(true);
+            props.setExistJoker(false);
+            setNonJokerDialog(true);
           }}
         >
           52枚(ジョーカー抜き)
         </Button>
-        <Dialog open={memberDialog}>
+
+        <Dialog open={jokerDialog}>
           <DialogContent>
             <DialogContentText>何人でプレイしますか？</DialogContentText>
           </DialogContent>
           <DialogActions>
             <Button
               onClick={() => {
-                setMemberDialog(true);
+                setJokerDialog(true);
                 history.push("game");
+                props.setMemberCount(2);
               }}
             >
               2人
             </Button>
             <Button
               onClick={() => {
-                setMemberDialog(true);
+                setJokerDialog(true);
                 history.push("game");
+                props.setMemberCount(3);
               }}
             >
               3人
             </Button>
             <Button
               onClick={() => {
-                setMemberDialog(false);
+                setJokerDialog(false);
+              }}
+            >
+              キャンセル
+            </Button>
+          </DialogActions>
+        </Dialog>
+
+        <Dialog open={nonJokerDialog}>
+          <DialogContent>
+            <DialogContentText>何人でプレイしますか？</DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              onClick={() => {
+                setNonJokerDialog(true);
+                history.push("game");
+                props.setMemberCount(2);
+              }}
+            >
+              2人
+            </Button>
+            <Button
+              onClick={() => {
+                setNonJokerDialog(true);
+                history.push("game");
+                props.setMemberCount(3);
+              }}
+            >
+              3人
+            </Button>
+            <Button
+              onClick={() => {
+                setNonJokerDialog(false);
               }}
             >
               キャンセル

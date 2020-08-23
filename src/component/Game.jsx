@@ -15,7 +15,7 @@ import {
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
-export default function Game() {
+export default function Game(props) {
   function createCard() {
     const resultArray = [];
     for (let i = 1; i <= 13; i++) {
@@ -24,9 +24,10 @@ export default function Game() {
       resultArray.push({ type: HEART, number: i });
       resultArray.push({ type: DIAMOND, number: i });
     }
-    //[Todo:createCardはstateを見てjokerをpushするかどうか判断する（Redux化の際にstoreのstateを参照する）]
-    resultArray.push({ type: JOKER });
-    resultArray.push({ type: JOKER });
+    if (props.existJoker) {
+      resultArray.push({ type: JOKER });
+      resultArray.push({ type: JOKER });
+    }
     return resultArray;
   }
   const [resetDialog, setResetDialog] = useState(false);
@@ -40,10 +41,9 @@ export default function Game() {
     opp2: [],
     grave: [],
   });
-
   const [preField, setPreField] = useState(field);
-
   const history = useHistory();
+
   function getRandomCard(count) {
     let result = [];
     let tmpDeck = deck.concat();
@@ -74,7 +74,7 @@ export default function Game() {
     setDeck(returnDeck);
     return result;
   }
-  //[NOTE:Redux化の段階でフィールドをリセットする用の関数が必要か確認]function clearField() {}
+
   return (
     <div>
       <div className="boxes">
@@ -85,13 +85,15 @@ export default function Game() {
             fieldSetter={setField}
           ></OppField1>
         </div>
-        <div className="boxes-2">
-          <OppField2
-            fieldKey="opp2"
-            fieldCard={field}
-            fieldSetter={setField}
-          ></OppField2>
-        </div>
+        {props.memberCount === 3 && (
+          <div className="boxes-2">
+            <OppField2
+              fieldKey="opp2"
+              fieldCard={field}
+              fieldSetter={setField}
+            ></OppField2>
+          </div>
+        )}
       </div>
       <div className="my-area">
         <div className="btns_grave">

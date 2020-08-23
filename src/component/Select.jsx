@@ -7,7 +7,7 @@ import { Button } from "@material-ui/core";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import SelectBox from "./SelectBox";
 
-export default function Select() {
+export default function Select(props) {
   const history = useHistory();
   function createCard() {
     const resultArray = [];
@@ -17,9 +17,10 @@ export default function Select() {
       resultArray.push({ type: HEART, number: i });
       resultArray.push({ type: DIAMOND, number: i });
     }
-    //[Todo:createCardはstateを見てjokerをpushするかどうか判断する（Redux化の際にstoreのstateを参照する）]
-    resultArray.push({ type: JOKER });
-    resultArray.push({ type: JOKER });
+    if (props.existJoker) {
+      resultArray.push({ type: JOKER });
+      resultArray.push({ type: JOKER });
+    }
     return resultArray;
   }
   const [deck, setDeck] = useState(createCard());
