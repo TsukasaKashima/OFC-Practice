@@ -8,22 +8,11 @@ import {
   DialogActions,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import OppField1 from "./Game";
-import OppField2 from "./Game";
 
-export default function Start() {
+export default function Start(props) {
   const [jokerDialog, setJokerDialog] = useState(false);
   const [nonJokerDialog, setNonJokerDialog] = useState(false);
   const history = useHistory();
-  const [oppField, setOppField] = useState([<OppField1 />, <OppField2 />]);
-
-  function removeArea() {
-    const getField = oppField.splice(1);
-    setOppField(getField);
-    /*return oppField.filter(() => {
-      return oppField !== oppField[1];
-    })*/
-  }
 
   return (
     <React.Fragment>
@@ -34,6 +23,7 @@ export default function Start() {
           variant="contained"
           color="primary"
           onClick={() => {
+            props.setExistJoker(true);
             setJokerDialog(true);
           }}
         >
@@ -44,6 +34,7 @@ export default function Start() {
           variant="contained"
           color="primary"
           onClick={() => {
+            props.setExistJoker(false);
             setNonJokerDialog(true);
           }}
         >
@@ -59,7 +50,7 @@ export default function Start() {
               onClick={() => {
                 setJokerDialog(true);
                 history.push("game");
-                removeArea();
+                props.setMemberCount(2);
               }}
             >
               2人
@@ -68,6 +59,7 @@ export default function Start() {
               onClick={() => {
                 setJokerDialog(true);
                 history.push("game");
+                props.setMemberCount(3);
               }}
             >
               3人
@@ -91,7 +83,7 @@ export default function Start() {
               onClick={() => {
                 setNonJokerDialog(true);
                 history.push("game");
-                //selectOneOpp();
+                props.setMemberCount(2);
               }}
             >
               2人
@@ -100,6 +92,7 @@ export default function Start() {
               onClick={() => {
                 setNonJokerDialog(true);
                 history.push("game");
+                props.setMemberCount(3);
               }}
             >
               3人

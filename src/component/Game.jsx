@@ -25,9 +25,10 @@ export default function Game(props) {
       resultArray.push({ type: HEART, number: i });
       resultArray.push({ type: DIAMOND, number: i });
     }
-    //[Todo:createCardはstateを見てjokerをpushするかどうか判断する（Redux化の際にstoreのstateを参照する）]
-    resultArray.push({ type: JOKER });
-    resultArray.push({ type: JOKER });
+    if (props.existJoker) {
+      resultArray.push({ type: JOKER });
+      resultArray.push({ type: JOKER });
+    }
     return resultArray;
   }
   const [resetDialog, setResetDialog] = useState(false);
@@ -42,8 +43,6 @@ export default function Game(props) {
     grave: [],
   });
   const [preField, setPreField] = useState(field);
-
-  const [oppField, setOppField] = useState([<OppField1 />, <OppField2 />]);
   const history = useHistory();
 
   function getRandomCard(count) {
@@ -77,26 +76,8 @@ export default function Game(props) {
     return result;
   }
 
-  function removeArea() {
-    const getField = oppField.splice(1);
-    setOppField(getField);
-    /*return oppField.filter(() => {
-      return oppField !== oppField[1];
-    })*/
-  }
-  console.log(oppField);
-
   return (
     <div>
-      <Button
-        variant="contained"
-        color="secondary"
-        onClick={() => {
-          removeArea();
-        }}
-      >
-        消す
-      </Button>
       <div className="boxes">
         <div className="boxes-1">
           <OppField1
@@ -105,13 +86,15 @@ export default function Game(props) {
             fieldSetter={setField}
           ></OppField1>
         </div>
-        <div className="boxes-2">
-          <OppField2
-            fieldKey="opp2"
-            fieldCard={field}
-            fieldSetter={setField}
-          ></OppField2>
-        </div>
+        {props.memberCount === 3 && (
+          <div className="boxes-2">
+            <OppField2
+              fieldKey="opp2"
+              fieldCard={field}
+              fieldSetter={setField}
+            ></OppField2>
+          </div>
+        )}
       </div>
       <div className="my-area">
         <div className="btns_grave">
