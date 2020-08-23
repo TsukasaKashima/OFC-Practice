@@ -198,41 +198,63 @@ export default function Game(props) {
         <div className="black-boxes">
           <div className="box-row">
             {[0, 1, 2].map((index) => {
-              console.log(1);
-              if (props.selectedCards[index]) {
-                console.log(field);
-                return (
-                  <GameCard
-                    type={props.selectedCards[index].type}
-                    number={props.selectedCards[index].number}
-                    index={index}
-                    fieldKey="selected"
-                    fieldCard={field}
-                    fieldSetter={setField}
-                  />
-                );
-              } else return <GameCard />;
+              return (
+                <GameCard
+                  index={index}
+                  fieldKey="selected"
+                  field={field}
+                  fieldSetter={setField}
+                />
+              );
             })}
           </div>
           <div className="box-row">
-            <GameCard />
-            <GameCard />
-            <GameCard />
+            {[3, 4, 5].map((index) => {
+              return (
+                <GameCard
+                  index={index}
+                  fieldKey="selected"
+                  field={field}
+                  fieldSetter={setField}
+                />
+              );
+            })}
           </div>
           <div className="box-row">
-            <GameCard />
-            <GameCard />
-            <GameCard />
+            {[6, 7, 8].map((index) => {
+              return (
+                <GameCard
+                  index={index}
+                  fieldKey="selected"
+                  field={field}
+                  fieldSetter={setField}
+                />
+              );
+            })}
           </div>
           <div className="box-row">
-            <GameCard />
-            <GameCard />
-            <GameCard />
+            {[9, 10, 11].map((index) => {
+              return (
+                <GameCard
+                  index={index}
+                  fieldKey="selected"
+                  field={field}
+                  fieldSetter={setField}
+                />
+              );
+            })}
           </div>
           <div className="box-row">
-            <GameCard />
-            <GameCard />
-            <GameCard />
+            {[12, 13, 14].map((index) => {
+              return (
+                <GameCard
+                  index={index}
+                  fieldKey="selected"
+                  field={field}
+                  fieldSetter={setField}
+                />
+              );
+            })}
           </div>
         </div>
         <Button
