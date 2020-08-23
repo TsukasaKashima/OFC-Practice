@@ -28,11 +28,13 @@ export default function Card(props) {
   }
 
   useEffect(() => {
+    console.log("B");
     if (
       props.field &&
       props.field[props.fieldKey] &&
       props.field[props.fieldKey][props.index]
     ) {
+      console.log("A");
       setCardInformation(props.field[props.fieldKey][props.index]);
     }
     if (callbackUpdatedField.current !== null) {

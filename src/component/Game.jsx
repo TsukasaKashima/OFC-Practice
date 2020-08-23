@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../App.css";
 import GameCard from "./GameCard";
+import SelectBoxCard from "./SelectBoxCard";
 import SelfField from "./SelfField";
 import OppField1 from "./OppField1";
 import OppField2 from "./OppField2";
@@ -40,7 +41,16 @@ export default function Game(props) {
     opp1: [],
     opp2: [],
     grave: [],
+    selected: [],
   });
+
+  useEffect(() => {
+    const tmpField = Object.assign({}, field);
+    tmpField.selected = props.selectedCards;
+    setField(tmpField);
+    console.log(tmpField);
+  }, [props.selectedCards]);
+
   const [preField, setPreField] = useState(field);
   const history = useHistory();
 
@@ -112,6 +122,7 @@ export default function Game(props) {
                   opp1: randomCards.slice(5, 10),
                   opp2: randomCards.slice(10, 15),
                   grave: field.grave,
+                  selected: field.selected,
                 });
               }}
             >
@@ -143,6 +154,7 @@ export default function Game(props) {
                       opp1: resetCards.slice(5, 10),
                       opp2: resetCards.slice(10, 15),
                       grave: field.grave,
+                      selected: field.selected,
                     });
                   }}
                 >
@@ -185,9 +197,22 @@ export default function Game(props) {
         </div>
         <div className="black-boxes">
           <div className="box-row">
-            <GameCard />
-            <GameCard />
-            <GameCard />
+            {[0, 1, 2].map((index) => {
+              console.log(1);
+              if (props.selectedCards[index]) {
+                console.log(field);
+                return (
+                  <GameCard
+                    type={props.selectedCards[index].type}
+                    number={props.selectedCards[index].number}
+                    index={index}
+                    fieldKey="selected"
+                    fieldCard={field}
+                    fieldSetter={setField}
+                  />
+                );
+              } else return <GameCard />;
+            })}
           </div>
           <div className="box-row">
             <GameCard />

@@ -13,6 +13,7 @@ let store = createStore(reducers);
 function App() {
   const [memberCount, setMemberCount] = useState(0);
   const [existJoker, setExistJoker] = useState(true);
+  const [selectedCards, setSelectedCards] = useState([]);
 
   return (
     <React.Fragment>
@@ -35,18 +36,24 @@ function App() {
               path={"/game"}
               render={() => {
                 return (
-                  <Game memberCount={memberCount} existJoker={existJoker} />
+                  <Game
+                    memberCount={memberCount}
+                    existJoker={existJoker}
+                    selectedCards={selectedCards}
+                    setSelectedCards={setSelectedCards}
+                  />
                 );
               }}
             />
             <Route
               path={"/select"}
-              component={Select}
               render={() => {
                 return (
                   <Select
                     existJoker={existJoker}
                     setExistJoker={setExistJoker}
+                    selectedCards={selectedCards}
+                    setSelectedCards={setSelectedCards}
                   />
                 );
               }}
