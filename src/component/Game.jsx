@@ -14,7 +14,6 @@ import {
   DialogActions,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-//import Start from "./Start";
 
 export default function Game(props) {
   function createCard() {
