@@ -46,6 +46,7 @@ export default function Select(props) {
     [DIAMOND]: [...diamondFilter],
     [JOKER]: [...jokerFilter],
   });
+
   return (
     <div className="select-cards">
       <div className="box-row">

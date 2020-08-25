@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
 import GameCard from "./GameCard";
-import SelectBoxCard from "./SelectBoxCard";
 import SelfField from "./SelfField";
 import OppField1 from "./OppField1";
 import OppField2 from "./OppField2";
@@ -48,7 +47,6 @@ export default function Game(props) {
     const tmpField = Object.assign({}, field);
     tmpField.selected = props.selectedCards;
     setField(tmpField);
-    console.log(tmpField);
   }, [props.selectedCards]);
 
   const [preField, setPreField] = useState(field);
@@ -84,16 +82,11 @@ export default function Game(props) {
     setDeck(returnDeck);
     return result;
   }
-
   return (
     <div>
       <div className="boxes">
         <div className="boxes-1">
-          <OppField1
-            fieldKey="opp1"
-            fieldCard={field}
-            fieldSetter={setField}
-          ></OppField1>
+          <OppField1 fieldKey="opp1" fieldCard={field} fieldSetter={setField} />
         </div>
         {props.memberCount === 3 && (
           <div className="boxes-2">
@@ -101,7 +94,7 @@ export default function Game(props) {
               fieldKey="opp2"
               fieldCard={field}
               fieldSetter={setField}
-            ></OppField2>
+            />
           </div>
         )}
       </div>
@@ -189,11 +182,7 @@ export default function Game(props) {
           </div>
         </div>
         <div className="myboxes">
-          <SelfField
-            fieldKey="self"
-            fieldCard={field}
-            fieldSetter={setField}
-          ></SelfField>
+          <SelfField fieldKey="self" fieldCard={field} fieldSetter={setField} />
         </div>
         <div className="black-boxes">
           <div className="box-row">
