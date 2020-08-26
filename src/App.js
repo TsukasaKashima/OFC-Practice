@@ -28,6 +28,7 @@ function App() {
                   <Start
                     setMemberCount={setMemberCount}
                     setExistJoker={setExistJoker}
+                    setSelectedCards={setSelectedCards}
                   />
                 );
               }}

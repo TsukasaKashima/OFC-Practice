@@ -51,6 +51,7 @@ export default function Start(props) {
                 setJokerDialog(true);
                 history.push("game");
                 props.setMemberCount(2);
+                props.setSelectedCards([]);
               }}
             >
               2人
@@ -60,6 +61,7 @@ export default function Start(props) {
                 setJokerDialog(true);
                 history.push("game");
                 props.setMemberCount(3);
+                props.setSelectedCards([]);
               }}
             >
               3人
@@ -84,6 +86,7 @@ export default function Start(props) {
                 setNonJokerDialog(true);
                 history.push("game");
                 props.setMemberCount(2);
+                props.setSelectedCards([]);
               }}
             >
               2人
@@ -93,6 +96,7 @@ export default function Start(props) {
                 setNonJokerDialog(true);
                 history.push("game");
                 props.setMemberCount(3);
+                props.setSelectedCards([]);
               }}
             >
               3人

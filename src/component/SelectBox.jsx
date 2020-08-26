@@ -15,7 +15,6 @@ export default function SelectBox(props) {
       })
     );
   }
-  console.log(props.selectedCards);
   return (
     <React.Fragment>
       <DropTarget
@@ -46,22 +45,18 @@ export default function SelectBox(props) {
             if (props.selectedCards[index]) {
               return (
                 <React.Fragment>
-                  {(props.selectedCards[index].type,
-                  props.selectedCards[index].number,
-                  props.selectedCards[index].index) && (
-                    <button
-                      className="delete-btn"
-                      onClick={() => {
-                        onClickDeleteButton(
-                          props.selectedCards[index].type,
-                          props.selectedCards[index].number,
-                          props.selectedCards[index].index
-                        );
-                      }}
-                    >
-                      <span>×</span>
-                    </button>
-                  )}
+                  <button
+                    className="delete-btn"
+                    onClick={() => {
+                      onClickDeleteButton(
+                        props.selectedCards[index].type,
+                        props.selectedCards[index].number,
+                        props.selectedCards[index].index
+                      );
+                    }}
+                  >
+                    <span>×</span>
+                  </button>
                   <SelectBoxCard
                     type={props.selectedCards[index].type}
                     number={props.selectedCards[index].number}
@@ -78,22 +73,18 @@ export default function SelectBox(props) {
             if (props.selectedCards[index]) {
               return (
                 <React.Fragment>
-                  {(props.selectedCards[index].type,
-                  props.selectedCards[index].number,
-                  props.selectedCards[index].index) && (
-                    <button
-                      className="delete-btn"
-                      onClick={() => {
-                        onClickDeleteButton(
-                          props.selectedCards[index].type,
-                          props.selectedCards[index].number,
-                          props.selectedCards[index].index
-                        );
-                      }}
-                    >
-                      <span>×</span>
-                    </button>
-                  )}
+                  <button
+                    className="delete-btn"
+                    onClick={() => {
+                      onClickDeleteButton(
+                        props.selectedCards[index].type,
+                        props.selectedCards[index].number,
+                        props.selectedCards[index].index
+                      );
+                    }}
+                  >
+                    <span>×</span>
+                  </button>
                   <SelectBoxCard
                     type={props.selectedCards[index].type}
                     number={props.selectedCards[index].number}

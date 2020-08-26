@@ -67,6 +67,7 @@ export default function Game(props) {
     setDeck(tmpDeck);
     return result;
   }
+
   function resetRandomCard(count) {
     let result = [];
     let returnDeck = preDeck.concat();
@@ -157,6 +158,7 @@ export default function Game(props) {
                   onClick={() => {
                     setResetDialog(true);
                     history.push("/select");
+                    props.setSelectedCards([]);
                   }}
                 >
                   自由に選択
