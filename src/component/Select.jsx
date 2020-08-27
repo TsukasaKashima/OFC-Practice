@@ -2,7 +2,14 @@ import React, { useState } from "react";
 import "../App.css";
 import SelectCardRow from "./SelectCardRow";
 import SelectCardRowJoker from "./SelectCardRowJoker";
-import { JOKER, SPADE, CLOVER, HEART, DIAMOND } from "../common/constant";
+import {
+  JOKER_1,
+  JOKER_2,
+  SPADE,
+  CLOVER,
+  HEART,
+  DIAMOND,
+} from "../common/constant";
 import { Button } from "@material-ui/core";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import SelectBox from "./SelectBox";
@@ -18,8 +25,8 @@ export default function Select(props) {
       resultArray.push({ type: DIAMOND, number: i });
     }
     if (props.existJoker) {
-      resultArray.push({ type: JOKER });
-      resultArray.push({ type: JOKER });
+      resultArray.push({ type: JOKER_1 });
+      resultArray.push({ type: JOKER_2 });
     }
     return resultArray;
   }
@@ -36,15 +43,19 @@ export default function Select(props) {
   const diamondFilter = deck.filter((deck) => {
     return deck.type === DIAMOND;
   });
-  const jokerFilter = deck.filter((deck) => {
-    return deck.type === JOKER;
+  const joker1Filter = deck.filter((deck) => {
+    return deck.type === JOKER_1;
+  });
+  const joker2Filter = deck.filter((deck) => {
+    return deck.type === JOKER_2;
   });
   const [field, setField] = useState({
     [SPADE]: [...spadeFilter],
     [CLOVER]: [...cloverFilter],
     [HEART]: [...heartFilter],
     [DIAMOND]: [...diamondFilter],
-    [JOKER]: [...jokerFilter],
+    [JOKER_1]: [...joker1Filter],
+    [JOKER_2]: [...joker2Filter],
   });
 
   return (
@@ -68,7 +79,12 @@ export default function Select(props) {
       <div className="box-row select-card-joker">
         <SelectCardRowJoker
           field={field}
-          fieldKey={JOKER}
+          fieldKey={JOKER_1}
+          fieldSetter={setField}
+        />
+        <SelectCardRowJoker
+          field={field}
+          fieldKey={JOKER_2}
           fieldSetter={setField}
         />
       </div>

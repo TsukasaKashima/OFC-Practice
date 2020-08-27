@@ -4,7 +4,14 @@ import GameCard from "./GameCard";
 import SelfField from "./SelfField";
 import OppField1 from "./OppField1";
 import OppField2 from "./OppField2";
-import { SPADE, CLOVER, DIAMOND, HEART, JOKER } from "../common/constant";
+import {
+  SPADE,
+  CLOVER,
+  DIAMOND,
+  HEART,
+  JOKER_1,
+  JOKER_2,
+} from "../common/constant";
 import GraveField from "./GraveField";
 import {
   Button,
@@ -25,8 +32,8 @@ export default function Game(props) {
       resultArray.push({ type: DIAMOND, number: i });
     }
     if (props.existJoker) {
-      resultArray.push({ type: JOKER });
-      resultArray.push({ type: JOKER });
+      resultArray.push({ type: JOKER_1 });
+      resultArray.push({ type: JOKER_2 });
     }
     return resultArray;
   }
@@ -83,6 +90,7 @@ export default function Game(props) {
     setDeck(returnDeck);
     return result;
   }
+
   return (
     <div>
       <div className="boxes">
