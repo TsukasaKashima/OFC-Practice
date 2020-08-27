@@ -46,6 +46,7 @@ export default function Select(props) {
     [DIAMOND]: [...diamondFilter],
     [JOKER]: [...jokerFilter],
   });
+
   return (
     <div className="select-cards">
       <div className="box-row">
@@ -72,7 +73,12 @@ export default function Select(props) {
         />
       </div>
       <div className="select-boxes">
-        <SelectBox field={field} setField={setField} />
+        <SelectBox
+          field={field}
+          setField={setField}
+          selectedCards={props.selectedCards}
+          setSelectedCards={props.setSelectedCards}
+        />
         <Button
           className="select-btn"
           variant="contained"

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../App.css";
 import GameCard from "./GameCard";
 import SelfField from "./SelfField";
@@ -40,7 +40,15 @@ export default function Game(props) {
     opp1: [],
     opp2: [],
     grave: [],
+    selected: [],
   });
+
+  useEffect(() => {
+    const tmpField = Object.assign({}, field);
+    tmpField.selected = props.selectedCards;
+    setField(tmpField);
+  }, [props.selectedCards]);
+
   const [preField, setPreField] = useState(field);
   const history = useHistory();
 
@@ -59,6 +67,7 @@ export default function Game(props) {
     setDeck(tmpDeck);
     return result;
   }
+
   function resetRandomCard(count) {
     let result = [];
     let returnDeck = preDeck.concat();
@@ -74,16 +83,11 @@ export default function Game(props) {
     setDeck(returnDeck);
     return result;
   }
-
   return (
     <div>
       <div className="boxes">
         <div className="boxes-1">
-          <OppField1
-            fieldKey="opp1"
-            fieldCard={field}
-            fieldSetter={setField}
-          ></OppField1>
+          <OppField1 fieldKey="opp1" fieldCard={field} fieldSetter={setField} />
         </div>
         {props.memberCount === 3 && (
           <div className="boxes-2">
@@ -91,7 +95,7 @@ export default function Game(props) {
               fieldKey="opp2"
               fieldCard={field}
               fieldSetter={setField}
-            ></OppField2>
+            />
           </div>
         )}
       </div>
@@ -112,6 +116,7 @@ export default function Game(props) {
                   opp1: randomCards.slice(5, 10),
                   opp2: randomCards.slice(10, 15),
                   grave: field.grave,
+                  selected: field.selected,
                 });
               }}
             >
@@ -143,6 +148,7 @@ export default function Game(props) {
                       opp1: resetCards.slice(5, 10),
                       opp2: resetCards.slice(10, 15),
                       grave: field.grave,
+                      selected: field.selected,
                     });
                   }}
                 >
@@ -152,6 +158,7 @@ export default function Game(props) {
                   onClick={() => {
                     setResetDialog(true);
                     history.push("/select");
+                    props.setSelectedCards([]);
                   }}
                 >
                   自由に選択
@@ -177,37 +184,68 @@ export default function Game(props) {
           </div>
         </div>
         <div className="myboxes">
-          <SelfField
-            fieldKey="self"
-            fieldCard={field}
-            fieldSetter={setField}
-          ></SelfField>
+          <SelfField fieldKey="self" fieldCard={field} fieldSetter={setField} />
         </div>
         <div className="black-boxes">
           <div className="box-row">
-            <GameCard />
-            <GameCard />
-            <GameCard />
+            {[0, 1, 2].map((index) => {
+              return (
+                <GameCard
+                  index={index}
+                  fieldKey="selected"
+                  field={field}
+                  fieldSetter={setField}
+                />
+              );
+            })}
           </div>
           <div className="box-row">
-            <GameCard />
-            <GameCard />
-            <GameCard />
+            {[3, 4, 5].map((index) => {
+              return (
+                <GameCard
+                  index={index}
+                  fieldKey="selected"
+                  field={field}
+                  fieldSetter={setField}
+                />
+              );
+            })}
           </div>
           <div className="box-row">
-            <GameCard />
-            <GameCard />
-            <GameCard />
+            {[6, 7, 8].map((index) => {
+              return (
+                <GameCard
+                  index={index}
+                  fieldKey="selected"
+                  field={field}
+                  fieldSetter={setField}
+                />
+              );
+            })}
           </div>
           <div className="box-row">
-            <GameCard />
-            <GameCard />
-            <GameCard />
+            {[9, 10, 11].map((index) => {
+              return (
+                <GameCard
+                  index={index}
+                  fieldKey="selected"
+                  field={field}
+                  fieldSetter={setField}
+                />
+              );
+            })}
           </div>
           <div className="box-row">
-            <GameCard />
-            <GameCard />
-            <GameCard />
+            {[12, 13, 14].map((index) => {
+              return (
+                <GameCard
+                  index={index}
+                  fieldKey="selected"
+                  field={field}
+                  fieldSetter={setField}
+                />
+              );
+            })}
           </div>
         </div>
         <Button

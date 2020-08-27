@@ -1,16 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import "../App.css";
 import SelectBoxCard from "./SelectBoxCard";
 import { DropTarget } from "react-drag-drop-container";
 
 export default function SelectBox(props) {
-  const [box, setBox] = useState([]);
   function onClickDeleteButton(type, number, index) {
-    const tmpCard = box.concat();
+    const tmpCard = props.selectedCards.concat();
     const tmpField = Object.assign({}, props.field);
     tmpField[type][index] = { type: type, number: number };
     props.setField(tmpField);
-    setBox(
+    props.setSelectedCards(
       tmpCard.filter((card) => {
         return !(card.type === type && card.number === number);
       })
@@ -20,13 +19,13 @@ export default function SelectBox(props) {
     <React.Fragment>
       <DropTarget
         dropData={{
-          type: box.type,
-          number: box.number,
+          type: props.selectedCards.type,
+          number: props.selectedCards.number,
         }}
         onHit={(e) => {
-          if (box.length < 15) {
+          if (props.selectedCards.length < 15) {
             const tmpField = Object.assign({}, props.field);
-            const tmpBox = box.concat();
+            const tmpBox = props.selectedCards.concat();
             tmpBox.push({
               number: e.dragData.number,
               type: e.dragData.type,
@@ -37,31 +36,31 @@ export default function SelectBox(props) {
               number: undefined,
             };
             props.setField(tmpField);
-            setBox(tmpBox);
+            props.setSelectedCards(tmpBox);
           }
         }}
       >
         <div className="box-row select-box-row">
           {[0, 1, 2, 3, 4, 5, 6, 7].map((index) => {
-            if (box[index]) {
+            if (props.selectedCards[index]) {
               return (
                 <React.Fragment>
                   <button
                     className="delete-btn"
                     onClick={() => {
                       onClickDeleteButton(
-                        box[index].type,
-                        box[index].number,
-                        box[index].index
+                        props.selectedCards[index].type,
+                        props.selectedCards[index].number,
+                        props.selectedCards[index].index
                       );
                     }}
                   >
                     <span>×</span>
                   </button>
                   <SelectBoxCard
-                    type={box[index].type}
-                    number={box[index].number}
-                    index={box[index].index}
+                    type={props.selectedCards[index].type}
+                    number={props.selectedCards[index].number}
+                    index={props.selectedCards[index].index}
                   />
                 </React.Fragment>
               );
@@ -71,25 +70,25 @@ export default function SelectBox(props) {
         </div>
         <div className="box-row">
           {[8, 9, 10, 11, 12, 13, 14].map((index) => {
-            if (box[index]) {
+            if (props.selectedCards[index]) {
               return (
                 <React.Fragment>
                   <button
                     className="delete-btn"
                     onClick={() => {
                       onClickDeleteButton(
-                        box[index].type,
-                        box[index].number,
-                        box[index].index
+                        props.selectedCards[index].type,
+                        props.selectedCards[index].number,
+                        props.selectedCards[index].index
                       );
                     }}
                   >
                     <span>×</span>
                   </button>
                   <SelectBoxCard
-                    type={box[index].type}
-                    number={box[index].number}
-                    index={box[index].index}
+                    type={props.selectedCards[index].type}
+                    number={props.selectedCards[index].number}
+                    index={props.selectedCards[index].index}
                   />
                 </React.Fragment>
               );
