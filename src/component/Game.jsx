@@ -145,8 +145,8 @@ export default function Game(props) {
               onClick={() => {
                 setPreDeck(deck);
                 setPreField(field);
-                incrementCount();
                 changeCardByClick();
+                incrementCount();
               }}
             >
               SET
