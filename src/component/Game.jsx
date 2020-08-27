@@ -62,16 +62,24 @@ export default function Game(props) {
   const [countClick, setCountClick] = useState(0);
   function incrementCount() {
     setCountClick(countClick + 1);
-    return countClick;
   }
 
   function changeCardByClick() {
+    const changeCardsFirst = getRandomCard(15);
     const changeCards = getRandomCard(7);
     if (countClick > 0) {
       setField({
         self: changeCards.slice(0, 3),
         opp1: changeCards.slice(3, 5),
         opp2: changeCards.slice(5, 7),
+        grave: field.grave,
+        selected: field.selected,
+      });
+    } else if (countClick <= 0) {
+      setField({
+        self: changeCardsFirst.slice(0, 5),
+        opp1: changeCardsFirst.slice(5, 10),
+        opp2: changeCardsFirst.slice(10, 15),
         grave: field.grave,
         selected: field.selected,
       });
@@ -135,16 +143,8 @@ export default function Game(props) {
               variant="contained"
               color="primary"
               onClick={() => {
-                const randomCards = getRandomCard(15);
                 setPreDeck(deck);
                 setPreField(field);
-                setField({
-                  self: randomCards.slice(0, 5),
-                  opp1: randomCards.slice(5, 10),
-                  opp2: randomCards.slice(10, 15),
-                  grave: field.grave,
-                  selected: field.selected,
-                });
                 incrementCount();
                 changeCardByClick();
               }}
