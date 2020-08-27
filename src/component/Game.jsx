@@ -59,6 +59,25 @@ export default function Game(props) {
   const [preField, setPreField] = useState(field);
   const history = useHistory();
 
+  const [countClick, setCountClick] = useState(0);
+  function incrementCount() {
+    setCountClick(countClick + 1);
+    return countClick;
+  }
+
+  function changeCardByClick() {
+    const changeCards = getRandomCard(7);
+    if (countClick > 0) {
+      setField({
+        self: changeCards.slice(0, 3),
+        opp1: changeCards.slice(3, 5),
+        opp2: changeCards.slice(5, 7),
+        grave: field.grave,
+        selected: field.selected,
+      });
+    }
+  }
+
   function getRandomCard(count) {
     let result = [];
     let tmpDeck = deck.concat();
@@ -111,7 +130,7 @@ export default function Game(props) {
         <div className="btns_grave">
           <div className="btns">
             <Button
-              disabled={deck.length <= 11}
+              disabled={countClick >= 5}
               id="setButton"
               variant="contained"
               color="primary"
@@ -126,6 +145,8 @@ export default function Game(props) {
                   grave: field.grave,
                   selected: field.selected,
                 });
+                incrementCount();
+                changeCardByClick();
               }}
             >
               SET
