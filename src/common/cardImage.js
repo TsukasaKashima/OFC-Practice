@@ -1,4 +1,4 @@
-import { SPADE, CLOVER, HEART, DIAMOND, JOKER } from "./constant.js";
+import { SPADE, CLOVER, HEART, DIAMOND, JOKER_1, JOKER_2 } from "./constant.js";
 import spade_1 from "../cards/spade_1.png";
 import spade_2 from "../cards/spade_2.png";
 import spade_3 from "../cards/spade_3.png";
@@ -54,7 +54,8 @@ import diamond_10 from "../cards/diamond_10.png";
 import diamond_11 from "../cards/diamond_11.png";
 import diamond_12 from "../cards/diamond_12.png";
 import diamond_13 from "../cards/diamond_13.png";
-import joker from "../cards/joker.png";
+import joker_1 from "../cards/joker_1.png";
+import joker_2 from "../cards/joker_2.png";
 
 const spadeCards = [
   spade_1,
@@ -125,13 +126,16 @@ const cardImage = {
   cloverCards,
   heartCards,
   diamondCards,
-  joker,
+  joker_1,
+  joker_2,
 };
 
 export default cardImage;
 export const getImageFromTypeAndNumber = (type, number) => {
-  if (type === JOKER) {
-    return joker;
+  if (type === JOKER_1) {
+    return joker_1;
+  } else if (type === JOKER_2) {
+    return joker_2;
   } else if (type === SPADE) {
     return spadeCards[number - 1];
   } else if (type === CLOVER) {

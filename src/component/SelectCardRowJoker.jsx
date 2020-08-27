@@ -4,7 +4,7 @@ import SelectCard from "./SelectCard";
 export default function SelectCardRowJoker(props) {
   return (
     <React.Fragment>
-      {[0, 1].map((index) => {
+      {[0].map((index) => {
         return (
           <SelectCard
             fieldKey={props.fieldKey}
