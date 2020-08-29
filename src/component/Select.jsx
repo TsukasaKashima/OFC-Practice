@@ -8,7 +8,7 @@ import {
   SPADE,
   CLOVER,
   HEART,
-  DIAMOND,
+  DIAMOND
 } from "../common/constant";
 import { Button } from "@material-ui/core";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
@@ -31,22 +31,22 @@ export default function Select(props) {
     return resultArray;
   }
   const [deck, setDeck] = useState(createCard());
-  const spadeFilter = deck.filter((deck) => {
+  const spadeFilter = deck.filter(deck => {
     return deck.type === SPADE;
   });
-  const cloverFilter = deck.filter((deck) => {
+  const cloverFilter = deck.filter(deck => {
     return deck.type === CLOVER;
   });
-  const heartFilter = deck.filter((deck) => {
+  const heartFilter = deck.filter(deck => {
     return deck.type === HEART;
   });
-  const diamondFilter = deck.filter((deck) => {
+  const diamondFilter = deck.filter(deck => {
     return deck.type === DIAMOND;
   });
-  const joker1Filter = deck.filter((deck) => {
+  const joker1Filter = deck.filter(deck => {
     return deck.type === JOKER_1;
   });
-  const joker2Filter = deck.filter((deck) => {
+  const joker2Filter = deck.filter(deck => {
     return deck.type === JOKER_2;
   });
   const [field, setField] = useState({
@@ -55,7 +55,7 @@ export default function Select(props) {
     [HEART]: [...heartFilter],
     [DIAMOND]: [...diamondFilter],
     [JOKER_1]: [...joker1Filter],
-    [JOKER_2]: [...joker2Filter],
+    [JOKER_2]: [...joker2Filter]
   });
 
   return (
@@ -89,12 +89,7 @@ export default function Select(props) {
         />
       </div>
       <div className="select-boxes">
-        <SelectBox
-          field={field}
-          setField={setField}
-          selectedCards={props.selectedCards}
-          setSelectedCards={props.setSelectedCards}
-        />
+        <SelectBox field={field} setField={setField} />
         <Button
           className="select-btn"
           variant="contained"

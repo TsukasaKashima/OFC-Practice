@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "../App.css";
 import GameCard from "./GameCard";
 import SelfField from "./SelfField";
@@ -10,7 +10,7 @@ import {
   DIAMOND,
   HEART,
   JOKER_1,
-  JOKER_2,
+  JOKER_2
 } from "../common/constant";
 import GraveField from "./GraveField";
 import {
@@ -18,11 +18,13 @@ import {
   Dialog,
   DialogContent,
   DialogContentText,
-  DialogActions,
+  DialogActions
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { AppContext } from "../context/AppContext";
 
 export default function Game(props) {
+  const { selectedCards, setSelectedCards } = useContext(AppContext);
   function createCard() {
     const resultArray = [];
     for (let i = 1; i <= 13; i++) {
@@ -47,13 +49,13 @@ export default function Game(props) {
     opp1: [],
     opp2: [],
     grave: [],
-    selected: [],
+    selected: []
   });
   useEffect(() => {
     const tmpField = Object.assign({}, field);
-    tmpField.selected = props.selectedCards;
+    tmpField.selected = selectedCards;
     setField(tmpField);
-  }, [props.selectedCards]);
+  }, [selectedCards]);
 
   const [preField, setPreField] = useState(field);
   const history = useHistory();
@@ -72,7 +74,7 @@ export default function Game(props) {
         opp1: changeCards.slice(3, 5),
         opp2: changeCards.slice(5, 7),
         grave: field.grave,
-        selected: field.selected,
+        selected: field.selected
       });
     } else if (countClick <= 0) {
       setField({
@@ -80,7 +82,7 @@ export default function Game(props) {
         opp1: changeCardsFirst.slice(5, 10),
         opp2: changeCardsFirst.slice(10, 15),
         grave: field.grave,
-        selected: field.selected,
+        selected: field.selected
       });
     }
   }
@@ -91,7 +93,7 @@ export default function Game(props) {
     for (let i = 0; i < count; i++) {
       let arrayIndex = Math.floor(Math.random() * tmpDeck.length);
       result[i] = tmpDeck[arrayIndex];
-      tmpDeck = tmpDeck.filter((deck) => {
+      tmpDeck = tmpDeck.filter(deck => {
         return !(
           deck.type === result[i].type && deck.number === result[i].number
         );
@@ -107,7 +109,7 @@ export default function Game(props) {
     for (let i = 0; i < count; i++) {
       let arrayIndex = Math.floor(Math.random() * returnDeck.length);
       result[i] = returnDeck[arrayIndex];
-      returnDeck = returnDeck.filter((preDeck) => {
+      returnDeck = returnDeck.filter(preDeck => {
         return !(
           preDeck.type === result[i].type && preDeck.number === result[i].number
         );
@@ -183,7 +185,7 @@ export default function Game(props) {
                       opp1: resetCards.slice(5, 10),
                       opp2: resetCards.slice(10, 15),
                       grave: field.grave,
-                      selected: field.selected,
+                      selected: field.selected
                     });
                   }}
                 >
@@ -193,7 +195,7 @@ export default function Game(props) {
                   onClick={() => {
                     setResetDialog(true);
                     history.push("/select");
-                    props.setSelectedCards([]);
+                    setSelectedCards([]);
                   }}
                 >
                   自由に選択
@@ -223,7 +225,7 @@ export default function Game(props) {
         </div>
         <div className="black-boxes">
           <div className="box-row">
-            {[0, 1, 2].map((index) => {
+            {[0, 1, 2].map(index => {
               return (
                 <GameCard
                   index={index}
@@ -235,7 +237,7 @@ export default function Game(props) {
             })}
           </div>
           <div className="box-row">
-            {[3, 4, 5].map((index) => {
+            {[3, 4, 5].map(index => {
               return (
                 <GameCard
                   index={index}
@@ -247,7 +249,7 @@ export default function Game(props) {
             })}
           </div>
           <div className="box-row">
-            {[6, 7, 8].map((index) => {
+            {[6, 7, 8].map(index => {
               return (
                 <GameCard
                   index={index}
@@ -259,7 +261,7 @@ export default function Game(props) {
             })}
           </div>
           <div className="box-row">
-            {[9, 10, 11].map((index) => {
+            {[9, 10, 11].map(index => {
               return (
                 <GameCard
                   index={index}
@@ -271,7 +273,7 @@ export default function Game(props) {
             })}
           </div>
           <div className="box-row">
-            {[12, 13, 14].map((index) => {
+            {[12, 13, 14].map(index => {
               return (
                 <GameCard
                   index={index}

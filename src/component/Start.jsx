@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "../App.css";
 import {
   Button,
   Dialog,
   DialogContent,
   DialogContentText,
-  DialogActions,
+  DialogActions
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { AppContext } from "../context/AppContext";
 
 export default function Start(props) {
   const [jokerDialog, setJokerDialog] = useState(false);
   const [nonJokerDialog, setNonJokerDialog] = useState(false);
   const history = useHistory();
+  const { setSelectedCards } = useContext(AppContext);
 
   return (
     <React.Fragment>
@@ -51,7 +53,7 @@ export default function Start(props) {
                 setJokerDialog(true);
                 history.push("game");
                 props.setMemberCount(2);
-                props.setSelectedCards([]);
+                setSelectedCards([]);
               }}
             >
               2人
@@ -61,7 +63,7 @@ export default function Start(props) {
                 setJokerDialog(true);
                 history.push("game");
                 props.setMemberCount(3);
-                props.setSelectedCards([]);
+                setSelectedCards([]);
               }}
             >
               3人
@@ -86,7 +88,7 @@ export default function Start(props) {
                 setNonJokerDialog(true);
                 history.push("game");
                 props.setMemberCount(2);
-                props.setSelectedCards([]);
+                setSelectedCards([]);
               }}
             >
               2人
@@ -96,7 +98,7 @@ export default function Start(props) {
                 setNonJokerDialog(true);
                 history.push("game");
                 props.setMemberCount(3);
-                props.setSelectedCards([]);
+                setSelectedCards([]);
               }}
             >
               3人
