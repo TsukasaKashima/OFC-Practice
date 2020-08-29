@@ -26,7 +26,6 @@ export default function Card(props) {
       props.fieldSetter(tmpField);
     };
   }
-
   useEffect(() => {
     if (
       props.field &&
@@ -40,6 +39,9 @@ export default function Card(props) {
       callbackUpdatedField.current = null;
     }
   }, [props.field, props.fieldKey, props.index]);
+
+  //[NOTE:この段階ではcardInformationの情報が取得できている]console.log(cardInformation);
+
   return (
     <DropTarget
       dropData={{
@@ -69,6 +71,7 @@ export default function Card(props) {
               cardInformation.type,
               cardInformation.number
             )}
+            cardInformation={cardInformation}
             alt=""
           />
         </DragDropContainer>

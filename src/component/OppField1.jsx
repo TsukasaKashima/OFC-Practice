@@ -2,6 +2,8 @@ import React from "react";
 import "../App.css";
 import GameCard from "./GameCard";
 export default function OppField1(props) {
+  //[NOTE:この段階ではもうcardInformationの情報が取得できない]console.log(props.cardInformation);
+
   return (
     <React.Fragment>
       <div className="box-row">

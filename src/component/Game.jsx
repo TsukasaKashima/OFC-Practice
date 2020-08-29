@@ -49,7 +49,6 @@ export default function Game(props) {
     grave: [],
     selected: [],
   });
-
   useEffect(() => {
     const tmpField = Object.assign({}, field);
     tmpField.selected = props.selectedCards;
@@ -58,6 +57,33 @@ export default function Game(props) {
 
   const [preField, setPreField] = useState(field);
   const history = useHistory();
+
+  const [countClick, setCountClick] = useState(0);
+  function incrementCount() {
+    setCountClick(countClick + 1);
+  }
+
+  function changeCardByClick() {
+    const changeCardsFirst = getRandomCard(15);
+    const changeCards = getRandomCard(7);
+    if (countClick > 0) {
+      setField({
+        self: changeCards.slice(0, 3),
+        opp1: changeCards.slice(3, 5),
+        opp2: changeCards.slice(5, 7),
+        grave: field.grave,
+        selected: field.selected,
+      });
+    } else if (countClick <= 0) {
+      setField({
+        self: changeCardsFirst.slice(0, 5),
+        opp1: changeCardsFirst.slice(5, 10),
+        opp2: changeCardsFirst.slice(10, 15),
+        grave: field.grave,
+        selected: field.selected,
+      });
+    }
+  }
 
   function getRandomCard(count) {
     let result = [];
@@ -90,12 +116,19 @@ export default function Game(props) {
     setDeck(returnDeck);
     return result;
   }
+  //[NOTE:OppField1でundifinedとなってしまっているため、
+  //この段階ではもうcardInformationの情報が取得できない]console.log(props.cardInformation);
 
   return (
     <div>
       <div className="boxes">
         <div className="boxes-1">
-          <OppField1 fieldKey="opp1" fieldCard={field} fieldSetter={setField} />
+          <OppField1
+            fieldKey="opp1"
+            fieldCard={field}
+            fieldSetter={setField}
+            data={props.cardInformation}
+          />
         </div>
         {props.memberCount === 3 && (
           <div className="boxes-2">
@@ -111,21 +144,15 @@ export default function Game(props) {
         <div className="btns_grave">
           <div className="btns">
             <Button
-              disabled={deck.length <= 11}
+              disabled={countClick >= 5}
               id="setButton"
               variant="contained"
               color="primary"
               onClick={() => {
-                const randomCards = getRandomCard(15);
                 setPreDeck(deck);
                 setPreField(field);
-                setField({
-                  self: randomCards.slice(0, 5),
-                  opp1: randomCards.slice(5, 10),
-                  opp2: randomCards.slice(10, 15),
-                  grave: field.grave,
-                  selected: field.selected,
-                });
+                changeCardByClick();
+                incrementCount();
               }}
             >
               SET
