@@ -142,8 +142,6 @@ export default function Game(props) {
     setDeck(returnDeck);
     return result;
   }
-  //[NOTE:OppField1でundifinedとなってしまっているため、
-  //この段階ではもうcardInformationの情報が取得できない]console.log(props.cardInformation);
 
   return (
     <div>

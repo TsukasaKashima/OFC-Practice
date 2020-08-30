@@ -40,8 +40,6 @@ export default function Card(props) {
     }
   }, [props.field, props.fieldKey, props.index]);
 
-  //[NOTE:この段階ではcardInformationの情報が取得できている]console.log(cardInformation);
-
   return (
     <DropTarget
       dropData={{
