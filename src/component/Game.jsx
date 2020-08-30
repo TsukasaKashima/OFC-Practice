@@ -42,10 +42,12 @@ export default function Game(props) {
   const [deck, setDeck] = useState(createCard());
   const [preDeck, setPreDeck] = useState(deck);
 
+  const defaultCardInformation = { type: undefined, number: undefined };
+
   const [field, setField] = useState({
-    self: [],
-    opp1: [],
-    opp2: [],
+    self: Array(13).fill(defaultCardInformation),
+    opp1: Array(13).fill(defaultCardInformation),
+    opp2: Array(13).fill(defaultCardInformation),
     grave: [],
     selected: [],
   });
@@ -65,25 +67,47 @@ export default function Game(props) {
   }
 
   function changeCardByClick() {
-    const changeCardsFirst = getRandomCard(15);
-    const changeCards = getRandomCard(7);
     if (countClick > 0) {
+      const changeCards = getRandomCard(7);
       setField({
-        self: changeCards.slice(0, 3),
-        opp1: changeCards.slice(3, 5),
-        opp2: changeCards.slice(5, 7),
+        self: concatFieldFromRandomCards(field.self, changeCards.slice(0, 3)),
+        opp1: concatFieldFromRandomCards(field.opp1, changeCards.slice(3, 5)),
+        opp2: concatFieldFromRandomCards(field.opp2, changeCards.slice(5, 7)),
         grave: field.grave,
         selected: field.selected,
       });
     } else if (countClick <= 0) {
+      const changeCardsFirst = getRandomCard(15);
       setField({
-        self: changeCardsFirst.slice(0, 5),
-        opp1: changeCardsFirst.slice(5, 10),
-        opp2: changeCardsFirst.slice(10, 15),
+        self: concatFieldFromRandomCards(
+          field.self,
+          changeCardsFirst.slice(0, 5)
+        ),
+        opp1: concatFieldFromRandomCards(
+          field.opp1,
+          changeCardsFirst.slice(5, 10)
+        ),
+        opp2: concatFieldFromRandomCards(
+          field.opp2,
+          changeCardsFirst.slice(10, 15)
+        ),
         grave: field.grave,
         selected: field.selected,
       });
     }
+  }
+
+  function concatFieldFromRandomCards(fieldCards, randomCards) {
+    const result = fieldCards.concat();
+    randomCards.forEach((randomCard) => {
+      const index = result.findIndex((fieldCard) => {
+        return fieldCard.type === undefined && fieldCard.number === undefined;
+      });
+      if (index !== -1) {
+        result[index] = randomCard;
+      }
+    });
+    return result;
   }
 
   function getRandomCard(count) {
@@ -98,6 +122,7 @@ export default function Game(props) {
         );
       });
     }
+    console.log(tmpDeck);
     setDeck(tmpDeck);
     return result;
   }
@@ -122,7 +147,12 @@ export default function Game(props) {
     <div>
       <div className="boxes">
         <div className="boxes-1">
-          <OppField1 fieldKey="opp1" fieldCard={field} fieldSetter={setField} />
+          <OppField1
+            fieldKey="opp1"
+            fieldCard={field}
+            fieldSetter={setField}
+            data={props.cardInformation}
+          />
         </div>
         {props.memberCount === 3 && (
           <div className="boxes-2">
