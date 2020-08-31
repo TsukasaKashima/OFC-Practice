@@ -64,8 +64,8 @@ export default function Game(props) {
   const [countClick, setCountClick] = useState(0);
   function incrementCount() {
     setCountClick(countClick + 1);
-    /*[TODO:現在クリック数にに応じて排出枚数を管理しているが、field内のカードの枚数に応じてカードの排出数を切り変えた方がいいかも]
-    Selectからカードを持って来て配置した際、SETボタンのクリック回数は問答無用で0となるため配りたい枚数とはならない可能性がある*/
+    /*[TODO:現在クリック数にに応じて排出枚数を管理しているが、field内のカードの枚数に応じてカードの排出数を切り変えた方がいいかも
+    Selectからカードを持って来て配置した際、SETボタンのクリック回数は問答無用で0となるため配りたい枚数とはならない可能性がある]*/
   }
 
   function changeCardByClick() {
@@ -101,8 +101,8 @@ export default function Game(props) {
 
   function resetCardByClick() {
     if (countClick > 1) {
-      const changeCards = resetRandomCard(7);
-      setPreField({
+      const changeCards = getRandomCard(7);
+      const resetedField = {
         self: concatFieldFromRandomCards(
           preField.self,
           changeCards.slice(0, 3)
@@ -117,29 +117,27 @@ export default function Game(props) {
         ),
         grave: preField.grave,
         selected: preField.selected,
-      });
-      setField(preField);
-      setDeck(preDeck);
+      };
+      setField(resetedField);
     } else if (countClick <= 1) {
-      const changeCardsFirst = resetRandomCard(15);
-      setPreField({
+      const changeCards = getRandomCard(15);
+      const resetedField = {
         self: concatFieldFromRandomCards(
           preField.self,
-          changeCardsFirst.slice(0, 5)
+          changeCards.slice(0, 5)
         ),
         opp1: concatFieldFromRandomCards(
           preField.opp1,
-          changeCardsFirst.slice(5, 10)
+          changeCards.slice(5, 10)
         ),
         opp2: concatFieldFromRandomCards(
           preField.opp2,
-          changeCardsFirst.slice(10, 15)
+          changeCards.slice(10, 15)
         ),
         grave: preField.grave,
         selected: preField.selected,
-      });
-      setField(preField);
-      setDeck(preDeck);
+      };
+      setField(resetedField);
     }
   }
 
@@ -172,7 +170,7 @@ export default function Game(props) {
     return result;
   }
 
-  function resetRandomCard(count) {
+  /*function resetRandomCard(count) {
     let result = [];
     let returnDeck = preDeck.concat();
     for (let i = 0; i < count; i++) {
@@ -186,7 +184,8 @@ export default function Game(props) {
     }
     setPreDeck(returnDeck);
     return result;
-  }
+  }*/
+
   return (
     <div>
       <div className="boxes">
@@ -245,7 +244,6 @@ export default function Game(props) {
                   onClick={() => {
                     setResetDialog(false);
                     resetCardByClick();
-                    console.log(preField);
                   }}
                 >
                   ランダム
