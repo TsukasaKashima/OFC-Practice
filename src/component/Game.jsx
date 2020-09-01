@@ -101,7 +101,7 @@ export default function Game(props) {
 
   function resetCardByClick() {
     if (countClick > 1) {
-      const changeCards = getRandomCard(7);
+      const changeCards = resetRandomCard(7);
       const resetedField = {
         self: concatFieldFromRandomCards(
           preField.self,
@@ -120,7 +120,7 @@ export default function Game(props) {
       };
       setField(resetedField);
     } else if (countClick <= 1) {
-      const changeCards = getRandomCard(15);
+      const changeCards = resetRandomCard(15);
       const resetedField = {
         self: concatFieldFromRandomCards(
           preField.self,
@@ -142,6 +142,7 @@ export default function Game(props) {
   }
 
   function concatFieldFromRandomCards(fieldCards, randomCards) {
+    console.log(randomCards);
     const result = fieldCards.concat();
     randomCards.forEach((randomCard) => {
       const index = result.findIndex((fieldCard) => {
@@ -149,6 +150,11 @@ export default function Game(props) {
       });
       if (index !== -1) {
         result[index] = randomCard;
+      } else if (
+        randomCards.type !== undefined &&
+        randomCards.number !== undefined
+      ) {
+        setPreDeck(result);
       }
     });
     return result;
@@ -170,7 +176,7 @@ export default function Game(props) {
     return result;
   }
 
-  /*function resetRandomCard(count) {
+  function resetRandomCard(count) {
     let result = [];
     let returnDeck = preDeck.concat();
     for (let i = 0; i < count; i++) {
@@ -182,10 +188,11 @@ export default function Game(props) {
         );
       });
     }
-    setPreDeck(returnDeck);
+    setDeck(returnDeck);
     return result;
-  }*/
-
+  }
+  console.log(deck);
+  console.log(preDeck);
   return (
     <div>
       <div className="boxes">
