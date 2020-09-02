@@ -45,7 +45,7 @@ export default function Game(props) {
   const defaultCardInformation = { type: undefined, number: undefined };
 
   const [field, setField] = useState({
-    self: Array(13).fill(defaultCardInformation),
+    self: Array(16).fill(defaultCardInformation),
     opp1: Array(13).fill(defaultCardInformation),
     opp2: Array(13).fill(defaultCardInformation),
     grave: [],
@@ -64,6 +64,8 @@ export default function Game(props) {
   const [countClick, setCountClick] = useState(0);
   function incrementCount() {
     setCountClick(countClick + 1);
+    /*[TODO:現在クリック数にに応じて排出枚数を管理しているが、field内のカードの枚数に応じてカードの排出数を切り変えた方がいいかも
+    Selectからカードを持って来て配置した際、SETボタンのクリック回数は問答無用で0となるため配りたい枚数とはならない可能性がある]*/
   }
 
   function changeCardByClick() {
@@ -97,6 +99,48 @@ export default function Game(props) {
     }
   }
 
+  function resetCardByClick() {
+    if (countClick > 1) {
+      const changeCards = resetRandomCard(7);
+      const resetedField = {
+        self: concatFieldFromRandomCards(
+          preField.self,
+          changeCards.slice(0, 3)
+        ),
+        opp1: concatFieldFromRandomCards(
+          preField.opp1,
+          changeCards.slice(3, 5)
+        ),
+        opp2: concatFieldFromRandomCards(
+          preField.opp2,
+          changeCards.slice(5, 7)
+        ),
+        grave: preField.grave,
+        selected: preField.selected,
+      };
+      setField(resetedField);
+    } else if (countClick <= 1) {
+      const changeCards = resetRandomCard(15);
+      const resetedField = {
+        self: concatFieldFromRandomCards(
+          preField.self,
+          changeCards.slice(0, 5)
+        ),
+        opp1: concatFieldFromRandomCards(
+          preField.opp1,
+          changeCards.slice(5, 10)
+        ),
+        opp2: concatFieldFromRandomCards(
+          preField.opp2,
+          changeCards.slice(10, 15)
+        ),
+        grave: preField.grave,
+        selected: preField.selected,
+      };
+      setField(resetedField);
+    }
+  }
+
   function concatFieldFromRandomCards(fieldCards, randomCards) {
     const result = fieldCards.concat();
     randomCards.forEach((randomCard) => {
@@ -109,7 +153,6 @@ export default function Game(props) {
     });
     return result;
   }
-
   function getRandomCard(count) {
     let result = [];
     let tmpDeck = deck.concat();
@@ -122,7 +165,6 @@ export default function Game(props) {
         );
       });
     }
-    console.log(tmpDeck);
     setDeck(tmpDeck);
     return result;
   }
@@ -197,18 +239,10 @@ export default function Game(props) {
               </DialogContent>
               <DialogActions>
                 <Button
+                  disabled={countClick <= 0}
                   onClick={() => {
                     setResetDialog(false);
-                    setDeck(preDeck);
-                    setField(preField);
-                    const resetCards = resetRandomCard(15);
-                    setField({
-                      self: resetCards.slice(0, 5),
-                      opp1: resetCards.slice(5, 10),
-                      opp2: resetCards.slice(10, 15),
-                      grave: field.grave,
-                      selected: field.selected,
-                    });
+                    resetCardByClick();
                   }}
                 >
                   ランダム
