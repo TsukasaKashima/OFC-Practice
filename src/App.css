@@ -70,6 +70,11 @@ button.start-right {
   position: relative;
 }
 
+.my-cards .box {
+  border: none !important;
+  text-align: left;
+}
+
 .btns_grave {
   position: absolute;
   width: 15%;
