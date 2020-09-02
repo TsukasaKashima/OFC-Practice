@@ -142,7 +142,6 @@ export default function Game(props) {
   }
 
   function concatFieldFromRandomCards(fieldCards, randomCards) {
-    console.log(randomCards);
     const result = fieldCards.concat();
     randomCards.forEach((randomCard) => {
       const index = result.findIndex((fieldCard) => {
@@ -150,16 +149,10 @@ export default function Game(props) {
       });
       if (index !== -1) {
         result[index] = randomCard;
-      } else if (
-        randomCards.type !== undefined &&
-        randomCards.number !== undefined
-      ) {
-        setPreDeck(result);
       }
     });
     return result;
   }
-
   function getRandomCard(count) {
     let result = [];
     let tmpDeck = deck.concat();
@@ -191,8 +184,7 @@ export default function Game(props) {
     setDeck(returnDeck);
     return result;
   }
-  console.log(deck);
-  console.log(preDeck);
+
   return (
     <div>
       <div className="boxes">
