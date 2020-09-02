@@ -45,7 +45,7 @@ export default function Game(props) {
   const defaultCardInformation = { type: undefined, number: undefined };
 
   const [field, setField] = useState({
-    self: Array(13).fill(defaultCardInformation),
+    self: Array(16).fill(defaultCardInformation),
     opp1: Array(13).fill(defaultCardInformation),
     opp2: Array(13).fill(defaultCardInformation),
     grave: [],
