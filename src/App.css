@@ -7,6 +7,7 @@ h1 {
   color: white;
   font-size: 5vw;
   margin: 6.5% 0;
+  letter-spacing: 3px;
 }
 
 img {
@@ -36,13 +37,13 @@ button.start-right {
 }
 
 .boxes-1 {
-  padding: 2% 0 2% 8%;
+  padding: 2% 0 0 8%;
   width: 40%;
   display: inline-block;
 }
 
 .boxes-2 {
-  padding: 2% 0;
+  padding: 2% 0 0 2%;
   width: 40%;
   display: inline-block;
 }
@@ -52,15 +53,15 @@ button.start-right {
 }
 
 .box {
-  width: 5vw;
-  height: 7.1vw;
+  width: 4vw;
+  height: 5.7vw;
   border: solid 1px #888888;
   margin-right: 2%;
   display: inline-block;
 }
 
 .box img {
-  width: 5vw;
+  width: 4vw;
   position: absolute;
 }
 
@@ -90,26 +91,31 @@ button.start-right {
 
 .btns {
   position: absolute;
-  top: -60%;
+  top: -67%;
 }
 
 .mygrave {
   width: 100%;
-  border: 1px #888888 solid;
+  margin-top: 5%;
 }
 
 .mygrave .box {
-  width: 5vw;
+  width: 4.3vw;
+  height: 10.8vh;
   display: inline-block;
   margin: 3%;
   text-align: left;
+}
+
+.mygrave .box img {
+  width: 4.3vw;
 }
 
 button.back-btn {
   position: absolute;
   width: 12%;
   padding: 0.7%;
-  top: 90%;
+  top: 75%;
   left: 6.6%;
   margin-bottom: 0;
   font-size: 1.5vw;
@@ -136,23 +142,23 @@ button.back-btn {
 }
 
 .myboxes .box {
-  width: 6.6vw;
-  height: 9.4vw;
+  width: 5.9vw;
+  height: 8.4vw;
   border: solid 1px #888888;
   margin-right: 2%;
   display: inline-block;
 }
 
 .myboxes .box img {
-  width: 6.6vw;
+  width: 5.9vw;
 }
 
 .black-boxes {
   position: absolute;
   width: 17%;
   background-color: black;
-  left: 73%;
-  top: -34%;
+  left: 76%;
+  top: -45%;
   padding: 2%;
 }
 
@@ -165,7 +171,7 @@ button.back-btn {
 }
 
 .black-boxes .box img {
-  widows: 5vw;
+  width: 5vw;
 }
 
 .select-cards {
@@ -175,6 +181,12 @@ button.back-btn {
 
 .select-cards .box {
   text-align: left;
+  width: 4.4vw;
+  height: 11.3vh;
+}
+
+.select-cards .box img {
+  width: 4.5vw;
 }
 
 .select-cards .ddcontainer {
@@ -183,7 +195,7 @@ button.back-btn {
 
 .select-card-joker {
   text-align: left;
-  margin-left: 2.2%;
+  margin-left: 6.4%;
 }
 
 .select-boxes {
