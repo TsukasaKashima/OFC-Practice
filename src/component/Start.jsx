@@ -17,7 +17,7 @@ export default function Start(props) {
   return (
     <React.Fragment>
       <div className="title">
-        <h1>OFC検証アプリ</h1>
+        <h1>OFC-Practice</h1>
         <Button
           className="start-left"
           variant="contained"
@@ -38,7 +38,7 @@ export default function Start(props) {
             setNonJokerDialog(true);
           }}
         >
-          52枚(ジョーカー抜き)
+          52枚
         </Button>
 
         <Dialog open={jokerDialog}>
