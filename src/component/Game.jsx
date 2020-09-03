@@ -193,7 +193,6 @@ export default function Game(props) {
     setDeck(returnDeck);
     return result;
   }
-  console.log(field.grave);
   return (
     <div>
       <div className="boxes">
