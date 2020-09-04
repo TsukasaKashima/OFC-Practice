@@ -64,12 +64,16 @@ export default function Game(props) {
   const [countClick, setCountClick] = useState(0);
   function incrementCount() {
     setCountClick(countClick + 1);
-    /*[TODO:現在クリック数にに応じて排出枚数を管理しているが、field内のカードの枚数に応じてカードの排出数を切り変えた方がいいかも
-    Selectからカードを持って来て配置した際、SETボタンのクリック回数は問答無用で0となるため配りたい枚数とはならない可能性がある]*/
   }
 
+  const countSelfUndifined = field.self.filter((card) => {
+    return card.type === undefined;
+  });
+  const countOppUndifined = field.opp1.filter((card) => {
+    return card.type === undefined;
+  });
   function changeCardByClick() {
-    if (countClick > 0) {
+    if (countSelfUndifined.length <= 11) {
       const changeCards = getRandomCard(7);
       setField({
         self: concatFieldFromRandomCards(field.self, changeCards.slice(0, 3)),
@@ -78,7 +82,47 @@ export default function Game(props) {
         grave: concatFieldFromRandomCards(field.grave, changeCards.slice(0, 0)),
         selected: field.selected,
       });
-    } else if (countClick <= 0) {
+    }
+    if (countSelfUndifined.length <= 11 && countOppUndifined.length >= 13) {
+      const changeCards = getRandomCard(17);
+      setField({
+        self: concatFieldFromRandomCards(field.self, changeCards.slice(0, 3)),
+        opp1: concatFieldFromRandomCards(field.opp1, changeCards.slice(3, 10)),
+        opp2: concatFieldFromRandomCards(field.opp2, changeCards.slice(10, 17)),
+        grave: concatFieldFromRandomCards(field.grave, changeCards.slice(0, 0)),
+        selected: field.selected,
+      });
+    }
+    if (countSelfUndifined.length <= 9 && countOppUndifined.length >= 13) {
+      const changeCards = getRandomCard(21);
+      setField({
+        self: concatFieldFromRandomCards(field.self, changeCards.slice(0, 3)),
+        opp1: concatFieldFromRandomCards(field.opp1, changeCards.slice(3, 12)),
+        opp2: concatFieldFromRandomCards(field.opp2, changeCards.slice(12, 21)),
+        grave: concatFieldFromRandomCards(field.grave, changeCards.slice(0, 0)),
+        selected: field.selected,
+      });
+    }
+    if (countSelfUndifined.length <= 7 && countOppUndifined.length >= 13) {
+      const changeCards = getRandomCard(23);
+      setField({
+        self: concatFieldFromRandomCards(field.self, changeCards.slice(0, 3)),
+        opp1: concatFieldFromRandomCards(field.opp1, changeCards.slice(3, 14)),
+        opp2: concatFieldFromRandomCards(field.opp2, changeCards.slice(12, 23)),
+        grave: concatFieldFromRandomCards(field.grave, changeCards.slice(0, 0)),
+        selected: field.selected,
+      });
+    }
+    if (countSelfUndifined.length <= 5 && countOppUndifined.length >= 13) {
+      const changeCards = getRandomCard(25);
+      setField({
+        self: concatFieldFromRandomCards(field.self, changeCards.slice(0, 3)),
+        opp1: concatFieldFromRandomCards(field.opp1, changeCards.slice(3, 16)),
+        opp2: concatFieldFromRandomCards(field.opp2, changeCards.slice(12, 25)),
+        grave: concatFieldFromRandomCards(field.grave, changeCards.slice(0, 0)),
+        selected: field.selected,
+      });
+    } else if (countSelfUndifined.length > 11) {
       const changeCardsFirst = getRandomCard(15);
       setField({
         self: concatFieldFromRandomCards(
@@ -101,9 +145,8 @@ export default function Game(props) {
       });
     }
   }
-
   function resetCardByClick() {
-    if (countClick > 1) {
+    if (countSelfUndifined.length < 11) {
       const changeCards = resetRandomCard(7);
       const resetedField = {
         self: concatFieldFromRandomCards(
@@ -125,7 +168,107 @@ export default function Game(props) {
         selected: preField.selected,
       };
       setField(resetedField);
-    } else if (countClick <= 1) {
+    }
+    if (
+      (countSelfUndifined.length === 9 || countSelfUndifined.length === 8) &&
+      countClick === 1
+    ) {
+      const changeCards = resetRandomCard(17);
+      setField({
+        self: concatFieldFromRandomCards(
+          preField.self,
+          changeCards.slice(0, 3)
+        ),
+        opp1: concatFieldFromRandomCards(
+          preField.opp1,
+          changeCards.slice(3, 10)
+        ),
+        opp2: concatFieldFromRandomCards(
+          preField.opp2,
+          changeCards.slice(10, 17)
+        ),
+        grave: concatFieldFromRandomCards(
+          preField.grave,
+          changeCards.slice(0, 0)
+        ),
+        selected: preField.selected,
+      });
+    }
+    if (
+      (countSelfUndifined.length === 7 || countSelfUndifined.length === 6) &&
+      countClick === 1
+    ) {
+      const changeCards = resetRandomCard(21);
+      setField({
+        self: concatFieldFromRandomCards(
+          preField.self,
+          changeCards.slice(0, 3)
+        ),
+        opp1: concatFieldFromRandomCards(
+          preField.opp1,
+          changeCards.slice(3, 12)
+        ),
+        opp2: concatFieldFromRandomCards(
+          preField.opp2,
+          changeCards.slice(12, 21)
+        ),
+        grave: concatFieldFromRandomCards(
+          preField.grave,
+          changeCards.slice(0, 0)
+        ),
+        selected: preField.selected,
+      });
+    }
+    if (
+      (countSelfUndifined.length === 5 || countSelfUndifined.length === 4) &&
+      countClick === 1
+    ) {
+      const changeCards = resetRandomCard(25);
+      setField({
+        self: concatFieldFromRandomCards(
+          preField.self,
+          changeCards.slice(0, 3)
+        ),
+        opp1: concatFieldFromRandomCards(
+          preField.opp1,
+          changeCards.slice(3, 14)
+        ),
+        opp2: concatFieldFromRandomCards(
+          preField.opp2,
+          changeCards.slice(14, 25)
+        ),
+        grave: concatFieldFromRandomCards(
+          preField.grave,
+          changeCards.slice(0, 0)
+        ),
+        selected: preField.selected,
+      });
+    }
+    if (
+      (countSelfUndifined.length === 3 || countSelfUndifined.length === 2) &&
+      countClick === 1
+    ) {
+      const changeCards = resetRandomCard(29);
+      setField({
+        self: concatFieldFromRandomCards(
+          preField.self,
+          changeCards.slice(0, 3)
+        ),
+        opp1: concatFieldFromRandomCards(
+          preField.opp1,
+          changeCards.slice(3, 16)
+        ),
+        opp2: concatFieldFromRandomCards(
+          preField.opp2,
+          changeCards.slice(16, 29)
+        ),
+        grave: concatFieldFromRandomCards(
+          preField.grave,
+          changeCards.slice(0, 0)
+        ),
+        selected: preField.selected,
+      });
+    } else if (countSelfUndifined.length >= 11) {
       const changeCards = resetRandomCard(15);
       const resetedField = {
         self: concatFieldFromRandomCards(
@@ -149,7 +292,6 @@ export default function Game(props) {
       setField(resetedField);
     }
   }
-
   function concatFieldFromRandomCards(fieldCards, randomCards) {
     const result = fieldCards.concat();
     randomCards.forEach((randomCard) => {
@@ -218,7 +360,7 @@ export default function Game(props) {
         <div className="btns_grave">
           <div className="btns">
             <Button
-              disabled={countClick >= 5}
+              disabled={countSelfUndifined.length <= 3}
               id="setButton"
               variant="contained"
               color="primary"
