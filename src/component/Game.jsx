@@ -48,7 +48,7 @@ export default function Game(props) {
     self: Array(16).fill(defaultCardInformation),
     opp1: Array(13).fill(defaultCardInformation),
     opp2: Array(13).fill(defaultCardInformation),
-    grave: [],
+    grave: Array(4).fill(defaultCardInformation),
     selected: [],
   });
 
@@ -75,7 +75,7 @@ export default function Game(props) {
         self: concatFieldFromRandomCards(field.self, changeCards.slice(0, 3)),
         opp1: concatFieldFromRandomCards(field.opp1, changeCards.slice(3, 5)),
         opp2: concatFieldFromRandomCards(field.opp2, changeCards.slice(5, 7)),
-        grave: field.grave,
+        grave: concatFieldFromRandomCards(field.grave, changeCards.slice(0, 0)),
         selected: field.selected,
       });
     } else if (countClick <= 0) {
@@ -93,7 +93,10 @@ export default function Game(props) {
           field.opp2,
           changeCardsFirst.slice(10, 15)
         ),
-        grave: field.grave,
+        grave: concatFieldFromRandomCards(
+          field.grave,
+          changeCardsFirst.slice(0, 0)
+        ),
         selected: field.selected,
       });
     }
@@ -115,7 +118,10 @@ export default function Game(props) {
           preField.opp2,
           changeCards.slice(5, 7)
         ),
-        grave: preField.grave,
+        grave: concatFieldFromRandomCards(
+          preField.grave,
+          changeCards.slice(0, 0)
+        ),
         selected: preField.selected,
       };
       setField(resetedField);
@@ -134,7 +140,10 @@ export default function Game(props) {
           preField.opp2,
           changeCards.slice(10, 15)
         ),
-        grave: preField.grave,
+        grave: concatFieldFromRandomCards(
+          preField.grave,
+          changeCards.slice(0, 0)
+        ),
         selected: preField.selected,
       };
       setField(resetedField);
@@ -184,7 +193,6 @@ export default function Game(props) {
     setDeck(returnDeck);
     return result;
   }
-
   return (
     <div>
       <div className="boxes">
