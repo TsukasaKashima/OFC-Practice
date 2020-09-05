@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "../App.css";
 import GameCard from "./GameCard";
 import SelfField from "./SelfField";
@@ -21,8 +21,10 @@ import {
   DialogActions,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { AppContext } from "../context/AppContext";
 
 export default function Game(props) {
+  const { selectedCards, setSelectedCards } = useContext(AppContext);
   function createCard() {
     const resultArray = [];
     for (let i = 1; i <= 13; i++) {
@@ -45,18 +47,18 @@ export default function Game(props) {
   const defaultCardInformation = { type: undefined, number: undefined };
 
   const [field, setField] = useState({
-    self: Array(13).fill(defaultCardInformation),
+    self: Array(16).fill(defaultCardInformation),
     opp1: Array(13).fill(defaultCardInformation),
     opp2: Array(13).fill(defaultCardInformation),
-    grave: [],
+    grave: Array(4).fill(defaultCardInformation),
     selected: [],
   });
 
   useEffect(() => {
     const tmpField = Object.assign({}, field);
-    tmpField.selected = props.selectedCards;
+    tmpField.selected = selectedCards;
     setField(tmpField);
-  }, [props.selectedCards]);
+  }, [selectedCards]);
 
   const [preField, setPreField] = useState(field);
   const history = useHistory();
@@ -65,18 +67,63 @@ export default function Game(props) {
   function incrementCount() {
     setCountClick(countClick + 1);
   }
-
+  const countSelfUndifined = field.self.filter((card) => {
+    return card.type === undefined;
+  });
+  const countOppUndifined = field.opp1.filter((card) => {
+    return card.type === undefined;
+  });
   function changeCardByClick() {
-    if (countClick > 0) {
+    if (countSelfUndifined.length <= 11) {
       const changeCards = getRandomCard(7);
       setField({
         self: concatFieldFromRandomCards(field.self, changeCards.slice(0, 3)),
         opp1: concatFieldFromRandomCards(field.opp1, changeCards.slice(3, 5)),
         opp2: concatFieldFromRandomCards(field.opp2, changeCards.slice(5, 7)),
-        grave: field.grave,
+        grave: concatFieldFromRandomCards(field.grave, changeCards.slice(0, 0)),
         selected: field.selected,
       });
-    } else if (countClick <= 0) {
+    }
+    if (countSelfUndifined.length <= 11 && countOppUndifined.length >= 13) {
+      const changeCards = getRandomCard(17);
+      setField({
+        self: concatFieldFromRandomCards(field.self, changeCards.slice(0, 3)),
+        opp1: concatFieldFromRandomCards(field.opp1, changeCards.slice(3, 10)),
+        opp2: concatFieldFromRandomCards(field.opp2, changeCards.slice(10, 17)),
+        grave: concatFieldFromRandomCards(field.grave, changeCards.slice(0, 0)),
+        selected: field.selected,
+      });
+    }
+    if (countSelfUndifined.length <= 9 && countOppUndifined.length >= 13) {
+      const changeCards = getRandomCard(21);
+      setField({
+        self: concatFieldFromRandomCards(field.self, changeCards.slice(0, 3)),
+        opp1: concatFieldFromRandomCards(field.opp1, changeCards.slice(3, 12)),
+        opp2: concatFieldFromRandomCards(field.opp2, changeCards.slice(12, 21)),
+        grave: concatFieldFromRandomCards(field.grave, changeCards.slice(0, 0)),
+        selected: field.selected,
+      });
+    }
+    if (countSelfUndifined.length <= 7 && countOppUndifined.length >= 13) {
+      const changeCards = getRandomCard(23);
+      setField({
+        self: concatFieldFromRandomCards(field.self, changeCards.slice(0, 3)),
+        opp1: concatFieldFromRandomCards(field.opp1, changeCards.slice(3, 14)),
+        opp2: concatFieldFromRandomCards(field.opp2, changeCards.slice(12, 23)),
+        grave: concatFieldFromRandomCards(field.grave, changeCards.slice(0, 0)),
+        selected: field.selected,
+      });
+    }
+    if (countSelfUndifined.length <= 5 && countOppUndifined.length >= 13) {
+      const changeCards = getRandomCard(25);
+      setField({
+        self: concatFieldFromRandomCards(field.self, changeCards.slice(0, 3)),
+        opp1: concatFieldFromRandomCards(field.opp1, changeCards.slice(3, 16)),
+        opp2: concatFieldFromRandomCards(field.opp2, changeCards.slice(12, 25)),
+        grave: concatFieldFromRandomCards(field.grave, changeCards.slice(0, 0)),
+        selected: field.selected,
+      });
+    } else if (countSelfUndifined.length > 11) {
       const changeCardsFirst = getRandomCard(15);
       setField({
         self: concatFieldFromRandomCards(
@@ -91,12 +138,161 @@ export default function Game(props) {
           field.opp2,
           changeCardsFirst.slice(10, 15)
         ),
-        grave: field.grave,
+        grave: concatFieldFromRandomCards(
+          field.grave,
+          changeCardsFirst.slice(0, 0)
+        ),
         selected: field.selected,
       });
     }
   }
-
+  function resetCardByClick() {
+    if (countSelfUndifined.length < 11) {
+      const changeCards = resetRandomCard(7);
+      const resetedField = {
+        self: concatFieldFromRandomCards(
+          preField.self,
+          changeCards.slice(0, 3)
+        ),
+        opp1: concatFieldFromRandomCards(
+          preField.opp1,
+          changeCards.slice(3, 5)
+        ),
+        opp2: concatFieldFromRandomCards(
+          preField.opp2,
+          changeCards.slice(5, 7)
+        ),
+        grave: concatFieldFromRandomCards(
+          preField.grave,
+          changeCards.slice(0, 0)
+        ),
+        selected: preField.selected,
+      };
+      setField(resetedField);
+    }
+    if (
+      (countSelfUndifined.length === 9 || countSelfUndifined.length === 8) &&
+      countClick === 1
+    ) {
+      const changeCards = resetRandomCard(17);
+      setField({
+        self: concatFieldFromRandomCards(
+          preField.self,
+          changeCards.slice(0, 3)
+        ),
+        opp1: concatFieldFromRandomCards(
+          preField.opp1,
+          changeCards.slice(3, 10)
+        ),
+        opp2: concatFieldFromRandomCards(
+          preField.opp2,
+          changeCards.slice(10, 17)
+        ),
+        grave: concatFieldFromRandomCards(
+          preField.grave,
+          changeCards.slice(0, 0)
+        ),
+        selected: preField.selected,
+      });
+    }
+    if (
+      (countSelfUndifined.length === 7 || countSelfUndifined.length === 6) &&
+      countClick === 1
+    ) {
+      const changeCards = resetRandomCard(21);
+      setField({
+        self: concatFieldFromRandomCards(
+          preField.self,
+          changeCards.slice(0, 3)
+        ),
+        opp1: concatFieldFromRandomCards(
+          preField.opp1,
+          changeCards.slice(3, 12)
+        ),
+        opp2: concatFieldFromRandomCards(
+          preField.opp2,
+          changeCards.slice(12, 21)
+        ),
+        grave: concatFieldFromRandomCards(
+          preField.grave,
+          changeCards.slice(0, 0)
+        ),
+        selected: preField.selected,
+      });
+    }
+    if (
+      (countSelfUndifined.length === 5 || countSelfUndifined.length === 4) &&
+      countClick === 1
+    ) {
+      const changeCards = resetRandomCard(25);
+      setField({
+        self: concatFieldFromRandomCards(
+          preField.self,
+          changeCards.slice(0, 3)
+        ),
+        opp1: concatFieldFromRandomCards(
+          preField.opp1,
+          changeCards.slice(3, 14)
+        ),
+        opp2: concatFieldFromRandomCards(
+          preField.opp2,
+          changeCards.slice(14, 25)
+        ),
+        grave: concatFieldFromRandomCards(
+          preField.grave,
+          changeCards.slice(0, 0)
+        ),
+        selected: preField.selected,
+      });
+    }
+    if (
+      (countSelfUndifined.length === 3 || countSelfUndifined.length === 2) &&
+      countClick === 1
+    ) {
+      const changeCards = resetRandomCard(29);
+      setField({
+        self: concatFieldFromRandomCards(
+          preField.self,
+          changeCards.slice(0, 3)
+        ),
+        opp1: concatFieldFromRandomCards(
+          preField.opp1,
+          changeCards.slice(3, 16)
+        ),
+        opp2: concatFieldFromRandomCards(
+          preField.opp2,
+          changeCards.slice(16, 29)
+        ),
+        grave: concatFieldFromRandomCards(
+          preField.grave,
+          changeCards.slice(0, 0)
+        ),
+        selected: preField.selected,
+      });
+    } else if (countSelfUndifined.length >= 11) {
+      const changeCards = resetRandomCard(15);
+      const resetedField = {
+        self: concatFieldFromRandomCards(
+          preField.self,
+          changeCards.slice(0, 5)
+        ),
+        opp1: concatFieldFromRandomCards(
+          preField.opp1,
+          changeCards.slice(5, 10)
+        ),
+        opp2: concatFieldFromRandomCards(
+          preField.opp2,
+          changeCards.slice(10, 15)
+        ),
+        grave: concatFieldFromRandomCards(
+          preField.grave,
+          changeCards.slice(0, 0)
+        ),
+        selected: preField.selected,
+      };
+      setField(resetedField);
+    }
+  }
   function concatFieldFromRandomCards(fieldCards, randomCards) {
     const result = fieldCards.concat();
     randomCards.forEach((randomCard) => {
@@ -109,7 +305,6 @@ export default function Game(props) {
     });
     return result;
   }
-
   function getRandomCard(count) {
     let result = [];
     let tmpDeck = deck.concat();
@@ -122,7 +317,6 @@ export default function Game(props) {
         );
       });
     }
-    console.log(tmpDeck);
     setDeck(tmpDeck);
     return result;
   }
@@ -142,7 +336,6 @@ export default function Game(props) {
     setDeck(returnDeck);
     return result;
   }
-
   return (
     <div>
       <div className="boxes">
@@ -168,7 +361,7 @@ export default function Game(props) {
         <div className="btns_grave">
           <div className="btns">
             <Button
-              disabled={countClick >= 5}
+              disabled={countSelfUndifined.length <= 3}
               id="setButton"
               variant="contained"
               color="primary"
@@ -197,18 +390,10 @@ export default function Game(props) {
               </DialogContent>
               <DialogActions>
                 <Button
+                  disabled={countClick <= 0}
                   onClick={() => {
                     setResetDialog(false);
-                    setDeck(preDeck);
-                    setField(preField);
-                    const resetCards = resetRandomCard(15);
-                    setField({
-                      self: resetCards.slice(0, 5),
-                      opp1: resetCards.slice(5, 10),
-                      opp2: resetCards.slice(10, 15),
-                      grave: field.grave,
-                      selected: field.selected,
-                    });
+                    resetCardByClick();
                   }}
                 >
                   ランダム
@@ -217,7 +402,7 @@ export default function Game(props) {
                   onClick={() => {
                     setResetDialog(true);
                     history.push("/select");
-                    props.setSelectedCards([]);
+                    setSelectedCards([]);
                   }}
                 >
                   自由に選択

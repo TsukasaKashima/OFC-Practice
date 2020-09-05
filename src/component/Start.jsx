@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "../App.css";
 import {
   Button,
@@ -8,16 +8,18 @@ import {
   DialogActions,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { AppContext } from "../context/AppContext";
 
 export default function Start(props) {
   const [jokerDialog, setJokerDialog] = useState(false);
   const [nonJokerDialog, setNonJokerDialog] = useState(false);
   const history = useHistory();
+  const { setSelectedCards } = useContext(AppContext);
 
   return (
     <React.Fragment>
       <div className="title">
-        <h1>OFC検証アプリ</h1>
+        <h1>OFC-Practice</h1>
         <Button
           className="start-left"
           variant="contained"
@@ -38,7 +40,7 @@ export default function Start(props) {
             setNonJokerDialog(true);
           }}
         >
-          52枚(ジョーカー抜き)
+          52枚
         </Button>
 
         <Dialog open={jokerDialog}>
@@ -51,7 +53,7 @@ export default function Start(props) {
                 setJokerDialog(true);
                 history.push("game");
                 props.setMemberCount(2);
-                props.setSelectedCards([]);
+                setSelectedCards([]);
               }}
             >
               2人
@@ -61,7 +63,7 @@ export default function Start(props) {
                 setJokerDialog(true);
                 history.push("game");
                 props.setMemberCount(3);
-                props.setSelectedCards([]);
+                setSelectedCards([]);
               }}
             >
               3人
@@ -86,7 +88,7 @@ export default function Start(props) {
                 setNonJokerDialog(true);
                 history.push("game");
                 props.setMemberCount(2);
-                props.setSelectedCards([]);
+                setSelectedCards([]);
               }}
             >
               2人
@@ -96,7 +98,7 @@ export default function Start(props) {
                 setNonJokerDialog(true);
                 history.push("game");
                 props.setMemberCount(3);
-                props.setSelectedCards([]);
+                setSelectedCards([]);
               }}
             >
               3人

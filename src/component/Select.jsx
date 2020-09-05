@@ -89,12 +89,7 @@ export default function Select(props) {
         />
       </div>
       <div className="select-boxes">
-        <SelectBox
-          field={field}
-          setField={setField}
-          selectedCards={props.selectedCards}
-          setSelectedCards={props.setSelectedCards}
-        />
+        <SelectBox field={field} setField={setField} />
         <Button
           className="select-btn"
           variant="contained"
