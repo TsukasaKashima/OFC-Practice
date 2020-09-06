@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "../App.css";
 import {
   Button,
@@ -8,11 +8,15 @@ import {
   DialogActions,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { AppContext } from "../context/AppContext";
 
 export default function Start(props) {
   const [jokerDialog, setJokerDialog] = useState(false);
   const [nonJokerDialog, setNonJokerDialog] = useState(false);
   const history = useHistory();
+  const { setSelectedCards } = useContext(AppContext);
+  const { setExistJoker } = useContext(AppContext);
+  const { setDeck, createCard } = useContext(AppContext);
 
   return (
     <React.Fragment>
@@ -23,7 +27,8 @@ export default function Start(props) {
           variant="contained"
           color="primary"
           onClick={() => {
-            props.setExistJoker(true);
+            setExistJoker(true);
+            setDeck(createCard(true));
             setJokerDialog(true);
           }}
         >
@@ -34,7 +39,8 @@ export default function Start(props) {
           variant="contained"
           color="primary"
           onClick={() => {
-            props.setExistJoker(false);
+            setExistJoker(false);
+            setDeck(createCard(false));
             setNonJokerDialog(true);
           }}
         >
@@ -51,7 +57,7 @@ export default function Start(props) {
                 setJokerDialog(true);
                 history.push("game");
                 props.setMemberCount(2);
-                props.setSelectedCards([]);
+                setSelectedCards([]);
               }}
             >
               2人
@@ -61,7 +67,7 @@ export default function Start(props) {
                 setJokerDialog(true);
                 history.push("game");
                 props.setMemberCount(3);
-                props.setSelectedCards([]);
+                setSelectedCards([]);
               }}
             >
               3人
@@ -86,7 +92,7 @@ export default function Start(props) {
                 setNonJokerDialog(true);
                 history.push("game");
                 props.setMemberCount(2);
-                props.setSelectedCards([]);
+                setSelectedCards([]);
               }}
             >
               2人
@@ -96,7 +102,7 @@ export default function Start(props) {
                 setNonJokerDialog(true);
                 history.push("game");
                 props.setMemberCount(3);
-                props.setSelectedCards([]);
+                setSelectedCards([]);
               }}
             >
               3人

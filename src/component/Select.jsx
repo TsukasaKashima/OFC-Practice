@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "../App.css";
 import SelectCardRow from "./SelectCardRow";
 import SelectCardRowJoker from "./SelectCardRowJoker";
@@ -13,24 +13,13 @@ import {
 import { Button } from "@material-ui/core";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import SelectBox from "./SelectBox";
+import { AppContext } from "../context/AppContext";
 
-export default function Select(props) {
+export default function Select() {
+  const { selectedCards } = useContext(AppContext);
+  const { deck, setDeck } = useContext(AppContext);
   const history = useHistory();
-  function createCard() {
-    const resultArray = [];
-    for (let i = 1; i <= 13; i++) {
-      resultArray.push({ type: SPADE, number: i });
-      resultArray.push({ type: CLOVER, number: i });
-      resultArray.push({ type: HEART, number: i });
-      resultArray.push({ type: DIAMOND, number: i });
-    }
-    if (props.existJoker) {
-      resultArray.push({ type: JOKER_1 });
-      resultArray.push({ type: JOKER_2 });
-    }
-    return resultArray;
-  }
-  const [deck, setDeck] = useState(createCard());
+
   const spadeFilter = deck.filter((deck) => {
     return deck.type === SPADE;
   });
@@ -57,6 +46,18 @@ export default function Select(props) {
     [JOKER_1]: [...joker1Filter],
     [JOKER_2]: [...joker2Filter],
   });
+
+  function deleteSelectedCards() {
+    let tmpDeck = deck.concat();
+    selectedCards.forEach((selectedCard) => {
+      tmpDeck = tmpDeck.filter((card) => {
+        return !(
+          selectedCard.type === card.type && selectedCard.number === card.number
+        );
+      });
+    });
+    setDeck(tmpDeck);
+  }
 
   return (
     <div className="select-cards">
@@ -89,18 +90,14 @@ export default function Select(props) {
         />
       </div>
       <div className="select-boxes">
-        <SelectBox
-          field={field}
-          setField={setField}
-          selectedCards={props.selectedCards}
-          setSelectedCards={props.setSelectedCards}
-        />
+        <SelectBox field={field} setField={setField} />
         <Button
           className="select-btn"
           variant="contained"
           color="primary"
           onClick={() => {
             history.push("/game");
+            deleteSelectedCards();
           }}
         >
           SET

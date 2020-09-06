@@ -1,17 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "../App.css";
 import GameCard from "./GameCard";
 import SelfField from "./SelfField";
 import OppField1 from "./OppField1";
 import OppField2 from "./OppField2";
-import {
-  SPADE,
-  CLOVER,
-  DIAMOND,
-  HEART,
-  JOKER_1,
-  JOKER_2,
-} from "../common/constant";
 import GraveField from "./GraveField";
 import {
   Button,
@@ -21,26 +13,16 @@ import {
   DialogActions,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { AppContext } from "../context/AppContext";
 
 export default function Game(props) {
-  function createCard() {
-    const resultArray = [];
-    for (let i = 1; i <= 13; i++) {
-      resultArray.push({ type: SPADE, number: i });
-      resultArray.push({ type: CLOVER, number: i });
-      resultArray.push({ type: HEART, number: i });
-      resultArray.push({ type: DIAMOND, number: i });
-    }
-    if (props.existJoker) {
-      resultArray.push({ type: JOKER_1 });
-      resultArray.push({ type: JOKER_2 });
-    }
-    return resultArray;
-  }
-  const [resetDialog, setResetDialog] = useState(false);
+  const { selectedCards, setSelectedCards } = useContext(AppContext);
+  const { deck, setDeck } = useContext(AppContext);
+  const { preDeck, setPreDeck } = useContext(AppContext);
+  const { createCard } = useContext(AppContext);
+  const { existJoker } = useContext(AppContext);
 
-  const [deck, setDeck] = useState(createCard());
-  const [preDeck, setPreDeck] = useState(deck);
+  const [resetDialog, setResetDialog] = useState(false);
 
   const defaultCardInformation = { type: undefined, number: undefined };
 
@@ -51,12 +33,11 @@ export default function Game(props) {
     grave: Array(4).fill(defaultCardInformation),
     selected: [],
   });
-
   useEffect(() => {
     const tmpField = Object.assign({}, field);
-    tmpField.selected = props.selectedCards;
+    tmpField.selected = selectedCards;
     setField(tmpField);
-  }, [props.selectedCards]);
+  }, [selectedCards]);
 
   const [preField, setPreField] = useState(field);
   const history = useHistory();
@@ -65,6 +46,12 @@ export default function Game(props) {
   function incrementCount() {
     setCountClick(countClick + 1);
   }
+  const countSelfUndifined = field.self.filter((card) => {
+    return card.type === undefined;
+  });
+  const countOppUndifined = field.opp1.filter((card) => {
+    return card.type === undefined;
+  });
 
   const countSelfUndifined = field.self.filter((card) => {
     return card.type === undefined;
@@ -360,7 +347,7 @@ export default function Game(props) {
         <div className="btns_grave">
           <div className="btns">
             <Button
-              disabled={countSelfUndifined.length <= 3}
+              disabled={countSelfUndifined.length === 3 || countClick === 5}
               id="setButton"
               variant="contained"
               color="primary"
@@ -401,7 +388,8 @@ export default function Game(props) {
                   onClick={() => {
                     setResetDialog(true);
                     history.push("/select");
-                    props.setSelectedCards([]);
+                    setSelectedCards([]);
+                    setDeck(createCard(existJoker));
                   }}
                 >
                   自由に選択
@@ -497,6 +485,7 @@ export default function Game(props) {
           color="secondary"
           onClick={() => {
             history.push("/");
+            setDeck(createCard(existJoker));
           }}
         >
           BACK
