@@ -52,8 +52,6 @@ export default function Game(props) {
   const countOppUndifined = field.opp1.filter((card) => {
     return card.type === undefined;
   });
-  console.log(deck);
-  console.log(countSelfUndifined.length);
 
   function changeCardByClick() {
     if (countSelfUndifined.length <= 11) {
