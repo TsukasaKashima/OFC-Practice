@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import "../App.css";
+import "../../App.css";
 import {
   Button,
   Dialog,
@@ -8,7 +8,7 @@ import {
   DialogActions,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { AppContext } from "../context/AppContext";
+import { AppContext } from "../../context/AppContext";
 
 export default function Start(props) {
   const [jokerDialog, setJokerDialog] = useState(false);

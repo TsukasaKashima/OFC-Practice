@@ -1,6 +1,6 @@
 import React from "react";
-import "../App.css";
-import { getImageFromTypeAndNumber } from "../common/cardImage.js";
+import "../../App.css";
+import { getImageFromTypeAndNumber } from "../../common/cardImage.js";
 
 export default function SelectBoxCard(props) {
   return (

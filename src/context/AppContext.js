@@ -16,8 +16,6 @@ export const AppContextProvider = (props) => {
   const [preDeck, setPreDeck] = useState(deck);
   const [existJoker, setExistJoker] = useState(true);
 
-  console.log(existJoker);
-
   function createCard(needPushJoker) {
     const resultArray = [];
     for (let i = 1; i <= 13; i++) {

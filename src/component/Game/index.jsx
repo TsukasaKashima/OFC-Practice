@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
-import "../App.css";
+import "../../App.css";
 import GameCard from "./GameCard";
 import SelfField from "./SelfField";
-import OppField1 from "./OppField1";
-import OppField2 from "./OppField2";
+import OppField from "./OppField";
 import GraveField from "./GraveField";
 import {
   Button,
@@ -13,7 +12,7 @@ import {
   DialogActions,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { AppContext } from "../context/AppContext";
+import { AppContext } from "../../context/AppContext";
 
 export default function Game(props) {
   const { selectedCards, setSelectedCards } = useContext(AppContext);
@@ -320,7 +319,7 @@ export default function Game(props) {
     <div>
       <div className="boxes">
         <div className="boxes-1">
-          <OppField1
+          <OppField
             fieldKey="opp1"
             fieldCard={field}
             fieldSetter={setField}
@@ -329,7 +328,7 @@ export default function Game(props) {
         </div>
         {props.memberCount === 3 && (
           <div className="boxes-2">
-            <OppField2
+            <OppField
               fieldKey="opp2"
               fieldCard={field}
               fieldSetter={setField}
@@ -370,7 +369,7 @@ export default function Game(props) {
               </DialogContent>
               <DialogActions>
                 <Button
-                  disabled={countClick <= 0}
+                  disabled={countClick === 0}
                   onClick={() => {
                     setResetDialog(false);
                     resetCardByClick();

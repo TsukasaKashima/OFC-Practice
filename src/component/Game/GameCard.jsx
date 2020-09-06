@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import "../App.css";
-import { getImageFromTypeAndNumber } from "../common/cardImage.js";
+import "../../App.css";
+import { getImageFromTypeAndNumber } from "../../common/cardImage.js";
 import { DragDropContainer, DropTarget } from "react-drag-drop-container";
 
 export default function Card(props) {
