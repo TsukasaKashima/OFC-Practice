@@ -4,14 +4,6 @@ import GameCard from "./GameCard";
 import SelfField from "./SelfField";
 import OppField1 from "./OppField1";
 import OppField2 from "./OppField2";
-import {
-  SPADE,
-  CLOVER,
-  DIAMOND,
-  HEART,
-  JOKER_1,
-  JOKER_2,
-} from "../common/constant";
 import GraveField from "./GraveField";
 import {
   Button,
@@ -25,24 +17,12 @@ import { AppContext } from "../context/AppContext";
 
 export default function Game(props) {
   const { selectedCards, setSelectedCards } = useContext(AppContext);
-  function createCard() {
-    const resultArray = [];
-    for (let i = 1; i <= 13; i++) {
-      resultArray.push({ type: SPADE, number: i });
-      resultArray.push({ type: CLOVER, number: i });
-      resultArray.push({ type: HEART, number: i });
-      resultArray.push({ type: DIAMOND, number: i });
-    }
-    if (props.existJoker) {
-      resultArray.push({ type: JOKER_1 });
-      resultArray.push({ type: JOKER_2 });
-    }
-    return resultArray;
-  }
-  const [resetDialog, setResetDialog] = useState(false);
+  const { deck, setDeck } = useContext(AppContext);
+  const { preDeck, setPreDeck } = useContext(AppContext);
+  const { createCard } = useContext(AppContext);
+  const { existJoker } = useContext(AppContext);
 
-  const [deck, setDeck] = useState(createCard());
-  const [preDeck, setPreDeck] = useState(deck);
+  const [resetDialog, setResetDialog] = useState(false);
 
   const defaultCardInformation = { type: undefined, number: undefined };
 
@@ -53,7 +33,7 @@ export default function Game(props) {
     grave: Array(4).fill(defaultCardInformation),
     selected: [],
   });
-
+  console.log(deck);
   useEffect(() => {
     const tmpField = Object.assign({}, field);
     tmpField.selected = selectedCards;
@@ -403,6 +383,7 @@ export default function Game(props) {
                     setResetDialog(true);
                     history.push("/select");
                     setSelectedCards([]);
+                    setDeck(createCard(existJoker));
                   }}
                 >
                   自由に選択
@@ -498,6 +479,7 @@ export default function Game(props) {
           color="secondary"
           onClick={() => {
             history.push("/");
+            setDeck(createCard(existJoker));
           }}
         >
           BACK

@@ -15,6 +15,7 @@ export default function Start(props) {
   const [nonJokerDialog, setNonJokerDialog] = useState(false);
   const history = useHistory();
   const { setSelectedCards } = useContext(AppContext);
+  const { setExistJoker } = useContext(AppContext);
 
   return (
     <React.Fragment>
@@ -25,7 +26,7 @@ export default function Start(props) {
           variant="contained"
           color="primary"
           onClick={() => {
-            props.setExistJoker(true);
+            setExistJoker(true);
             setJokerDialog(true);
           }}
         >
@@ -36,7 +37,7 @@ export default function Start(props) {
           variant="contained"
           color="primary"
           onClick={() => {
-            props.setExistJoker(false);
+            setExistJoker(false);
             setNonJokerDialog(true);
           }}
         >

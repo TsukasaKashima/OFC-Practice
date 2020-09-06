@@ -13,7 +13,6 @@ let store = createStore(reducers);
 
 function App() {
   const [memberCount, setMemberCount] = useState(0);
-  const [existJoker, setExistJoker] = useState(true);
   const [selectedCards, setSelectedCards] = useState([]);
 
   return (
@@ -28,7 +27,6 @@ function App() {
                 return (
                   <Start
                     setMemberCount={setMemberCount}
-                    setExistJoker={setExistJoker}
                     setSelectedCards={setSelectedCards}
                   />
                 );
@@ -40,7 +38,6 @@ function App() {
                 return (
                   <Game
                     memberCount={memberCount}
-                    existJoker={existJoker}
                     selectedCards={selectedCards}
                     setSelectedCards={setSelectedCards}
                   />
@@ -52,8 +49,6 @@ function App() {
               render={() => {
                 return (
                   <Select
-                    existJoker={existJoker}
-                    setExistJoker={setExistJoker}
                     selectedCards={selectedCards}
                     setSelectedCards={setSelectedCards}
                   />
