@@ -43,7 +43,7 @@ button.start-right {
 }
 
 .boxes-2 {
-  padding: 2% 0;
+  padding: 2% 0 0 2%;
   width: 40%;
   display: inline-block;
 }
