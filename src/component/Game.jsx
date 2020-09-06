@@ -33,7 +33,6 @@ export default function Game(props) {
     grave: Array(4).fill(defaultCardInformation),
     selected: [],
   });
-  console.log(deck);
   useEffect(() => {
     const tmpField = Object.assign({}, field);
     tmpField.selected = selectedCards;
@@ -53,6 +52,9 @@ export default function Game(props) {
   const countOppUndifined = field.opp1.filter((card) => {
     return card.type === undefined;
   });
+  console.log(deck);
+  console.log(countSelfUndifined.length);
+
   function changeCardByClick() {
     if (countSelfUndifined.length <= 11) {
       const changeCards = getRandomCard(7);
@@ -341,7 +343,7 @@ export default function Game(props) {
         <div className="btns_grave">
           <div className="btns">
             <Button
-              disabled={countSelfUndifined.length <= 3}
+              disabled={countSelfUndifined.length === 3 || countClick === 5}
               id="setButton"
               variant="contained"
               color="primary"
