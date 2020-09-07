@@ -1,5 +1,5 @@
 import React from "react";
-import "../App.css";
+import "../../App.css";
 import SelectCard from "./SelectCard";
 export default function SelectCardRowJoker(props) {
   return (

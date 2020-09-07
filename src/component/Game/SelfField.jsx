@@ -1,9 +1,33 @@
 import React from "react";
-import "../App.css";
+import "../../App.css";
 import GameCard from "./GameCard";
-export default function OppField1(props) {
+export default function SelfField(props) {
   return (
     <React.Fragment>
+      <div className="box-row">
+        {[13, 14, 15].map((index) => {
+          return (
+            <GameCard
+              index={index}
+              fieldKey={props.fieldKey}
+              field={props.fieldCard}
+              fieldSetter={props.fieldSetter}
+            />
+          );
+        })}
+      </div>
+      <div className="box-row">
+        {[8, 9, 10, 11, 12].map((index) => {
+          return (
+            <GameCard
+              index={index}
+              fieldKey={props.fieldKey}
+              field={props.fieldCard}
+              fieldSetter={props.fieldSetter}
+            />
+          );
+        })}
+      </div>
       <div className="box-row">
         {[0, 1, 2, 3, 4].map((index) => {
           return (
@@ -16,20 +40,8 @@ export default function OppField1(props) {
           );
         })}
       </div>
-      <div className="box-row">
-        {[5, 6, 7, 8, 9].map((index) => {
-          return (
-            <GameCard
-              index={index}
-              fieldKey={props.fieldKey}
-              field={props.fieldCard}
-              fieldSetter={props.fieldSetter}
-            />
-          );
-        })}
-      </div>
-      <div className="box-row">
-        {[10, 11, 12].map((index) => {
+      <div className="box-row my-cards">
+        {[5, 6, 7].map((index) => {
           return (
             <GameCard
               index={index}

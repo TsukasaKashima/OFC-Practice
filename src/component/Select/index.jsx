@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import "../App.css";
+import "../../App.css";
 import SelectCardRow from "./SelectCardRow";
 import SelectCardRowJoker from "./SelectCardRowJoker";
 import {
@@ -9,11 +9,11 @@ import {
   CLOVER,
   HEART,
   DIAMOND,
-} from "../common/constant";
+} from "../../common/constant";
 import { Button } from "@material-ui/core";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import SelectBox from "./SelectBox";
-import { AppContext } from "../context/AppContext";
+import { AppContext } from "../../context/AppContext";
 
 export default function Select() {
   const { selectedCards } = useContext(AppContext);

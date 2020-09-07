@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import "../App.css";
-import { getImageFromTypeAndNumber } from "../common/cardImage.js";
+import "../../App.css";
+import { getImageFromTypeAndNumber } from "../../common/cardImage.js";
 import { DragDropContainer, DropTarget } from "react-drag-drop-container";
 
 export default function Card(props) {
@@ -10,12 +10,6 @@ export default function Card(props) {
     number: undefined,
   });
 
-  // Note: ドロップされた側のCardで呼び出される関数。
-  //       この時点でprops.fieldSetterを呼び出してフィールドを更新すると、
-  //       カードが重複してしまう。
-  //       (stateのsetter関数が非同期であるため、まだドラッグした側のcardで呼び出したonHit関数内で行ったsetFieldSetterの結果が反映されていない)
-  //       そこで、callbackUpdatedFieldというrefに退避させ、
-  //       useEffectでprops.fieldの内容を監視してcallbackUpdatedFieldを実行させるようにした。
   function onDrop(type, number) {
     callbackUpdatedField.current = (field) => {
       const tmpField = Object.assign({}, field);

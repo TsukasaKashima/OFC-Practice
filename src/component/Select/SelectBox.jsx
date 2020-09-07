@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import "../App.css";
+import "../../App.css";
 import SelectBoxCard from "./SelectBoxCard";
 import { DropTarget } from "react-drag-drop-container";
-import { AppContext } from "../context/AppContext";
+import { AppContext } from "../../context/AppContext";
 
 export default function SelectBox(props) {
   const { selectedCards, setSelectedCards } = useContext(AppContext);
