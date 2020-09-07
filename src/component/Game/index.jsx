@@ -52,12 +52,6 @@ export default function Game(props) {
     return card.type === undefined;
   });
 
-  const countSelfUndifined = field.self.filter((card) => {
-    return card.type === undefined;
-  });
-  const countOppUndifined = field.opp1.filter((card) => {
-    return card.type === undefined;
-  });
   function changeCardByClick() {
     if (countSelfUndifined.length <= 11) {
       const changeCards = getRandomCard(7);
@@ -321,6 +315,7 @@ export default function Game(props) {
     setDeck(returnDeck);
     return result;
   }
+  console.log(deck);
   return (
     <div>
       <div className="boxes">
