@@ -315,7 +315,6 @@ export default function Game(props) {
     setDeck(returnDeck);
     return result;
   }
-  console.log(deck);
   return (
     <div>
       <div className="boxes">
