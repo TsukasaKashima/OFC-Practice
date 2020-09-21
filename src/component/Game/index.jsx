@@ -393,6 +393,7 @@ export default function Game(props) {
     setDeck(returnDeck);
     return result;
   }
+  console.log(countMyCardsUndifined.length);
   return (
     <div>
       <div className="boxes">
