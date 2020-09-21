@@ -17,7 +17,7 @@ export default function SelfField(props) {
         })}
       </div>
       <div className="box-row">
-        {[8, 9, 10, 11, 12].map((index) => {
+        {[5, 6, 7, 8, 9].map((index) => {
           return (
             <GameCard
               index={index}
@@ -30,18 +30,6 @@ export default function SelfField(props) {
       </div>
       <div className="box-row">
         {[0, 1, 2, 3, 4].map((index) => {
-          return (
-            <GameCard
-              index={index}
-              fieldKey={props.fieldKey}
-              field={props.fieldCard}
-              fieldSetter={props.fieldSetter}
-            />
-          );
-        })}
-      </div>
-      <div className="box-row my-cards">
-        {[5, 6, 7].map((index) => {
           return (
             <GameCard
               index={index}
