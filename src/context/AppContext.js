@@ -30,6 +30,18 @@ export const AppContextProvider = (props) => {
     }
     return resultArray;
   }
+
+  function compareStrengthOfCards(type, number) {
+    const resultArray = [];
+    for (let i = createCard.length; i <= 54; i++) {
+      /*[NOTE:このif内で強弱をつけたら良さそうと推測]
+      if (JOKER_1) {
+        JOKER_1 < JOKER_2;
+      }*/
+    }
+
+    resultArray.sort();
+  }
   return (
     <AppContext.Provider
       value={{

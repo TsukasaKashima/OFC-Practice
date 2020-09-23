@@ -215,7 +215,6 @@ export default function Game(props) {
       });
     }
     if (
-      //219行目の書き方っぽい
       (countSelfUndifined.length === 9 &&
         countMyCardsUndifined.length === 0 &&
         countClick === 1) ||
@@ -393,7 +392,6 @@ export default function Game(props) {
     setDeck(returnDeck);
     return result;
   }
-  console.log(countMyCardsUndifined.length);
   return (
     <div>
       <div className="boxes">
@@ -492,6 +490,16 @@ export default function Game(props) {
         </div>
         <div className="myboxes">
           <SelfField fieldKey="self" fieldCard={field} fieldSetter={setField} />
+          <Button
+            className="order-btn"
+            variant="contained"
+            color="primary"
+            onClick={() => {
+              console.log("clicked!");
+            }}
+          >
+            ORDER
+          </Button>
           <MyCards
             fieldKey="myCards"
             fieldCard={field}
