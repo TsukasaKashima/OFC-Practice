@@ -394,8 +394,9 @@ export default function Game(props) {
   }
 
   const array = [
-    /*{ type: "JOKER_1" },
-    { type: "JOKER_2" },*/
+    { type: "JOKER_1", number: 1 },
+    { type: "JOKER_2", number: 1 },
+    { type: "SPADE", number: 1 },
     { type: "SPADE", number: 2 },
     { type: "SPADE", number: 3 },
     { type: "SPADE", number: 4 },
@@ -408,6 +409,7 @@ export default function Game(props) {
     { type: "SPADE", number: 11 },
     { type: "SPADE", number: 12 },
     { type: "SPADE", number: 13 },
+    { type: "HEART", number: 1 },
     { type: "HEART", number: 2 },
     { type: "HEART", number: 3 },
     { type: "HEART", number: 4 },
@@ -420,6 +422,7 @@ export default function Game(props) {
     { type: "HEART", number: 11 },
     { type: "HEART", number: 12 },
     { type: "HEART", number: 13 },
+    { type: "DIAMOND", number: 1 },
     { type: "DIAMOND", number: 2 },
     { type: "DIAMOND", number: 3 },
     { type: "DIAMOND", number: 4 },
@@ -432,6 +435,7 @@ export default function Game(props) {
     { type: "DIAMOND", number: 11 },
     { type: "DIAMOND", number: 12 },
     { type: "DIAMOND", number: 13 },
+    { type: "CLOVER", number: 1 },
     { type: "CLOVER", number: 2 },
     { type: "CLOVER", number: 3 },
     { type: "CLOVER", number: 4 },
@@ -445,24 +449,39 @@ export default function Game(props) {
     { type: "CLOVER", number: 12 },
     { type: "CLOVER", number: 13 },
   ];
-  const aces = [
-    { type: "SPADE", number: 1 },
-    { type: "HEART", number: 1 },
-    { type: "DIAMOND", number: 1 },
-    { type: "CLOVER", number: 1 },
-  ];
 
   const arrayOfCards = [...array].sort(function (a, b) {
+    if (
+      (a.type === "JOKER_1" && b.type !== "JOKER_1") ||
+      (a.type === "JOKER_2" && b.type !== "JOKER_2")
+    ) {
+      return -1;
+    }
+    if (
+      (b.type === "JOKER_1" && a.type !== "JOKER_1") ||
+      (b.type === "JOKER_2" && a.type !== "JOKER_2")
+    ) {
+      return 1;
+    }
+    if (a.number === 1 && b.number !== 1) {
+      return -1;
+    }
+    if (b.number === 1 && a.number !== 1) {
+      return 1;
+    }
+    if (a.number === 1 && b.number === 1) {
+      return 0;
+    }
     if (a.number < b.number) {
       return 1;
-    } else if (a.number > b.number) {
+    }
+    if (a.number > b.number) {
       return -1;
     } else {
       return 0;
     }
   });
 
-  arrayOfCards.splice(0, 0, ...aces);
   console.log(arrayOfCards);
 
   return (
