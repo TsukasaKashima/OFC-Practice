@@ -394,8 +394,8 @@ export default function Game(props) {
   }
 
   const array = [
-    { type: "JOKER_1", number: 1 },
-    { type: "JOKER_2", number: 1 },
+    { type: "JOKER_1" },
+    { type: "JOKER_2" },
     { type: "SPADE", number: 1 },
     { type: "SPADE", number: 2 },
     { type: "SPADE", number: 3 },
