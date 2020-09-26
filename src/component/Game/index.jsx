@@ -450,39 +450,41 @@ export default function Game(props) {
     { type: "CLOVER", number: 13 },
   ];
 
-  const arrayOfCards = [...array].sort(function (a, b) {
-    if (
-      (a.type === "JOKER_1" && b.type !== "JOKER_1") ||
-      (a.type === "JOKER_2" && b.type !== "JOKER_2")
-    ) {
-      return -1;
-    }
-    if (
-      (b.type === "JOKER_1" && a.type !== "JOKER_1") ||
-      (b.type === "JOKER_2" && a.type !== "JOKER_2")
-    ) {
-      return 1;
-    }
-    if (a.number === 1 && b.number !== 1) {
-      return -1;
-    }
-    if (b.number === 1 && a.number !== 1) {
-      return 1;
-    }
-    if (a.number === 1 && b.number === 1) {
-      return 0;
-    }
-    if (a.number < b.number) {
-      return 1;
-    }
-    if (a.number > b.number) {
-      return -1;
-    } else {
-      return 0;
-    }
-  });
+  function makeOrderByStrength() {
+    let arrayOfCards = [...array].sort(function (a, b) {
+      if (
+        (a.type === "JOKER_1" && b.type !== "JOKER_1") ||
+        (a.type === "JOKER_2" && b.type !== "JOKER_2")
+      ) {
+        return -1;
+      } else if (
+        (b.type === "JOKER_1" && a.type !== "JOKER_1") ||
+        (b.type === "JOKER_2" && a.type !== "JOKER_2")
+      ) {
+        return 1;
+      } else if (a.number === 1 && b.number !== 1) {
+        return -1;
+      } else if (b.number === 1 && a.number !== 1) {
+        return 1;
+      } else if (a.number === 1 && b.number === 1) {
+        return 0;
+      } else if (a.number < b.number) {
+        return 1;
+      } else if (a.number > b.number) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+    field.self.forEach((sortCard) => {
+      arrayOfCards = arrayOfCards.filter((card) => {
+        return sortCard.type === card.type && sortCard.number === card.number;
+      });
+    });
+    setField(arrayOfCards);
+  }
 
-  console.log(arrayOfCards);
+  //console.log(makeOrderByStrength());
 
   return (
     <div>
@@ -587,7 +589,7 @@ export default function Game(props) {
             variant="contained"
             color="primary"
             onClick={() => {
-              console.log("clicked!");
+              makeOrderByStrength();
             }}
           >
             ORDER
