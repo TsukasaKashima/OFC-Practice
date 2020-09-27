@@ -373,7 +373,6 @@ export default function Game(props) {
         );
       });
     }
-    setDeck(tmpDeck);
     return result;
   }
 
@@ -450,8 +449,12 @@ export default function Game(props) {
     { type: "CLOVER", number: 13 },
   ];
 
-  function makeOrderByStrength() {
-    let arrayOfCards = [...array].sort(function (a, b) {
+  const selfFirstRow = field.self.slice(0, 5);
+  const selfSecondRow = field.self.slice(5, 10);
+  const selfThirdRow = field.self.slice(10, 13);
+
+  function makeOrderByStrength(selfFirstRow) {
+    const arrayOfCards = [...array].sort(function (a, b) {
       if (
         (a.type === "JOKER_1" && b.type !== "JOKER_1") ||
         (a.type === "JOKER_2" && b.type !== "JOKER_2")
@@ -476,15 +479,12 @@ export default function Game(props) {
         return 0;
       }
     });
-    field.self.forEach((sortCard) => {
-      arrayOfCards = arrayOfCards.filter((card) => {
-        return sortCard.type === card.type && sortCard.number === card.number;
-      });
-    });
-    setField(arrayOfCards);
+    return arrayOfCards;
   }
 
-  //console.log(makeOrderByStrength());
+  function setOrder(selfFirstRow) {
+    console.log(makeOrderByStrength(selfFirstRow));
+  }
 
   return (
     <div>
@@ -589,7 +589,7 @@ export default function Game(props) {
             variant="contained"
             color="primary"
             onClick={() => {
-              makeOrderByStrength();
+              setOrder();
             }}
           >
             ORDER
