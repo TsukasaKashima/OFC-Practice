@@ -392,69 +392,10 @@ export default function Game(props) {
     return result;
   }
 
-  const array = [
-    { type: "JOKER_1" },
-    { type: "JOKER_2" },
-    { type: "SPADE", number: 1 },
-    { type: "SPADE", number: 2 },
-    { type: "SPADE", number: 3 },
-    { type: "SPADE", number: 4 },
-    { type: "SPADE", number: 5 },
-    { type: "SPADE", number: 6 },
-    { type: "SPADE", number: 7 },
-    { type: "SPADE", number: 8 },
-    { type: "SPADE", number: 9 },
-    { type: "SPADE", number: 10 },
-    { type: "SPADE", number: 11 },
-    { type: "SPADE", number: 12 },
-    { type: "SPADE", number: 13 },
-    { type: "HEART", number: 1 },
-    { type: "HEART", number: 2 },
-    { type: "HEART", number: 3 },
-    { type: "HEART", number: 4 },
-    { type: "HEART", number: 5 },
-    { type: "HEART", number: 6 },
-    { type: "HEART", number: 7 },
-    { type: "HEART", number: 8 },
-    { type: "HEART", number: 9 },
-    { type: "HEART", number: 10 },
-    { type: "HEART", number: 11 },
-    { type: "HEART", number: 12 },
-    { type: "HEART", number: 13 },
-    { type: "DIAMOND", number: 1 },
-    { type: "DIAMOND", number: 2 },
-    { type: "DIAMOND", number: 3 },
-    { type: "DIAMOND", number: 4 },
-    { type: "DIAMOND", number: 5 },
-    { type: "DIAMOND", number: 6 },
-    { type: "DIAMOND", number: 7 },
-    { type: "DIAMOND", number: 8 },
-    { type: "DIAMOND", number: 9 },
-    { type: "DIAMOND", number: 10 },
-    { type: "DIAMOND", number: 11 },
-    { type: "DIAMOND", number: 12 },
-    { type: "DIAMOND", number: 13 },
-    { type: "CLOVER", number: 1 },
-    { type: "CLOVER", number: 2 },
-    { type: "CLOVER", number: 3 },
-    { type: "CLOVER", number: 4 },
-    { type: "CLOVER", number: 5 },
-    { type: "CLOVER", number: 6 },
-    { type: "CLOVER", number: 7 },
-    { type: "CLOVER", number: 8 },
-    { type: "CLOVER", number: 9 },
-    { type: "CLOVER", number: 10 },
-    { type: "CLOVER", number: 11 },
-    { type: "CLOVER", number: 12 },
-    { type: "CLOVER", number: 13 },
-  ];
+  //[NOTE:makeOrderByStrengthに引数として下記の変数を渡せればいいと思う]
 
-  const selfFirstRow = field.self.slice(0, 5);
-  const selfSecondRow = field.self.slice(5, 10);
-  const selfThirdRow = field.self.slice(10, 13);
-
-  function makeOrderByStrength(selfFirstRow) {
-    const arrayOfCards = [...array].sort(function (a, b) {
+  function makeOrderByStrength(rowCards) {
+    const arrayOfCards = rowCards.sort(function (a, b) {
       if (
         (a.type === "JOKER_1" && b.type !== "JOKER_1") ||
         (a.type === "JOKER_2" && b.type !== "JOKER_2")
@@ -475,6 +416,9 @@ export default function Game(props) {
         return 1;
       } else if (a.number > b.number) {
         return -1;
+      } else if (a.number === b.number) {
+        console.log("OK");
+        return -1;
       } else {
         return 0;
       }
@@ -482,7 +426,11 @@ export default function Game(props) {
     return arrayOfCards;
   }
 
-  function setOrder(selfFirstRow) {
+  const selfFirstRow = field.self.slice(0, 5);
+  const selfSecondRow = field.self.slice(5, 10);
+  const selfThirdRow = field.self.slice(10, 13);
+
+  function setOrder() {
     console.log(makeOrderByStrength(selfFirstRow));
   }
 
