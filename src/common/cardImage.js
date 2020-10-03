@@ -129,7 +129,6 @@ const cardImage = {
   joker_1,
   joker_2,
 };
-
 export default cardImage;
 export const getImageFromTypeAndNumber = (type, number) => {
   if (type === JOKER_1) {

@@ -215,7 +215,6 @@ export default function Game(props) {
       });
     }
     if (
-      //219行目の書き方っぽい
       (countSelfUndifined.length === 9 &&
         countMyCardsUndifined.length === 0 &&
         countClick === 1) ||
@@ -374,7 +373,6 @@ export default function Game(props) {
         );
       });
     }
-    setDeck(tmpDeck);
     return result;
   }
 
@@ -393,7 +391,59 @@ export default function Game(props) {
     setDeck(returnDeck);
     return result;
   }
-  console.log(countMyCardsUndifined.length);
+
+  //[NOTE:makeOrderByStrengthに引数として下記の変数を渡せればいいと思う]
+
+  function makeOrderByStrength(rowCards) {
+    const arrayOfCards = rowCards.sort(function (a, b) {
+      let aNumber = a.number === 1 ? 14 : a.number;
+      let bNumber = b.number === 1 ? 14 : b.number;
+      if (
+        (a.type === "JOKER_1" && b.type !== "JOKER_1") ||
+        (a.type === "JOKER_2" && b.type !== "JOKER_2")
+      ) {
+        return -1;
+      } else if (
+        (b.type === "JOKER_1" && a.type !== "JOKER_1") ||
+        (b.type === "JOKER_2" && a.type !== "JOKER_2")
+      ) {
+        return 1;
+      }
+      //ここから
+      else if ([aNumber === bNumber].length === 1) {
+        aNumber *= 10 ** 1;
+        console.log("OK");
+        return -1;
+      } else if ([aNumber].length === 2) {
+        aNumber *= 10 ** 2;
+        console.log("OK");
+        return -1;
+      } else if ([aNumber].length === 3) {
+        aNumber *= 10 ** 3;
+        console.log("OK");
+        return -1;
+      }
+      //ここまでの記述、aNumberとbNumberの総数を探る方法を探す
+      else if (aNumber < bNumber) {
+        console.log([aNumber].length);
+        return 1;
+      } else if (aNumber > bNumber) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+    return arrayOfCards;
+  }
+
+  const selfFirstRow = field.self.slice(0, 5);
+  const selfSecondRow = field.self.slice(5, 10);
+  const selfThirdRow = field.self.slice(10, 13);
+
+  function setOrder() {
+    console.log(makeOrderByStrength(selfFirstRow));
+  }
+
   return (
     <div>
       <div className="boxes">
@@ -492,6 +542,16 @@ export default function Game(props) {
         </div>
         <div className="myboxes">
           <SelfField fieldKey="self" fieldCard={field} fieldSetter={setField} />
+          <Button
+            className="order-btn"
+            variant="contained"
+            color="primary"
+            onClick={() => {
+              setOrder();
+            }}
+          >
+            ORDER
+          </Button>
           <MyCards
             fieldKey="myCards"
             fieldCard={field}

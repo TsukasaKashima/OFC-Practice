@@ -5,7 +5,7 @@ export default function SelfField(props) {
   return (
     <React.Fragment>
       <div className="box-row">
-        {[13, 14, 15].map((index) => {
+        {[10, 11, 12].map((index) => {
           return (
             <GameCard
               index={index}

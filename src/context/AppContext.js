@@ -30,6 +30,7 @@ export const AppContextProvider = (props) => {
     }
     return resultArray;
   }
+
   return (
     <AppContext.Provider
       value={{
