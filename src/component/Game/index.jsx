@@ -396,6 +396,8 @@ export default function Game(props) {
 
   function makeOrderByStrength(rowCards) {
     const arrayOfCards = rowCards.sort(function (a, b) {
+      let aNumber = a.number === 1 ? 14 : a.number;
+      let bNumber = b.number === 1 ? 14 : b.number;
       if (
         (a.type === "JOKER_1" && b.type !== "JOKER_1") ||
         (a.type === "JOKER_2" && b.type !== "JOKER_2")
@@ -406,18 +408,26 @@ export default function Game(props) {
         (b.type === "JOKER_2" && a.type !== "JOKER_2")
       ) {
         return 1;
-      } else if (a.number === 1 && b.number !== 1) {
-        return -1;
-      } else if (b.number === 1 && a.number !== 1) {
-        return 1;
-      } else if (a.number === 1 && b.number === 1) {
-        return 0;
-      } else if (a.number < b.number) {
-        return 1;
-      } else if (a.number > b.number) {
-        return -1;
-      } else if (a.number === b.number) {
+      }
+      //ここから
+      else if ([aNumber === bNumber].length === 1) {
+        aNumber *= 10 ** 1;
         console.log("OK");
+        return -1;
+      } else if ([aNumber].length === 2) {
+        aNumber *= 10 ** 2;
+        console.log("OK");
+        return -1;
+      } else if ([aNumber].length === 3) {
+        aNumber *= 10 ** 3;
+        console.log("OK");
+        return -1;
+      }
+      //ここまでの記述、aNumberとbNumberの総数を探る方法を探す
+      else if (aNumber < bNumber) {
+        console.log([aNumber].length);
+        return 1;
+      } else if (aNumber > bNumber) {
         return -1;
       } else {
         return 0;
