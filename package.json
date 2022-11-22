@@ -13,7 +13,7 @@
     "react-drag-drop-container": "https://github.com/peterh32/react-drag-drop-container.git",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1",
+    "react-scripts": "5.0.1",
     "redux": "^4.0.5",
     "tools": "0.0.0"
   },
